@@ -5,6 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 import LoadingSpinner from '#/components/common/loadingSpinner'
 import type { AssetResponse, ProjectViewAsset } from '#/dataInterface'
 import type { OrderDirection, ProjectFieldName } from '#/projects/projectViews/constants'
+import BentoProjectsEmptyState from './BentoProjectsEmptyState'
 import styles from './projectsTable.module.scss'
 import ProjectsTableHeader from './projectsTableHeader'
 import ProjectsTableRow from './projectsTableRow'
@@ -20,7 +21,7 @@ export interface ProjectsTableOrder {
 interface ProjectsTableProps {
   isLoading?: boolean
   /** To display contextual empty message when zero assets. */
-  emptyMessage?: string
+  emptyMessage?: React.ReactNode
   assets: Array<AssetResponse | ProjectViewAsset>
   /** Renders the columns for highlighted fields in some fancy way. */
   highlightedFields: ProjectFieldName[]
@@ -76,9 +77,7 @@ export default function ProjectsTable(props: ProjectsTableProps) {
         {props.isLoading && <LoadingSpinner />}
 
         {!props.isLoading && props.assets.length === 0 && (
-          <div className={cx(rowStyles.row, rowStyles.rowTypeMessage)}>
-            {props.emptyMessage || t('There are no projects to display.')}
-          </div>
+          <BentoProjectsEmptyState emptyMessage={props.emptyMessage} />
         )}
 
         <InfiniteScroll

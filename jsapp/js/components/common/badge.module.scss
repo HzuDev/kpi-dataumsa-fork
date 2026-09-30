@@ -1,23 +1,30 @@
 @use 'scss/mixins';
 @use 'scss/colors';
 
-$badge-height-xs: 20px;
+$badge-height-xs: 22px;
 $badge-font-xs: 11px;
 
-$badge-height-s: 24px;
+$badge-height-s: 26px;
 $badge-font-s: 12px;
 
-$badge-height-m: 28px;
+$badge-height-m: 30px;
 $badge-font-m: 13px;
 
-$badge-height-l: 32px;
+$badge-height-l: 34px;
 $badge-font-l: 14px;
 
 .root {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   vertical-align: middle;
   text-align: center;
   max-width: 100%;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
+  border-radius: 9999px;
+  border: 1.5px solid var(--color-text-main, #0f172a);
+  box-shadow: none !important;
 }
 
 .root:not(.disableShortening) {
@@ -25,59 +32,59 @@ $badge-font-l: 14px;
 }
 
 .icon {
-  vertical-align: top;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
 }
 
 .color-light-storm {
-  color: colors.$kobo-gray-800;
-  background-color: colors.$kobo-light-storm;
+  color: #0f172a;
+  background-color: #f1f5f9;
 }
 
 .color-light-amber {
-  color: colors.$kobo-dark-amber;
-  background-color: colors.$kobo-light-amber;
+  color: #92400e;
+  background-color: #fef3c7;
 }
 
 .color-light-blue {
-  color: colors.$kobo-dark-blue;
-  background-color: colors.$kobo-bg-blue;
+  color: #0369a1;
+  background-color: #e0f6ff;
 }
 
 .color-light-red {
-  color: colors.$kobo-dark-red;
-  background-color: colors.$kobo-light-red;
+  color: #991b1b;
+  background-color: #fee2e2;
 }
 
 .color-light-teal {
-  color: colors.$kobo-dark-teal;
-  background-color: colors.$kobo-light-teal;
+  color: #065f46;
+  background-color: #d1fae5;
 }
 
 .color-light-green {
-  color: colors.$kobo-dark-green;
-  background-color: colors.$kobo-light-green;
+  color: #065f46;
+  background-color: #d1fae5;
 }
 
 .color-dark-gray {
-  color: colors.$kobo-white;
-  background-color: colors.$kobo-gray-700;
+  color: #ffffff;
+  background-color: #0f172a;
 }
 
 @mixin badge-size($size, $font) {
-  // NOTE: icon size is already handled by badge.tsx file rendering proper <Icon> component
   height: $size;
   min-width: $size;
-  line-height: $size;
+  line-height: 1;
   font-size: $font;
-  border-radius: $size * 0.5;
-  padding: 0 $size * 0.2;
+  padding: 0 10px;
 
   &.hasLabel {
-    padding: 0 $size * 0.4;
+    padding: 0 12px;
   }
 
   .icon + .label {
-    margin-left: $size * 0.15;
+    margin-left: 6px;
   }
 }
 

@@ -1,32 +1,42 @@
 @use 'scss/_variables';
 @use 'scss/colors';
 
-// Kobo specific dropzone changes
+// Kobo specific dropzone changes - Bento style redesign
 
 // Extension of `dropzone` used in settings modals
 .kobo-dropzone {
-  background: colors.$kobo-gray-200;
-  padding: 30px;
-  border: 2px dashed colors.$kobo-gray-300;
+  background-color: var(--color-bg-main, #f8fafc) !important;
+  padding: 36px 24px;
+  border: 2.5px dashed var(--color-text-main, #0f172a) !important;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 20px !important;
   text-align: center;
+  color: var(--color-text-main, #0f172a);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: none !important;
+  transition: all 0.15s ease;
 
   // Optional description
   .dropzone-description {
-    padding-top: 6px;
-    font-size: variables.$base-font-size;
+    padding-top: 8px;
+    font-size: 13.5px;
+    color: var(--color-text-muted, #475569);
 
     a {
+      color: var(--color-primary-dark, #0688ba);
       text-decoration: underline;
+      font-weight: 600;
     }
   }
 
   i {
     display: block;
-    margin: 0 auto;
-    font-size: 32px;
-    opacity: 0.5;
+    margin: 0 auto 12px;
+    font-size: 42px;
+    color: var(--color-primary, #29b9f2);
+    transition: transform 0.2s ease;
   }
 
   .loading {
@@ -39,17 +49,34 @@
     margin-bottom: 16px;
   }
 
-  &:hover {border-color: colors.$kobo-blue;}
-  &.dropzone-active {border-color: colors.$kobo-blue;}
-  &.dropzone-reject {border-color: colors.$kobo-red;}
+  &:hover {
+    background-color: var(--color-primary-light, #e0f6ff) !important;
+    border-color: var(--color-primary-dark, #0688ba) !important;
+    transform: translateY(-2px);
+
+    i {
+      transform: scale(1.1);
+    }
+  }
+
+  &.dropzone-active {
+    background-color: var(--color-primary-light, #e0f6ff) !important;
+    border-color: var(--color-primary-dark, #0688ba) !important;
+  }
+
+  &.dropzone-reject {
+    border-color: var(--color-danger, #ef4444) !important;
+    background-color: #fef2f2 !important;
+  }
 }
 
 // Form media specific dropzone
 .kobo-dropzone--form-media {
-  background: colors.$kobo-white;
+  background: #ffffff;
   padding: 40px;
-  border: 6px dashed colors.$kobo-gray-300;
-  font-size: 18px;
-  font-weight: 500;
-  color: colors.$kobo-gray-700;
+  border: 2.5px dashed var(--color-text-main, #0f172a);
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-main, #0f172a);
 }

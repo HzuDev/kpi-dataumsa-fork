@@ -4,7 +4,8 @@
 @use 'scss/mixins';
 
 .report-view {
-  padding: 12px;
+  padding: 24px 40px;
+  background: var(--color-bg-main, #f8fafc);
 }
 
 .report-view__limit-message {
@@ -17,33 +18,41 @@
 }
 
 .report-view__item {
-  border: 1px solid colors.$kobo-gray-300;
-  margin: 15px 0;
-  background: colors.$kobo-white;
+  border: 2.5px solid var(--color-text-main, #0f172a);
+  border-radius: 20px;
+  margin: 24px 0;
+  background: var(--color-text-inverse, #ffffff);
+  box-shadow: none !important;
+  overflow: hidden;
 }
 
 .report-view__itemHeading {
-  padding: 10px 24px;
-  border-left: 5px solid colors.$kobo-teal;
-  border-bottom: 1px solid colors.$kobo-gray-300;
+  padding: 16px 24px;
+  border-bottom: 2px solid var(--color-text-main, #0f172a);
+  background-color: var(--color-bg-main, #f8fafc);
   position: relative;
 
   h2 {
     margin: 0;
     margin-right: 60px;
-    color: colors.$kobo-teal;
-    font-size: 16px;
-    font-weight: normal;
+    color: var(--color-text-main, #0f172a);
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-size: 17px;
+    font-weight: 700;
     line-height: 1.35em;
   }
 
   .report-view__headingMeta {
-    opacity: 0.6;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    color: var(--color-text-muted, #475569);
     font-size: 12px;
+    font-weight: 600;
     margin-right: 60px;
+    margin-top: 3px;
 
     .type {
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
   }
 
@@ -51,28 +60,40 @@
     overflow: visible;
     position: absolute;
     right: 15px;
-    top: 6px;
+    top: 10px;
+
+    button {
+      border-radius: 50% !important;
+      border: 1.5px solid var(--color-text-main, #0f172a) !important;
+      box-shadow: none !important;
+    }
   }
 }
 
 .report-view__itemContent {
-  padding: 10px 24px;
+  padding: 20px 24px;
   position: relative;
 
   table {
     width: 100%;
-    border: 0;
+    border: 2px solid var(--color-text-main, #0f172a);
+    border-radius: 12px;
     margin: 20px 0;
     border-spacing: 0;
+    overflow: hidden;
 
     thead th {
       margin: 0;
-      padding: 8px;
-      background-color: colors.$kobo-gray-700;
-      color: colors.$kobo-white;
+      padding: 10px 16px;
+      background-color: var(--color-bg-main, #f8fafc);
+      color: var(--color-text-main, #0f172a);
       text-align: right;
-      font-weight: normal;
-      font-size: variables.$base-font-size;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--color-text-main, #0f172a);
 
       &:first-child {
         text-align: initial;
@@ -80,12 +101,17 @@
     }
 
     tbody tr td {
-      border-bottom: 1px solid colors.$kobo-gray-500;
-      padding: 8px;
+      border-bottom: 1.5px solid rgba(15, 23, 42, 0.08);
+      padding: 10px 16px;
       text-align: right;
+      font-family: var(--font-mono, 'JetBrains Mono', monospace);
+      font-size: 13.5px;
+      color: var(--color-text-main, #0f172a);
 
       &:first-child {
         text-align: initial;
+        font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+        font-weight: 500;
       }
     }
   }
@@ -107,7 +133,8 @@
 // report buttons
 .form-view__reportButtons {
   @include mixins.centerRowFlex;
-  gap: 10px;
+  gap: 12px;
+  margin-bottom: 20px;
 
   + .form-view__cell--iframe {
     height: calc(100% - 60px);
@@ -116,16 +143,30 @@
 
 .form-view__report-buttons-left {
   @include mixins.centerRowFlex;
-  gap: 5px;
+  gap: 8px;
   flex: 1;
+
+  button {
+    border-radius: 9999px !important;
+    font-weight: 700 !important;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+    box-shadow: none !important;
+  }
 }
 
 .form-view__report-buttons-right {
   @include mixins.centerRowFlex;
+  gap: 8px;
+
+  button {
+    border-radius: 9999px !important;
+    font-weight: 700 !important;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+    box-shadow: none !important;
+  }
 }
 
 // report graph settings
-
 .graph-settings__colors {
   padding: 20px 10px;
 
@@ -138,8 +179,8 @@
   strong {
     margin-bottom: 20px;
     display: block;
-    font-weight: 400;
-    color: colors.$kobo-gray-700;
+    font-weight: 600;
+    color: var(--color-text-main, #0f172a);
   }
 }
 
@@ -155,19 +196,21 @@
   }
 
   label {
-    border: 2px solid white;
-    border-radius: 6px;
+    border: 2px solid rgba(15, 23, 42, 0.15);
+    border-radius: 12px;
     display: block;
     width: 100%;
     cursor: pointer;
+    transition: all 0.15s ease;
   }
 
   input:checked + label {
-    border-color: colors.$kobo-blue;
+    border-color: var(--color-text-main, #0f172a);
+    background-color: var(--color-primary-light, #e0f6ff);
   }
 
   input:not(:checked):hover + label {
-    border-color: colors.$kobo-gray-400;
+    border-color: var(--color-primary-dark, #0688ba);
   }
 
   &--vertical {
@@ -217,6 +260,7 @@
         display: inline-block;
         width: 40px;
         height: 40px;
+        border-radius: 8px;
       }
     }
   }
@@ -248,7 +292,7 @@
   input {
     width: 100%;
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 600;
   }
 }
 
@@ -274,11 +318,11 @@
 
 @include breakpoints.breakpoint(mediumAndUp) {
   .report-view {
-    padding: 12px 40px;
+    padding: 24px 40px;
   }
 
   .report-view__itemContent table {
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
+    margin-left: 0;
   }
 }

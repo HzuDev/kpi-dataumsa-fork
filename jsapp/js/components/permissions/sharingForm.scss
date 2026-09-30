@@ -10,10 +10,11 @@ $s-gray-row-spacing: 10px;
 .form-modal--sharing-form {
   h2 {
     margin: 0;
-    font-size: 15px;
-    color: var(--color-text-main, colors.$kobo-gray-900);
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-size: 16px;
+    color: var(--color-text-main, #0f172a);
     font-weight: 700;
-    letter-spacing: 0.2px;
+    letter-spacing: -0.01em;
   }
 
   .user-row + button {
@@ -28,9 +29,10 @@ $s-gray-row-spacing: 10px;
 }
 
 .user-row {
-  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
-  padding-bottom: 8px;
-  padding-top: 8px;
+  border-bottom: 1.5px solid rgba(15, 23, 42, 0.08);
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
 
   &.user-row--deleted {
     display: none;
@@ -57,27 +59,37 @@ $s-gray-row-spacing: 10px;
     min-width: 160px;
     text-align: right;
     padding: 0 10px 0 15px;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--color-text-main, #0f172a);
 
     .user-row__perm {
       display: inline;
 
       &:not(:last-of-type)::after {
-        content: ' · ';
+        content: ' \00b7 ';
+        color: var(--color-primary, #29b9f2);
       }
     }
   }
 
   .user-row__perms-actions {
     @include mixins.centerRowFlex;
-    gap: 5px;
+    gap: 8px;
+
+    button {
+      border-radius: 9999px !important;
+      border: 1.5px solid var(--color-text-main, #0f172a) !important;
+      box-shadow: none !important;
+    }
   }
 
   .user-row__editor {
-    margin-top: 5px;
+    margin-top: 8px;
   }
 }
 
-// We want to avoud UI jumping when question with a long name is being selected
+// We want to avoid UI jumping when question with a long name is being selected
 // in "based on a condition" dropdown
 .modal .form-modal__item--who-has-access {
   min-width: 600px;
@@ -86,7 +98,6 @@ $s-gray-row-spacing: 10px;
 .form-modal__item--copy-team-permissions {
   position: relative;
 
-  // The closing button is not a part of UserAssetPermsEditor
   .user-permissions-editor-closer {
     position: absolute;
     top: 10px;
@@ -95,7 +106,8 @@ $s-gray-row-spacing: 10px;
 }
 
 .form-modal__item--permissions-header {
-  font-weight: bold;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-weight: 700;
 }
 
 .anonymousSubmissionDialog {
@@ -112,9 +124,9 @@ $s-gray-row-spacing: 10px;
 
 .user-row__editor,
 .form-modal__item--gray-row {
-  background: rgba(15, 23, 42, 0.03);
-  border: 1px solid rgba(15, 23, 42, 0.05);
-  border-radius: 8px;
+  background: var(--color-bg-main, #f8fafc);
+  border: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 12px;
   padding: 16px;
 }
 
@@ -132,18 +144,28 @@ $s-gray-row-spacing: 10px;
     min-width: $s-flexed-row-select-width;
 
     .kobo-select__control {
-      height: 40px;
+      height: 42px;
+      border: 2px solid var(--color-text-main, #0f172a);
+      border-radius: 8px;
     }
   }
 
   > input[type='text'] {
     flex: 1;
     padding: $s-gray-row-spacing;
-    height: 40px;
+    height: 42px;
+    border: 2px solid var(--color-text-main, #0f172a);
+    border-radius: 8px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 14px;
   }
 
   button {
     min-width: $s-flexed-row-button-width;
+    border-radius: 9999px !important;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
   }
 }
 

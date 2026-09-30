@@ -39,3 +39,7 @@ locale/en/LC_MESSAGES/*.po
 
 # We post changelog in github releases, but generate it here. Let's not accidentally commit it.
 CHANGELOG.md
+
+# Internal documentation and specs
+DESIGN*.md
+PRODUCT.md

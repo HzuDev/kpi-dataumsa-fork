@@ -1,33 +1,102 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
 :root {
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Colors
+     ========================================================================== */
   --color-primary: #29b9f2;
   --color-primary-dark: #0688ba;
   --color-primary-light: #e0f6ff;
-  --color-surface: #ffffff;
+  --color-bg-main: #f8fafc;
+  --color-bg-surface: rgba(255, 255, 255, 0.7);
   --color-text-main: #0f172a;
-  --color-text-muted: #64748b;
+  --color-text-muted: #475569;
+  --color-text-dark-muted: #94a3b8;
+  --color-text-inverse: #ffffff;
+  --color-bg-dark: #090f1e;
+  --color-bg-dark-surface: #131b2e;
+  --color-accent: #8b5cf6;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  /* Aliases for legacy compatibility */
+  --color-surface: var(--color-text-inverse);
   --color-border: #cbd5e1;
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Typography Families
+     ========================================================================== */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-display: "Montserrat", var(--font-sans);
+  --font-mono: "JetBrains Mono", monospace;
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Typography Scale
+     ========================================================================== */
+  --font-size-xs: 0.875rem; /* 14px */
+  --font-size-sm: 0.9375rem; /* 15px */
+  --font-size-base: 1.0625rem; /* 17px */
+  --font-size-lg: 1.25rem; /* 20px */
+  --font-size-xl: 1.4375rem; /* 23px */
+  --font-size-2xl: 1.75rem; /* 28px */
+  --font-size-3xl: 2.125rem; /* 34px */
+  --font-size-4xl: 2.75rem; /* 44px */
+  --font-size-5xl: 3.5rem; /* 56px */
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Spacing Scale
+     ========================================================================== */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-128: 128px;
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Radii
+     ========================================================================== */
+  --radius-sm: 8px;
   --radius-md: 12px;
-  --transition-fast: 0.2s ease;
-  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-lg: 20px;
+  --radius-card: 32px;
+  --radius-pill: 9999px;
+  --radius-blob: 1000px;
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Layout & Borders
+     ========================================================================== */
+  --page-max-width: 1200px;
+  --section-gap: 72px;
+  --card-padding: 24px;
+  --border-thick: 2px solid var(--color-text-main);
+  --border-bold: 2.5px solid var(--color-text-main);
+  --border-subtle: 1px solid var(--color-border);
+  --transition-fast: 0.15s ease;
+  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .main-container {
   display: flex;
   min-height: 100vh;
   width: 100vw;
-  background-color: var(--color-surface);
+  background-color: var(--color-bg-main);
   color: var(--color-text-main);
+  font-family: var(--font-sans);
   overflow-x: hidden;
   box-sizing: border-box;
 }
 .main-container * {
   box-sizing: border-box;
 }
+.main-container {
+  /* Animaciones Keyframes */
+}
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -42,406 +111,732 @@
     opacity: 1;
   }
 }
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-@keyframes floatPhone {
-  0%, 100% {
-    transform: translateY(0px) rotate(-2deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(2deg);
-  }
-}
-@keyframes floatLock {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-6px) scale(1.05);
-  }
-}
-@keyframes floatCard {
-  0%, 100% {
-    transform: translateY(0px) rotate(2deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(-1deg);
-  }
-}
-@keyframes floatBadge {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-5px) scale(1.08);
-  }
-}
-@keyframes dataFlow {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 50px 50px;
-  }
-}
 .main-container {
-  /* Panel Izquierdo: Formulario Integrado */
+  /* ==========================================================================
+     Panel Izquierdo: Bento Card Container (Canvas Base)
+     ========================================================================== */
 }
 .main-container .login-panel {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-surface);
-  padding: 4rem 2rem;
+  background-color: var(--color-bg-main);
+  padding: var(--spacing-32) var(--spacing-24);
   position: relative;
   z-index: 10;
+}
+.main-container {
+  /* Tarjeta Bento Principal */
 }
 .main-container .login-wrapper {
   width: 100%;
   max-width: 460px;
-  animation: fadeUp 0.8s var(--transition-smooth);
+  background-color: var(--color-text-inverse);
+  border: var(--border-bold);
+  border-radius: var(--radius-card);
+  padding: var(--spacing-40) var(--spacing-32);
+  box-shadow: none;
+  animation: fadeUp 0.6s var(--transition-smooth);
 }
 .main-container {
-  /* Badge de Estado */
+  /* Badge de Estado - Formato Sticker */
 }
 .main-container .status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(41, 185, 242, 0.1);
-  color: var(--color-primary-dark);
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-bottom: 2rem;
-  border: 1px solid rgba(41, 185, 242, 0.2);
-  transition: var(--transition-fast);
+  gap: var(--spacing-8);
+  background-color: var(--color-primary-light);
+  color: var(--color-text-main);
+  padding: var(--spacing-4) var(--spacing-16);
+  border-radius: var(--radius-pill);
+  border: var(--border-thick);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--spacing-24);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
 }
 .main-container .status-badge:hover {
-  background: rgba(41, 185, 242, 0.15);
+  background-color: #cbeeff;
+  transform: translateY(-1px);
 }
 .main-container {
-  /* Cabecera y Logo */
+  /* Cabecera y Títulos */
 }
 .main-container .brand-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: var(--spacing-24);
 }
 .main-container .logo-text {
-  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  font-family: var(--font-display);
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-3xl));
   font-weight: 800;
-  letter-spacing: -1px;
+  letter-spacing: -0.03em;
   color: var(--color-text-main);
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-8);
   line-height: 1.1;
 }
 .main-container .logo-text span {
   color: var(--color-primary);
 }
 .main-container .title-text {
-  font-size: clamp(2rem, 3.5vw, 2.4rem);
+  font-family: var(--font-display);
+  font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
   font-weight: 800;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.03em;
   color: var(--color-text-main);
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-8);
   line-height: 1.2;
 }
 .main-container .subtitle {
-  font-size: 1.05rem;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 .main-container {
-  /* Contenedor de Inputs con Floating Labels */
+  /* ==========================================================================
+     Inputs y Form Controls (Bento Style)
+     ========================================================================== */
 }
 .main-container .input-group {
   position: relative;
-  margin-bottom: 1.8rem;
+  margin-bottom: var(--spacing-20);
 }
 .main-container .input-group input {
   width: 100%;
-  padding: 1.2rem;
-  font-size: 1.05rem;
+  height: auto;
+  padding: var(--spacing-12) var(--spacing-16);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
   color: var(--color-text-main);
-  background-color: transparent;
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-md);
-  transition: var(--transition-fast);
+  background-color: var(--color-text-inverse);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  transition: outline-color var(--transition-fast), border-color var(--transition-fast);
   outline: none;
+  box-shadow: none;
 }
-.main-container .input-group input:focus, .main-container .input-group input:not(:placeholder-shown) {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px var(--color-primary-light);
+.main-container .input-group input:focus {
+  border-color: var(--color-text-main);
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 .main-container .input-group input:focus ~ label, .main-container .input-group input:not(:placeholder-shown) ~ label {
-  top: -0.6rem;
-  left: 0.8rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-primary-dark);
+  top: -0.65rem;
+  left: 0.75rem;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-main);
 }
 .main-container .input-group label {
   position: absolute;
-  left: 1rem;
-  top: 1.25rem;
+  left: var(--spacing-16);
+  top: var(--spacing-12);
+  font-family: var(--font-sans);
   color: var(--color-text-muted);
-  font-size: 1.05rem;
+  font-size: var(--font-size-base);
   transition: var(--transition-fast);
   pointer-events: none;
-  background-color: var(--color-surface);
-  padding: 0 0.5rem;
+  background-color: var(--color-text-inverse);
+  padding: 0 var(--spacing-4);
+  line-height: 1.2;
+}
+.main-container .input-group select {
+  width: 100%;
+  height: auto;
+  padding: var(--spacing-12) var(--spacing-40) var(--spacing-12) var(--spacing-16);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  color: var(--color-text-main);
+  background-color: var(--color-text-inverse);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  transition: outline-color var(--transition-fast);
+  outline: none;
+  appearance: none;
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230f172a' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-16) center;
+  background-size: 1.15rem;
+}
+.main-container .input-group select:focus {
+  border-color: var(--color-text-main);
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.main-container .input-group.has-select label {
+  top: -0.65rem;
+  left: 0.75rem;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+.main-container .input-group.password1 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
 }
 .main-container {
-  /* Botón Principal */
+  /* ==========================================================================
+     Boton Primario Cyan (Bento Sticker Button)
+     ========================================================================== */
 }
 .main-container .login-button {
   width: 100%;
-  padding: 1.2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--color-surface);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  border: none;
-  border-radius: var(--radius-md);
+  padding: var(--spacing-16) var(--spacing-28, 28px);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-main);
+  background-color: var(--color-primary);
+  border: var(--border-thick);
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: var(--transition-smooth);
-  margin-top: 1rem;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+  margin-top: var(--spacing-16);
+  box-shadow: none;
+  text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(41, 185, 242, 0.2);
-}
-.main-container .login-button::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%);
-  transform: skewX(-25deg);
-  transition: var(--transition-smooth);
 }
 .main-container .login-button:hover {
+  background-color: var(--color-primary-dark);
+  color: var(--color-text-inverse);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(6, 136, 186, 0.35);
-}
-.main-container .login-button:hover::after {
-  left: 150%;
-  transition: 0.7s ease-in-out;
 }
 .main-container .login-button:active {
-  transform: translateY(0);
+  transform: translateY(2px);
 }
 .main-container {
-  /* Links de Acción */
+  /* Links de Accion */
 }
 .main-container .action-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: var(--spacing-16);
   justify-content: space-between;
-  margin-top: 2rem;
-  font-size: 0.95rem;
+  margin-top: var(--spacing-24);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
 }
 .main-container .action-links a {
   text-decoration: none;
   color: var(--color-text-muted);
-  font-weight: 500;
-  transition: var(--transition-fast);
+  font-weight: 600;
+  transition: color var(--transition-fast);
 }
 .main-container .action-links a:hover {
   color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+.main-container .action-links a span {
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  text-decoration: underline;
 }
 .main-container {
-  /* Panel Derecho: Branding y Datos */
+  /* Checkbox Bento */
 }
-.main-container .brand-panel {
-  flex: 1.2;
-  background-color: var(--color-text-main);
-  color: var(--color-surface);
+.main-container .checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  margin-bottom: var(--spacing-20);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+.main-container .checkbox-group input[type=checkbox] {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  border: var(--border-thick);
+  border-radius: 4px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+.main-container .checkbox-group label {
+  color: var(--color-text-main);
+  cursor: pointer;
+}
+.main-container .checkbox-group label a {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  font-weight: 700;
+}
+.main-container .checkbox-group label a:hover {
+  color: var(--color-primary);
+}
+.main-container .checkbox-group .required {
+  color: var(--color-danger);
+  font-weight: 700;
+  margin-left: var(--spacing-4);
+}
+.main-container {
+  /* Radio / Gender Bento */
+}
+.main-container .radio-group {
+  margin-bottom: var(--spacing-20);
+}
+.main-container .radio-group .group-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: var(--spacing-8);
+}
+.main-container .radio-group .group-label .required {
+  color: var(--color-danger);
+  font-weight: 700;
+  margin-left: var(--spacing-4);
+}
+.main-container .radio-group .radio-options {
+  display: flex;
+  gap: var(--spacing-20);
+  flex-wrap: wrap;
+}
+.main-container .radio-group .radio-options ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: var(--spacing-20);
+  flex-wrap: wrap;
+}
+.main-container .radio-group .radio-options ul li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+.main-container .radio-group .radio-options label {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-main);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-weight: 500;
+}
+.main-container .radio-group .radio-options input[type=radio] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+.main-container {
+  /* Textos de Ayuda */
+}
+.main-container p.help {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-4);
+  line-height: 1.4;
+}
+.main-container {
+  /* Password strength app widget container */
+}
+.main-container #registration-password-app {
+  margin-top: -0.5rem;
+  margin-bottom: var(--spacing-20);
+}
+.main-container #registration-password-app div[class*=root] {
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+.main-container #registration-password-app div[class*=title] {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: var(--spacing-8);
+}
+.main-container #registration-password-app div[class*=bar] {
+  width: 100%;
+  height: 8px;
+  background-color: var(--color-primary-light);
+  border: var(--border-thick);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+  box-shadow: none;
+  margin-bottom: var(--spacing-12);
+}
+.main-container #registration-password-app div[class*=bar] div[class*=indicator] {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width var(--transition-fast), background-color var(--transition-fast);
+}
+.main-container #registration-password-app div[class*=bar][data-password-score="0"] div[class*=indicator] {
+  background-color: var(--color-danger);
+}
+.main-container #registration-password-app div[class*=bar][data-password-score="1"] div[class*=indicator] {
+  background-color: var(--color-warning);
+}
+.main-container #registration-password-app div[class*=bar][data-password-score="2"] div[class*=indicator] {
+  background-color: var(--color-warning);
+}
+.main-container #registration-password-app div[class*=bar][data-password-score="3"] div[class*=indicator] {
+  background-color: var(--color-success);
+}
+.main-container #registration-password-app div[class*=bar][data-password-score="4"] div[class*=indicator] {
+  background-color: var(--color-primary);
+}
+.main-container #registration-password-app ul[class*=messages] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-4);
+  height: auto !important;
+}
+.main-container #registration-password-app ul[class*=messages] li[class*=message] {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+.main-container #registration-password-app ul[class*=messages] li[class*=message]::before {
+  content: "●";
+  color: var(--color-primary);
+  font-size: 0.65rem;
+}
+.main-container #registration-password-app ul[class*=messages] li[class*=message][class*=messageWarning] {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+.main-container #registration-password-app ul[class*=messages] li[class*=message][class*=messageWarning]::before {
+  color: var(--color-danger);
+}
+.main-container {
+  /* ==========================================================================
+     Panel Derecho: Contenedor con la Tarjeta ShowCase Estilo Referencia
+     ========================================================================== */
+}
+.main-container .brand-panel {
+  flex: 1.15;
+  background-color: var(--color-bg-dark); /* #090f1e de DESIGN2.md */
+  border-left: var(--border-bold);
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 2rem;
+  padding: var(--spacing-24);
   position: relative;
-  text-align: center;
   overflow: hidden;
+  box-sizing: border-box;
+  /* Sutil textura ambiental */
 }
 .main-container .brand-panel::before {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: linear-gradient(rgba(41, 185, 242, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(41, 185, 242, 0.08) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: dataFlow 20s linear infinite;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 60%);
+  pointer-events: none;
   z-index: 1;
-}
-.main-container .brand-panel::after {
-  content: "";
-  position: absolute;
-  width: clamp(400px, 60vw, 800px);
-  height: clamp(400px, 60vw, 800px);
-  background: radial-gradient(circle, rgba(41, 185, 242, 0.12) 0%, rgba(15, 23, 42, 0) 70%);
-  border-radius: 50%;
-  z-index: 1;
-  animation: float 8s ease-in-out infinite;
 }
 .main-container .brand-content {
   position: relative;
   z-index: 2;
-  max-width: 500px;
-  animation: fadeIn 1.2s var(--transition-smooth) 0.3s both;
-}
-.main-container .brand-content h2 {
-  font-size: clamp(2rem, 3vw, 2.6rem);
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-  color: var(--color-surface);
-}
-.main-container .brand-content p {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: #cbd5e1;
-  margin-bottom: 2.5rem;
+  width: 100%;
+  max-width: 530px;
+  height: calc(100vh - 48px);
+  max-height: 750px;
+  min-height: 600px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  animation: fadeIn 0.8s var(--transition-smooth) 0.1s both;
 }
 .main-container {
-  /* Ilustración: Celular + Candado */
+  /* ==========================================================================
+     Bento ShowCase Card (Réplica exacta de la referencia)
+     ========================================================================== */
 }
-.main-container .privacy-illustration {
+.main-container .bento-showcase-card {
   position: relative;
-  width: 140px;
-  height: 180px;
-  margin: 0 auto 3.5rem auto;
-}
-.main-container {
-  /* El Celular */
-}
-.main-container .phone {
-  width: 95px;
-  height: 170px;
-  background: #1e293b;
-  border: 4px solid #475569;
-  border-radius: 16px;
-  padding: 8px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-  animation: floatPhone 6s ease-in-out infinite;
-  z-index: 1;
-}
-.main-container .phone-screen {
-  background: #f1f5f9;
+  background-color: var(--color-success); /* #10b981 Success Emerald de DESIGN2.md */
+  border: 3px solid #0f172a;
+  border-radius: 40px;
+  padding: 36px 32px 28px 32px;
+  color: #ffffff;
   width: 100%;
   height: 100%;
-  border-radius: 6px;
-  padding: 12px 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: none;
+  /* Muesca escalón en la esquina superior derecha */
+}
+.main-container .bento-showcase-card .card-notch-corner {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 72px;
+  height: 48px;
+  background-color: var(--color-bg-dark);
+  border-bottom: 3px solid #0f172a;
+  border-left: 3px solid #0f172a;
+  border-bottom-left-radius: 28px;
+  z-index: 3;
+  pointer-events: none;
+}
+.main-container .bento-showcase-card .bento-showcase__upper {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+}
+.main-container .bento-showcase-card .bento-showcase__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(15, 23, 42, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 16px;
+}
+.main-container .bento-showcase-card .bento-showcase__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 2.7vw, 2.45rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  max-width: 420px;
+  text-align: left;
+}
+.main-container .bento-showcase-card .bento-pillar-container {
+  min-height: 135px;
+  position: relative;
+  text-align: left;
+}
+.main-container .bento-showcase-card .bento-pillar-slide {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.main-container .bento-showcase-card .bento-pillar-slide.is-active {
+  display: block;
+  opacity: 1;
+  animation: fadeIn 0.35s ease;
+}
+.main-container .bento-showcase-card .bento-pillar__headline {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
   gap: 8px;
 }
-.main-container .form-line {
-  height: 6px;
-  background: #cbd5e1;
-  border-radius: 3px;
+.main-container .bento-showcase-card .bento-pillar__desc {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.94);
+  margin: 0;
+  font-weight: 400;
+  max-width: 440px;
 }
-.main-container .form-line.title {
-  width: 70%;
-  height: 8px;
-  background: #94a3b8;
-  margin-bottom: 6px;
+.main-container .bento-showcase-card {
+  /* Starburst Line-Art en el Fondo */
 }
-.main-container .form-line.short {
-  width: 50%;
-}
-.main-container .form-line.long {
-  width: 100%;
-}
-.main-container .form-btn {
-  height: 18px;
-  background: var(--color-primary);
-  border-radius: 4px;
-  margin-top: auto;
-}
-.main-container {
-  /* El Candado */
-}
-.main-container .padlock {
+.main-container .bento-showcase-card .bento-starburst {
   position: absolute;
-  bottom: 5px;
-  right: -15px;
-  z-index: 2;
-  animation: floatLock 5s ease-in-out infinite;
+  right: -25px;
+  top: 90px;
+  width: 240px;
+  height: 240px;
+  color: rgba(255, 255, 255, 0.22);
+  pointer-events: none;
+  z-index: 1;
+  transform: rotate(12deg);
 }
-.main-container .lock-shackle {
-  width: 32px;
-  height: 40px;
-  border: 6px solid #94a3b8;
-  border-bottom: none;
-  border-radius: 16px 16px 0 0;
-  margin: 0 auto;
-  position: relative;
-  top: 8px;
+.main-container .bento-showcase-card {
+  /* Controles de Navegación */
 }
-.main-container .lock-body {
-  width: 70px;
-  height: 50px;
-  background: var(--color-primary);
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+.main-container .bento-showcase-card .bento-controls {
   display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 2;
+}
+.main-container .bento-showcase-card .bento-controls .bento-nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  border: 2px solid #0f172a;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+.main-container .bento-showcase-card .bento-controls .bento-nav-btn:active {
+  transform: translateY(1px);
+}
+.main-container .bento-showcase-card .bento-controls .bento-nav-btn--prev {
+  background-color: #d1fae5;
+  color: #0f172a;
+}
+.main-container .bento-showcase-card .bento-controls .bento-nav-btn--prev:hover {
+  background-color: #ffffff;
+  transform: translateY(-2px);
+}
+.main-container .bento-showcase-card .bento-controls .bento-nav-btn--next {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+.main-container .bento-showcase-card .bento-controls .bento-nav-btn--next:hover {
+  background-color: #1e293b;
+  transform: translateY(-2px);
+}
+.main-container .bento-showcase-card .bento-controls .bento-slide-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 8px;
+}
+.main-container .bento-showcase-card {
+  /* ==========================================================================
+     Placa Inferior Blanca (Bento Plate)
+     ========================================================================== */
+}
+.main-container .bento-showcase-card .bento-showcase__plate {
+  background-color: #ffffff;
+  border: 3px solid #0f172a;
+  border-radius: 24px;
+  padding: 24px 28px;
+  position: relative;
+  color: var(--color-text-main);
+  z-index: 2;
+  text-align: left;
+  margin-top: auto;
+  /* Insignia Circular Flotante con Estrella */
+}
+.main-container .bento-showcase-card .bento-showcase__plate .bento-floating-star {
+  position: absolute;
+  top: -26px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background-color: #ffffff;
+  border: 2.5px solid #0f172a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+  box-shadow: none;
+  z-index: 4;
+  transition: transform var(--transition-fast);
+}
+.main-container .bento-showcase-card .bento-showcase__plate .bento-floating-star:hover {
+  transform: rotate(45deg);
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-title {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--color-text-main);
+  margin: 0 0 8px 0;
+  padding-right: 50px;
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-desc {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  margin: 0 0 16px 0;
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-badge {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: var(--color-primary-light);
+  color: var(--color-text-main);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid #0f172a;
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-avatars {
+  display: flex;
   align-items: center;
 }
-.main-container .lock-keyhole {
-  width: 10px;
-  height: 14px;
-  background: #0f172a;
-  border-radius: 5px;
-  position: relative;
-}
-.main-container .lock-keyhole::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14px;
-  height: 14px;
-  background: #0f172a;
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-avatars .avatar-tag {
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-left: -8px;
 }
-.main-container .stats-badge {
-  display: inline-block;
-  padding: 0.8rem 1.5rem;
-  background: rgba(41, 185, 242, 0.1);
-  border: 1px solid rgba(41, 185, 242, 0.3);
-  border-radius: var(--radius-pill, 20px);
-  font-size: 0.95rem;
-  color: var(--color-primary-light);
-  backdrop-filter: blur(5px);
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-avatars .avatar-tag:first-child {
+  margin-left: 0;
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-avatars .avatar-tag--cs {
+  background-color: #0284c7;
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-avatars .avatar-tag--tec {
+  background-color: #8b5cf6;
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-avatars .avatar-tag--med {
+  background-color: #ef4444;
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-avatars .avatar-tag--hum {
+  background-color: #059669;
+}
+.main-container .bento-showcase-card .bento-showcase__plate .plate-footer .plate-avatars .avatar-tag--more {
+  background-color: #0f172a;
+  font-size: 8px;
 }
 .main-container {
-  /* Logo styling override for django block */
+  /* Logo */
 }
 .main-container .registration--logo {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-20);
   text-align: left;
 }
 .main-container .registration--logo img {
@@ -449,138 +844,167 @@
   height: auto;
 }
 .main-container {
-  /* Error rendering specific to django inputs */
+  /* Mensajes de Error */
 }
 .main-container .error-message {
-  color: #ef4444;
-  font-size: 0.85rem;
-  margin-top: 0.4rem;
-  font-weight: 500;
+  color: var(--color-danger);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  margin-top: var(--spacing-4);
+  font-weight: 600;
 }
 .main-container .non-field-errors {
   background-color: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #991b1b;
-  padding: 0.8rem 1.2rem;
+  border: 2px solid var(--color-danger);
+  color: var(--color-danger);
+  padding: var(--spacing-12) var(--spacing-16);
   border-radius: var(--radius-md);
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
+  margin-bottom: var(--spacing-20);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
   list-style: none;
 }
 .main-container {
-  /* Language switcher inside panel */
+  /* Selector de Idioma (Pill Sticker) */
 }
 .main-container .language-switcher-container {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: var(--spacing-20);
+  right: var(--spacing-20);
   z-index: 20;
 }
 .main-container .language-switcher-container select {
   appearance: none;
-  background-color: transparent;
-  border: 1px solid var(--color-border);
-  padding: 0.4rem 1.8rem 0.4rem 0.8rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
+  background-color: var(--color-text-inverse);
+  border: var(--border-thick);
+  padding: var(--spacing-8) var(--spacing-32) var(--spacing-8) var(--spacing-16);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-main);
   cursor: pointer;
   outline: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230f172a' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 0.5rem center;
-  background-size: 1rem;
-  transition: var(--transition-fast);
+  background-position: right var(--spacing-12) center;
+  background-size: 0.9rem;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
 }
 .main-container .language-switcher-container select:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  transform: translateY(-1px);
 }
 .main-container {
-  /* SSO Section */
+  /* ==========================================================================
+     SSO (Single Sign On) — Bento Ghost Pill Button
+     ========================================================================== */
 }
-.main-container .registration__sso--login {
-  margin-top: 2rem;
+.main-container .registration__sso--login,
+.main-container .registration__sso--signup {
+  margin-top: var(--spacing-24);
   text-align: center;
 }
-.main-container .registration__sso--login hr {
+.main-container .registration__sso--login hr,
+.main-container .registration__sso--signup hr {
   border: 0;
-  border-top: 1px solid var(--color-border);
-  margin-bottom: 1.5rem;
+  border-top: 1.5px solid var(--color-border);
+  margin-bottom: var(--spacing-20);
 }
-.main-container .registration__sso--login h2 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+.main-container .registration__sso--login h2,
+.main-container .registration__sso--signup h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  margin-bottom: var(--spacing-4);
   color: var(--color-text-main);
 }
-.main-container .registration__sso--login p {
-  font-size: 0.8rem;
+.main-container .registration__sso--login p,
+.main-container .registration__sso--signup p {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
   color: var(--color-text-muted);
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-16);
   line-height: 1.4;
 }
-.main-container .registration__sso--login .socialaccount_providers {
+.main-container .registration__sso--login .socialaccount_providers,
+.main-container .registration__sso--signup .socialaccount_providers {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.main-container .registration__sso--login .socialaccount_providers li {
-  margin-bottom: 0.5rem;
+.main-container .registration__sso--login .socialaccount_providers li,
+.main-container .registration__sso--signup .socialaccount_providers li {
+  margin-bottom: var(--spacing-8);
 }
 .main-container .kobo-button--sso {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.9rem;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
+  padding: var(--spacing-12) var(--spacing-24);
+  border: var(--border-thick);
+  background-color: var(--color-text-inverse);
   color: var(--color-text-main);
-  font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
   text-decoration: none;
+  box-shadow: none;
 }
 .main-container .kobo-button--sso:hover {
   background-color: var(--color-primary-light);
-  border-color: var(--color-primary);
-  color: var(--color-primary-dark);
+  border-color: var(--color-text-main);
+  color: var(--color-text-main);
+  transform: translateY(-1px);
+}
+.main-container .kobo-button--sso:active {
+  transform: translateY(1px);
 }
 .main-container {
   /* Legal Links */
 }
 .main-container .registration__legal {
-  margin-top: 2rem;
-  border-top: 1px solid var(--color-border);
-  padding-top: 1rem;
+  margin-top: var(--spacing-24);
+  border-top: 1.5px solid var(--color-border);
+  padding-top: var(--spacing-16);
   text-align: center;
 }
 .main-container .registration__legal .links {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: var(--spacing-20);
 }
 .main-container .registration__legal .links a {
   text-decoration: none;
-  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
   color: var(--color-text-muted);
-  transition: var(--transition-fast);
+  transition: color var(--transition-fast);
 }
 .main-container .registration__legal .links a:hover {
   color: var(--color-primary-dark);
-  text-decoration: underline;
 }
 
-/* Responsiveness overrides */
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
 @media (max-width: 1024px) {
   .main-container .login-panel {
-    padding: 3rem 2rem;
+    padding: var(--spacing-24) var(--spacing-16);
+  }
+  .main-container .brand-panel {
+    padding: var(--spacing-16);
+  }
+  .main-container .bento-showcase-card {
+    padding: 28px 24px 24px 24px;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .main-container {
     flex-direction: column;
   }
@@ -588,321 +1012,27 @@
     display: none;
   }
   .main-container .login-panel {
-    padding: 2rem 1.5rem;
+    padding: var(--spacing-24) var(--spacing-16);
     align-items: flex-start;
     justify-content: center;
     min-height: 100vh;
+    width: 100%;
   }
   .main-container .login-wrapper {
     max-width: 100%;
-    margin-top: 5vh;
-  }
-  /* Dropdowns, Radio lists, Checkboxes styles in registration */
-  .input-group select {
-    width: 100%;
-    padding: 1.2rem;
-    font-size: 1.05rem;
-    color: var(--color-text-main);
-    background-color: transparent;
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-md);
-    transition: var(--transition-fast);
-    outline: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1.2rem center;
-    background-size: 1.25rem;
-  }
-  .input-group select:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 4px var(--color-primary-light);
-  }
-  /* Force label to top for selects */
-  .input-group.has-select label {
-    top: -0.6rem;
-    left: 0.8rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-primary-dark);
-  }
-  /* Checkbox styling */
-  .checkbox-group {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-  .checkbox-group input[type=checkbox] {
-    margin-top: 4px;
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--color-border);
-    border-radius: 4px;
-    cursor: pointer;
-    accent-color: var(--color-primary);
-  }
-  .checkbox-group label {
-    color: var(--color-text-main);
-    cursor: pointer;
-  }
-  .checkbox-group label a {
-    color: var(--color-primary-dark);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .checkbox-group label a:hover {
-    color: var(--color-primary);
-    text-decoration: underline;
-  }
-  .checkbox-group .required {
-    color: #ef4444;
-    font-weight: 700;
-    margin-left: 4px;
-  }
-  /* Radio/Gender styling */
-  .radio-group {
-    margin-bottom: 1.8rem;
-  }
-  .radio-group .group-label {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text-main);
-    margin-bottom: 0.8rem;
-  }
-  .radio-group .group-label .required {
-    color: #ef4444;
-    font-weight: 700;
-    margin-left: 4px;
-  }
-  .radio-group .radio-options {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .radio-group .radio-options ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .radio-group .radio-options ul li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .radio-group .radio-options label {
-    font-size: 1rem;
-    color: var(--color-text-main);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .radio-group .radio-options input[type=radio] {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-    accent-color: var(--color-primary);
-  }
-  /* Help text styling */
-  p.help {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    margin-top: 0.4rem;
-    line-height: 1.4;
-  }
-  /* Password strength app widget container */
-  #registration-password-app {
-    margin-bottom: 1.5rem;
-  }
-  /* NUEVA ILUSTRACIÓN: Tarjeta de Perfil */
-  .account-illustration {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    margin: 0 auto 3rem auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  /* Tarjeta de Usuario */
-  .profile-card {
-    width: 120px;
-    height: 150px;
-    background: #1e293b;
-    border: 3px solid #475569;
-    border-radius: var(--radius-lg, 12px);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    animation: floatCard 7s ease-in-out infinite;
-    position: relative;
-    z-index: 1;
-  }
-  .profile-card .ui-line {
-    height: 6px;
-    background: #cbd5e1;
-    border-radius: var(--radius-sm, 4px);
-    width: 100%;
-    margin-bottom: 8px;
-  }
-  .profile-card .ui-line.short {
-    width: 60%;
-    background: #94a3b8;
-  }
-  .avatar-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--color-primary);
-    margin-bottom: 16px;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-circle::before {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-  }
-  .avatar-circle::after {
-    content: "";
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 18px;
-    height: 18px;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-  }
-  /* Badge de Verificación / Creación */
-  .success-badge {
-    position: absolute;
-    bottom: -10px;
-    right: -20px;
-    width: 48px;
-    height: 48px;
-    background: var(--color-primary-dark);
-    border-radius: 50%;
-    border: 4px solid var(--color-text-main);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    animation: floatBadge 5s ease-in-out infinite;
-    box-shadow: 0 10px 20px rgba(6, 136, 186, 0.4);
-  }
-  .success-badge::after {
-    content: "";
-    width: 12px;
-    height: 22px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-    margin-bottom: 4px;
-  }
-  /* Password strength app widget container override */
-  #registration-password-app {
-    margin-top: -0.5rem;
-    margin-bottom: 1.5rem;
-  }
-  #registration-password-app div[class*=root] {
-    width: 100%;
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-  }
-  #registration-password-app div[class*=title] {
-    font-weight: 600;
-    color: var(--color-text-main);
-    margin-bottom: 0.5rem;
-  }
-  #registration-password-app div[class*=bar] {
-    width: 100%;
-    height: 6px;
-    background-color: var(--color-border);
-    border-radius: var(--radius-sm, 4px);
-    overflow: hidden;
-    position: relative;
-    box-shadow: none;
-    margin-bottom: 0.8rem;
-  }
-  #registration-password-app div[class*=bar] div[class*=indicator] {
-    height: 100%;
-    border-radius: var(--radius-sm, 4px);
-    transition: width 0.3s ease, background-color 0.3s ease;
-  }
-  #registration-password-app div[class*=bar][data-password-score="0"] div[class*=indicator] {
-    background-color: #ef4444;
-  }
-  #registration-password-app div[class*=bar][data-password-score="1"] div[class*=indicator] {
-    background-color: #f97316;
-  }
-  #registration-password-app div[class*=bar][data-password-score="2"] div[class*=indicator] {
-    background-color: #eab308;
-  }
-  #registration-password-app div[class*=bar][data-password-score="3"] div[class*=indicator] {
-    background-color: #22c55e;
-  }
-  #registration-password-app div[class*=bar][data-password-score="4"] div[class*=indicator] {
-    background-color: var(--color-primary);
-  }
-  #registration-password-app ul[class*=messages] {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    height: auto !important;
-  }
-  #registration-password-app ul[class*=messages] li[class*=message] {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  #registration-password-app ul[class*=messages] li[class*=message]::before {
-    content: "•";
-    color: var(--color-primary);
-    font-weight: bold;
-    margin-right: 4px;
-  }
-  #registration-password-app ul[class*=messages] li[class*=message][class*=messageWarning] {
-    color: #ef4444;
-    font-weight: 500;
-  }
-  #registration-password-app ul[class*=messages] li[class*=message][class*=messageWarning]::before {
-    color: #ef4444;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-24) var(--spacing-16);
+    margin-top: 3vh;
   }
 }
-
-/* Accessibility: Support prefers-reduced-motion (WCAG 2.1 AA 2.2.2 & AAA 2.3.3) */
+/* ==========================================================================
+   Accessibility: Support prefers-reduced-motion (WCAG 2.1 AA)
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .main-container .login-wrapper {
-    animation: none;
-  }
-  .main-container .brand-panel::before,
-  .main-container .brand-panel::after,
-  .main-container .phone,
-  .main-container .padlock,
-  .main-container .profile-card,
-  .main-container .success-badge,
-  .main-container .brand-content {
+  .main-container .login-wrapper,
+  .main-container .bento-showcase-card,
+  .main-container .bento-pillar-slide {
     animation: none !important;
+    transition: none !important;
   }
 }

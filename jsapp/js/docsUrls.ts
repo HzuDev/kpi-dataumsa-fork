@@ -16,7 +16,10 @@ export const DOCS_PATHS = {
 } as const
 
 export function getDocUrl(subpath: string = ''): string {
-  const baseUrl = envStore.data.support_url || 'https://data.umsa.bo/docs/'
+  let baseUrl = envStore.data.support_url
+  if (!baseUrl || baseUrl.includes('kobotoolbox.org')) {
+    baseUrl = 'https://data.umsa.bo/docs/'
+  }
   const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`
   const normalizedSubpath = subpath.startsWith('/') ? subpath.slice(1) : subpath
   return `${normalizedBase}${normalizedSubpath}`

@@ -1,41 +1,62 @@
 @use 'scss/_variables';
 @use 'scss/colors';
 
-// ==========================================================================
-// Buttons
-// ==========================================================================
+// Reset form builder inline add row button so it never inherits pill borders
+.btn.btn--addrow,
+.btn--addrow {
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    min-height: unset !important;
+    padding: 0 !important;
+    line-height: normal !important;
+}
 
+
+
+
+// ==========================================================================\n// Buttons - Bento Standard
+// ==========================================================================\n
 .btn {
-    box-shadow: none;
+    box-shadow: none !important;
     margin-bottom: 0;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
+    border: 2px solid var(--color-text-main, #0f172a);
     white-space: nowrap;
-    border-radius: 4px;
-    color: colors.$kobo-white;
-    background-color: colors.$kobo-blue;
-    height: 30px;
-    line-height: 30px;
-    padding: 0 20px;
-    font-weight: 400;
-    font-size: variables.$base-font-size;
+    border-radius: 9999px;
+    color: var(--color-text-main, #0f172a);
+    background-color: var(--color-primary, #29b9f2);
+    height: 36px;
+    line-height: 1;
+    padding: 0 22px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-weight: 700;
+    font-size: 13.5px;
     user-select: none;
     position: relative;
+    transition: all 0.15s ease;
 
     &:hover {
-        background-color: colors.$kobo-mid-blue;
+        background-color: var(--color-primary-dark, #0688ba);
+        color: #ffffff;
         text-decoration: none;
+        transform: translateY(-1px);
     }
 
     &:active,
- .is-active {
+    .is-active {
         outline: 0;
         background-image: none;
         box-shadow: none;
+        transform: translateY(1px);
     }
 }
 
@@ -44,25 +65,25 @@
 fieldset[disabled] .btn {
     pointer-events: none;
     cursor: not-allowed;
-    opacity: 0.65;
+    opacity: 0.45;
+    background-color: #e2e8f0;
+    border-color: rgba(15, 23, 42, 0.3);
+    color: #94a3b8;
 }
 
 .btn--small {
-    height: 20px;
-    padding-right: 5px;
-    padding-left: 5px;
+    height: 28px;
+    padding: 0 14px;
     font-size: 12px;
-    line-height: 20px;
-    border-radius: 3px;
 }
 
 .btn--block {
-    display: block;
+    display: flex;
     width: 100%;
 }
 
 .btn--block + .btn--block {
-    margin-top: 5px;
+    margin-top: 8px;
 }
 
 input[type='submit'].btn--block,
@@ -73,6 +94,7 @@ input[type='button'].btn--block {
 
 .btn--disabled {
     cursor: default;
-    color: colors.$kobo-gray-300;
-    font-weight: normal;
+    color: #94a3b8;
+    background-color: #e2e8f0;
+    border-color: rgba(15, 23, 42, 0.3);
 }

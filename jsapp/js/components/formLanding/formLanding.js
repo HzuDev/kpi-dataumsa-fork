@@ -1,3 +1,4 @@
+import { DOCS_PATHS, getDocUrl } from '#/docsUrls'
 import { Group, Stack } from '@mantine/core'
 import { IconWorldFilled } from '@tabler/icons-react'
 import React from 'react'
@@ -399,9 +400,7 @@ class FormLanding extends React.Component {
                 content={t(
                   'You can now control whether to allow anonymous submissions for each project. Previously, this was an account-wide setting.',
                 )}
-                supportArticle={
-                  envStore.data.support_url + HELP_ARTICLE_ANON_SUBMISSIONS_URL
-                }
+                supportArticle={getDocUrl(DOCS_PATHS.RECOLECCION_DATOS)}
                 featureKey='anonymousSubmissions'
                 disabled={pageState.state?.modal}
                 pointerClass='anonymousSubmissionPointer'

@@ -44,7 +44,7 @@ export const recordValues = <T extends object>(o: T) => Object.values(o) as T[ke
 
 export const LANGUAGE_COOKIE_NAME = 'django_language'
 
-const cookies = new Cookies()
+export const cookies = new Cookies()
 
 /**
  * Pop up a notification with react-hot-toast
@@ -224,7 +224,20 @@ export const log = (() => {
 window.log = log
 
 export function currentLang(): string {
-  return cookies.get(LANGUAGE_COOKIE_NAME) || 'en'
+  const cookieLang = cookies.get(LANGUAGE_COOKIE_NAME)
+  if (cookieLang) {
+    return cookieLang.toLowerCase().startsWith('es') ? 'es' : cookieLang.toLowerCase()
+  }
+  if (typeof navigator !== 'undefined' && navigator.language) {
+    const navLang = navigator.language.toLowerCase()
+    if (navLang.startsWith('es')) {
+      return 'es'
+    }
+    if (navLang.startsWith('en')) {
+      return 'en'
+    }
+  }
+  return 'es'
 }
 
 export interface LangObject {

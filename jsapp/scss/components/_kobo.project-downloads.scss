@@ -27,8 +27,8 @@
   hr {
     display: block;
     width: 100%;
-    height: 1px;
-    background-color: colors.$kobo-gray-300;
+    height: 1.5px;
+    background-color: rgba(15, 23, 42, 0.08);
     margin: 0;
     border: 0;
   }
@@ -53,7 +53,8 @@
 
   .kobo-select {
     .kobo-select__control {
-      border: 1px solid colors.$kobo-gray-300;
+      border: 2px solid var(--color-text-main, #0f172a);
+      border-radius: 8px;
     }
   }
 
@@ -68,11 +69,14 @@
   }
 
   .project-downloads-group-textbox__title {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
     font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-muted, #475569);
     text-align: right;
 
     &.project-downloads-group-textbox__title--disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       pointer-events: none;
     }
   }
@@ -86,7 +90,7 @@
 
   .project-downloads__advanced-view {
     display: flex;
-    align-items: stretch; // needed for questions list stretching
+    align-items: stretch;
     flex-wrap: wrap;
     padding-top: 12px;
   }
@@ -94,6 +98,10 @@
   .project-downloads__title {
     margin-bottom: 6px;
     display: inline-block;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--color-text-main, #0f172a);
   }
 
   .project-downloads__column {
@@ -106,7 +114,7 @@
 
     &.project-downloads__column--right {
       flex: 1;
-      position: relative; // needed to stretch question list with GeoJSON checkbox visible
+      position: relative;
     }
 
     .project-downloads__column-row {
@@ -127,11 +135,11 @@
         }
 
         .project-downloads__vr {
-          width: 1px;
-          height: 1em;
+          width: 1.5px;
+          height: 1.2em;
           display: block;
           margin: 0;
-          background-color: colors.$kobo-gray-300;
+          background-color: var(--color-text-main, #0f172a);
         }
       }
     }
@@ -159,7 +167,6 @@
     }
 
     .project-downloads__delete-settings-button {
-      // positioning
       position: absolute;
       left: 100%;
       margin-left: 8px;
@@ -182,8 +189,8 @@
     iframe {
       width: 100%;
       height: 250px;
-      border: 1px solid colors.$kobo-gray-300;
-      border-radius: 4px;
+      border: 2px solid var(--color-text-main, #0f172a);
+      border-radius: 12px;
     }
   }
 
@@ -205,9 +212,10 @@
 
   .project-downloads__date-selector {
     margin: 0 5px;
-    border: 1px solid colors.$kobo-gray-300;
-    padding: 2px 4px;
-    border-radius: 4px;
+    border: 2px solid var(--color-text-main, #0f172a);
+    padding: 4px 8px;
+    border-radius: 8px;
     margin-top: 4px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   }
 }

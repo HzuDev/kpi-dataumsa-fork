@@ -14,16 +14,17 @@ $projects-table-row-height: 40px;
   position: relative;
   align-items: center;
   cursor: pointer;
-  margin: 0 16px;
+  margin: 0 24px;
   user-select: none;
 }
 
 .cell {
   padding: $projects-table-row-padding;
-  color: var(--color-text-main, colors.$kobo-gray-800);
+  color: var(--color-text-main, #0f172a);
   flex: 1 0 auto;
   width: 10%;
-  font-size: 14px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 13.5px;
 
   > * {
     cursor: inherit;
@@ -38,8 +39,8 @@ $projects-table-row-height: 40px;
   }
 
   &[data-field='checkbox'] {
-    max-width: 40px;
-    width: 40px;
+    max-width: 44px;
+    width: 44px;
     @include mixins.centerRowFlex;
   }
 
@@ -51,11 +52,12 @@ $projects-table-row-height: 40px;
 
   &[data-field='ownerFullName'],
   &[data-field='ownerUsername'] {
-    font-weight: 600;
+    font-weight: 700;
   }
 
   &[data-field='name'] {
-    color: var(--color-primary-dark, colors.$kobo-dark-blue);
+    color: var(--color-text-main, #0f172a);
+    font-family: var(--font-display, 'Montserrat', sans-serif);
     font-weight: 700;
     padding: 0;
 
@@ -73,7 +75,8 @@ $projects-table-row-height: 40px;
       }
       
       &:hover {
-        color: var(--color-primary, colors.$kobo-blue);
+        color: var(--color-primary-dark, #0688ba);
+        text-decoration: underline;
       }
     }
   }
@@ -111,12 +114,12 @@ $projects-table-row-height: 40px;
 }
 
 .row.rowTypeProject {
-  background-color: colors.$kobo-white;
-  border: 1px solid rgba(15, 23, 42, 0.06);
-  border-radius: 10px;
-  margin: 8px 16px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: #ffffff;
+  border: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 16px;
+  margin: 8px 24px;
+  box-shadow: none;
+  transition: all 0.15s ease;
 
   .cell {
     @include mixins.textEllipsis;
@@ -133,52 +136,89 @@ $projects-table-row-height: 40px;
       position: relative;
       overflow: visible;
       contain: inline-size style;
+
+      :global(.checkbox__input) {
+        border: 2px solid var(--color-text-main, #0f172a) !important;
+        border-radius: 6px !important;
+        width: 18px !important;
+        height: 18px !important;
+        background-color: #ffffff !important;
+        transition: all 0.15s ease !important;
+
+        &:checked {
+          background-color: var(--color-primary, #29b9f2) !important;
+          border-color: var(--color-text-main, #0f172a) !important;
+          color: var(--color-text-main, #0f172a) !important;
+        }
+      }
     }
   }
 
-  // Custom status badge refinement
+  // Bento status badge refinement
   .cell[data-field='status'] {
-    > div {
-      font-weight: 600 !important;
-      border-radius: 20px !important;
+    > div,
+    :global(.k-badge) {
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+      font-weight: 700 !important;
+      font-size: 11.5px !important;
+      border-radius: 9999px !important;
       padding: 0 12px !important;
       height: 24px !important;
-      line-height: 24px !important;
-      border: none !important;
+      line-height: 21px !important;
+      border: 1.5px solid var(--color-text-main, #0f172a) !important;
       box-shadow: none !important;
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      
-      &[class*='color-light-teal'] {
-        background-color: rgba(82, 197, 208, 0.12) !important;
-        color: colors.$kobo-dark-teal !important;
-      }
+      gap: 5px !important;
       
       &[class*='color-light-blue'] {
-        background-color: rgba(41, 185, 242, 0.12) !important;
-        color: var(--color-primary-dark, colors.$kobo-dark-blue) !important;
+        background-color: #dcfce7 !important; // Deployed = Emerald Light wash
+        color: #065f46 !important;
+        border-color: var(--color-text-main, #0f172a) !important;
+
+        :global(.k-icon) {
+          color: #065f46 !important;
+        }
+      }
+
+      &[class*='color-light-teal'] {
+        background-color: var(--color-primary-light, #e0f6ff) !important; // Draft = Cyan Light wash
+        color: var(--color-primary-dark, #0369a1) !important;
+        border-color: var(--color-text-main, #0f172a) !important;
+
+        :global(.k-icon) {
+          color: var(--color-primary-dark, #0369a1) !important;
+        }
       }
       
       &[class*='color-light-amber'] {
-        background-color: rgba(255, 190, 128, 0.15) !important;
-        color: colors.$kobo-dark-amber !important;
+        background-color: #f1f5f9 !important; // Archived = Slate Light wash
+        color: #334155 !important;
+        border-color: var(--color-text-main, #0f172a) !important;
+
+        :global(.k-icon) {
+          color: #334155 !important;
+        }
       }
     }
   }
 
-  // Custom submissions count badge refinement
+  // Bento submissions count badge refinement
   .cell[data-field='submissions'] {
-    > div {
+    > div,
+    :global(.k-badge) {
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
       font-weight: 700 !important;
-      border-radius: 20px !important;
-      background-color: rgba(15, 23, 42, 0.07) !important;
-      color: var(--color-text-main, colors.$kobo-gray-900) !important;
-      border: none !important;
+      font-size: 12px !important;
+      border-radius: 9999px !important;
+      background-color: #ffffff !important;
+      color: var(--color-text-main, #0f172a) !important;
+      border: 1.5px solid var(--color-text-main, #0f172a) !important;
       box-shadow: none !important;
       padding: 0 10px !important;
-      height: 24px !important;
-      line-height: 24px !important;
+      height: 22px !important;
+      line-height: 19px !important;
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
@@ -186,46 +226,45 @@ $projects-table-row-height: 40px;
   }
 
   &:hover {
-    transform: translateY(-1.5px);
-    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.02);
-    border-color: rgba(41, 185, 242, 0.35);
-    background-color: rgba(41, 185, 242, 0.015);
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0px var(--color-text-main, #0f172a) !important;
+    border-color: var(--color-text-main, #0f172a) !important;
+    background-color: #ffffff !important;
 
     .cell {
       background-color: transparent !important;
-    }
-
-    &[data-field='checkbox'] {
-      :global .checkbox__input {
-        box-shadow: 0 0 0 4px rgba(41, 185, 242, 0.12);
-        border-color: var(--color-primary, colors.$kobo-blue);
-      }
     }
   }
 }
 
 .row.rowTypeHeader {
-  margin: 0 16px;
+  margin: 12px 24px 6px 24px;
   background-color: transparent;
-  border-bottom: 2px solid rgba(15, 23, 42, 0.05);
+  border-bottom: 2px solid var(--color-text-main, #0f172a);
+  padding-bottom: 6px;
 
   .cell {
     @include mixins.centerRowFlex;
-    color: var(--color-text-muted, colors.$kobo-gray-700);
+    color: var(--color-text-muted, #475569);
     border-top: 0;
     cursor: pointer;
     height: $projects-table-row-height;
-    padding: 0;
+    padding: 0 10px;
     background-color: transparent;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
     font-weight: 700;
-    font-size: 13px;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 
     &:hover {
-      color: var(--color-text-main, colors.$kobo-gray-900) !important;
+      color: var(--color-text-main, #0f172a) !important;
     }
 
     &[data-field='checkbox'] {
       cursor: default;
+      max-width: 44px;
+      width: 44px;
     }
   }
 }
@@ -239,8 +278,10 @@ $projects-table-row-height: 40px;
 }
 
 .headerLabel {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-weight: 700;
-  font-size: 13px;
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
 }
 
 .row.rowTypeProject .cell.cellHighlighted {
@@ -249,5 +290,5 @@ $projects-table-row-height: 40px;
 
 .row.rowTypeHeader .cell.cellHighlighted {
   background-color: rgba(41, 185, 242, 0.08);
-  color: var(--color-primary-dark, colors.$kobo-dark-blue);
+  color: var(--color-primary-dark, #0688ba);
 }

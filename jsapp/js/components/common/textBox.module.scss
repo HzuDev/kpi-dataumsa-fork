@@ -7,10 +7,10 @@
 // because of too general styles of Form Builder.
 // See: https://github.com/kobotoolbox/kpi/issues/3914
 
-$input-color: colors.$kobo-gray-800;
-$wrapper-border-radius: 6px;
+$input-color: #0f172a;
+$wrapper-border-radius: 8px;
 // This is being shared by multiple components
-$label-margin: 3px;
+$label-margin: 4px;
 $label-leading: 20px;
 
 .root {
@@ -18,7 +18,7 @@ $label-leading: 20px;
 
   &.hasValue {
     .inputWrapper {
-      border-color: colors.$kobo-gray-400;
+      border-color: var(--color-text-main, #0f172a);
     }
   }
 
@@ -26,7 +26,7 @@ $label-leading: 20px;
     .inputWrapper {
       color: colors.$kobo-gray-500;
       background-color: colors.$kobo-gray-100;
-      border-color: colors.$kobo-gray-500;
+      border-color: colors.$kobo-gray-400;
     }
 
     .startIcon,
@@ -37,35 +37,33 @@ $label-leading: 20px;
 
   &.hasError {
     .inputWrapper {
-      border-color: colors.$kobo-mid-red;
+      border-color: var(--color-danger, #ef4444) !important;
     }
 
     .input {
-      // Don't type red if there is an error
       color: $input-color;
     }
 
     .startIcon,
     .endIcon {
-      color: colors.$kobo-red;
+      color: var(--color-danger, #ef4444);
     }
   }
 }
 
 .label {
-  color: colors.$kobo-gray-800;
-  font-size: 12px;
+  color: var(--color-text-main, #0f172a);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 13px;
+  font-weight: 700;
   line-height: $label-leading;
   margin-bottom: $label-margin;
 }
 
 .requiredMark {
-  // Smaller than the design, because there is also a single whitespace
-  // character between the label and this mark
   margin-left: 2px;
-  color: colors.$kobo-red;
+  color: var(--color-danger, #ef4444);
   font-size: 14px;
-  // Magic number to align it similarly to Figma designs
   line-height: 16px;
   display: inline-block;
   vertical-align: bottom;
@@ -76,22 +74,27 @@ $label-leading: 20px;
   flex-direction: row;
   align-content: flex-start;
   color: $input-color;
-  background-color: colors.$kobo-white;
-  border: 1px solid colors.$kobo-gray-300;
-  padding: 0; // size dictates the paddings
+  background-color: #ffffff;
+  border: 2px solid var(--color-text-main, #0f172a);
+  padding: 0;
   border-radius: $wrapper-border-radius;
+  box-shadow: none !important;
   cursor: text;
+  transition: all 0.15s ease;
 
   &:focus-within {
-    @include mixins.default-ui-focus;
+    border-color: var(--color-text-main, #0f172a) !important;
+    outline: 2px solid var(--color-primary, #29b9f2) !important;
+    outline-offset: 2px !important;
   }
 }
 
 // We need this crazy selector here to increse the specificity
-// TODO: use a normal selector in far future when we no longer have bad CSS code
 textarea[class].input.input,
 input[class].input.input {
   font-size: 14px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 500;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -99,7 +102,6 @@ input[class].input.input {
   background-color: transparent;
   color: $input-color;
 
-  // The wrapper component is handling focus styles
   &:focus {
     outline: none;
   }
@@ -109,24 +111,23 @@ input[class].input.input {
     pointer-events: none;
 
     &::placeholder {
-      color: colors.$kobo-gray-600;
+      color: colors.$kobo-gray-500;
     }
   }
 
   &::placeholder {
-    color: colors.$kobo-gray-600;
-    opacity: 1;
+    color: var(--color-text-muted, #475569);
+    opacity: 0.9;
   }
 }
 
 textarea[class].input.input {
-  // Disallows resizing resizeable textarea to tiny size
-  min-height: 20px;
+  min-height: 24px;
 }
 
 .startIcon,
 .endIcon {
-  color: colors.$kobo-gray-700;
+  color: var(--color-text-muted, #475569);
 }
 
 .startIcon {
@@ -139,30 +140,26 @@ textarea[class].input.input {
 }
 
 .errorIcon {
-  color: colors.$kobo-red;
+  color: var(--color-danger, #ef4444);
 }
 
 .errorMessages {
   font-size: 12px;
   line-height: 1.6;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
-  color: colors.$kobo-red;
+  color: var(--color-danger, #ef4444);
   margin-top: 6px;
 }
 
-// Note: TextBox is built differently from Button (for many reasons) so we can't
-// connect their styles via some shared bulletproof variables. Just ensure that
-// both components in the same size have the same height :)
-
 .sizeL .inputWrapper {
-  padding: 8px 16px;
+  padding: 8px 14px;
 }
 
 .sizeM .inputWrapper {
-  padding: 5px 12px;
+  padding: 6px 12px;
 }
 
 .sizeS .inputWrapper {
-  padding: 3px 10px;
+  padding: 4px 10px;
 }

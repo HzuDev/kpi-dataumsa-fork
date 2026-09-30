@@ -3,8 +3,11 @@
 {% load i18n %}
 
 {% block head_stylesheets %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   {{ block.super }}
-  <link rel="stylesheet" href="{% static 'css/login_redesign.css' %}">
+  <link rel="stylesheet" href="{% static 'css/login_redesign.css' %}?v=bento_ref_v1">
 {% endblock %}
 
 {% block head_end %}
@@ -19,6 +22,7 @@
     {% block language_selector %}{{ block.super }}{% endblock %}
   </div>
 
+  {# Panel Izquierdo: Formulario #}
   <div class="login-panel">
     <div class="login-wrapper">
       {% block status_badge %}
@@ -56,57 +60,174 @@
     </div>
   </div>
 
-  {# Panel Derecho: Ilustración y Mensaje de Marca #}
+  {# Panel Derecho: Réplica Fiel del Card de Referencia #}
   <div class="brand-panel">
     <div class="brand-content">
       {% block brand_content %}
-      <!-- Ilustración animada: Celular y Candado -->
-      <div class="privacy-illustration">
-        <div class="phone">
-          <div class="phone-screen">
-            <div class="form-line title"></div>
-            <div class="form-line short"></div>
-            <div class="form-line long"></div>
-            <div class="form-line long"></div>
-            <div class="form-line short"></div>
-            <div class="form-btn"></div>
+      <div class="bento-showcase-card">
+        <!-- Muesca de esquina superior derecha -->
+        <div class="card-notch-corner"></div>
+
+        <!-- Sección Superior: Tag, Título, Pilares de Valor y Controles -->
+        <div class="bento-showcase__upper">
+          <div class="bento-showcase__tag">
+            ● {% if LANGUAGE_CODE == 'es' %}Plataforma Institucional UMSA{% else %}UMSA Institutional Platform{% endif %}
+          </div>
+
+          <h2 class="bento-showcase__title">
+            {% if LANGUAGE_CODE == 'es' %}
+              Ciencia, territorio y datos confiables.
+            {% else %}
+              Science, territory and reliable data.
+            {% endif %}
+          </h2>
+
+          <div class="bento-pillar-container">
+            <div class="bento-pillar-slide is-active" data-index="0">
+              <div class="bento-pillar__headline">
+                {% if LANGUAGE_CODE == 'es' %}
+                  Trabajo de campo 100% sin conexión
+                {% else %}
+                  100% Offline field work
+                {% endif %}
+              </div>
+              <p class="bento-pillar__desc">
+                {% if LANGUAGE_CODE == 'es' %}
+                  Diseña formularios estructurados y recopila información en cualquier comunidad o municipio sin depender de cobertura celular. La sincronización se realiza de forma automática y segura al regresar a base.
+                {% else %}
+                  Design structured survey instruments and collect data in any community or municipality without relying on cell coverage. Automatic and secure synchronization.
+                {% endif %}
+              </p>
+            </div>
+
+            <div class="bento-pillar-slide" data-index="1">
+              <div class="bento-pillar__headline">
+                {% if LANGUAGE_CODE == 'es' %}
+                  Rigor metodológico y validación
+                {% else %}
+                  Methodological rigor and validation
+                {% endif %}
+              </div>
+              <p class="bento-pillar__desc">
+                {% if LANGUAGE_CODE == 'es' %}
+                  Aplica lógica de saltos condicionales, restricciones de coherencia, georreferenciación GPS precisa y captura multimedia para que cada registro cumpla los más altos estándares científicos.
+                {% else %}
+                  Apply conditional skip logic, consistency constraints, accurate GPS coordinates, and multimedia capture to meet the highest scientific research standards.
+                {% endif %}
+              </p>
+            </div>
+
+            <div class="bento-pillar-slide" data-index="2">
+              <div class="bento-pillar__headline">
+                {% if LANGUAGE_CODE == 'es' %}
+                  Soberanía y protección institucional
+                {% else %}
+                  Sovereignty and institutional protection
+                {% endif %}
+              </div>
+              <p class="bento-pillar__desc">
+                {% if LANGUAGE_CODE == 'es' %}
+                  La producción científica y los censos universitarios permanecen bajo la custodia exclusiva de la UMSA, garantizando reserva y protección de la información sin intermediarios comerciales.
+                {% else %}
+                  Scientific output and university censuses remain strictly under UMSA custody, guaranteeing institutional confidentiality without commercial intermediaries.
+                {% endif %}
+              </p>
+            </div>
+          </div>
+
+          <!-- Starburst Geométrica en el Fondo -->
+          <svg viewBox="0 0 200 200" class="bento-starburst" aria-hidden="true">
+            <polygon points="100,10 115,75 180,30 135,90 190,100 135,110 180,170 115,125 100,190 85,125 20,170 65,110 10,100 65,90 20,30 85,75"
+                     fill="none" stroke="currentColor" stroke-width="2" />
+          </svg>
+
+          <!-- Botones de Navegación -->
+          <div class="bento-controls">
+            <button type="button" class="bento-nav-btn bento-nav-btn--prev" aria-label="Anterior">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button type="button" class="bento-nav-btn bento-nav-btn--next" aria-label="Siguiente">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+            <span class="bento-slide-indicator"><span id="bento-curr">1</span> / 3</span>
           </div>
         </div>
-        <div class="padlock">
-          <div class="lock-shackle"></div>
-          <div class="lock-body">
-            <div class="lock-keyhole"></div>
+
+        <!-- Sección Inferior: Placa Blanca Bento con Estrella Flotante -->
+        <div class="bento-showcase__plate">
+          <div class="bento-floating-star">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z"/>
+            </svg>
+          </div>
+
+          <h3 class="plate-title">
+            {% if LANGUAGE_CODE == 'es' %}
+              Metodología y rigor para tus investigaciones
+            {% else %}
+              Methodology and rigor for your research
+            {% endif %}
+          </h3>
+          <p class="plate-desc">
+            {% if LANGUAGE_CODE == 'es' %}
+              Herramienta oficial a disposición de docentes, tesistas y estudiantes de las 13 facultades de la UMSA.
+            {% else %}
+              Official tool available for faculty, thesis researchers, and students across all 13 faculties of UMSA.
+            {% endif %}
+          </p>
+
+          <div class="plate-footer">
+            <span class="plate-badge">DATA UMSA OFICIAL</span>
+            <div class="plate-avatars">
+              <span class="avatar-tag avatar-tag--cs" title="Ciencias Sociales">CS</span>
+              <span class="avatar-tag avatar-tag--tec" title="Tecnología">TEC</span>
+              <span class="avatar-tag avatar-tag--med" title="Medicina">MED</span>
+              <span class="avatar-tag avatar-tag--hum" title="Humanidades">HUM</span>
+              <span class="avatar-tag avatar-tag--more">+13</span>
+            </div>
           </div>
         </div>
-      </div>
-
-      <h2>
-        {% if LANGUAGE_CODE == 'es' %}
-        Recolecta con confianza. Analiza con poder.
-        {% else %}
-        Collect with confidence. Analyze with power.
-        {% endif %}
-      </h2>
-      <p>
-        {% if LANGUAGE_CODE == 'es' %}
-        La plataforma de recolección de datos de la Universidad Mayor de San Andrés.<br />
-        Más potente para flujos de datos complejos y su validación en tiempo real.
-        {% else %}
-        UMSA's data collection platform.
-        {% endif %}
-      </p>
-
-      <div class="stats-badge">
-        {% if LANGUAGE_CODE == 'es' %}
-        Precisión • Innovación • Academia
-        {% else %}
-        Precision • Innovation • Academia
-        {% endif %}
       </div>
       {% endblock %}
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var slides = document.querySelectorAll('.bento-pillar-slide');
+    var prevBtn = document.querySelector('.bento-nav-btn--prev');
+    var nextBtn = document.querySelector('.bento-nav-btn--next');
+    var currIndicator = document.getElementById('bento-curr');
+    if (!slides.length || !prevBtn || !nextBtn) return;
+    
+    var currentIndex = 0;
+    function showSlide(index) {
+      slides.forEach(function(s, i) {
+        s.classList.toggle('is-active', i === index);
+      });
+      if (currIndicator) {
+        currIndicator.textContent = (index + 1);
+      }
+    }
+    
+    prevBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(currentIndex);
+    });
+    
+    nextBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    });
+  });
+</script>
 
 {# Scripts de desarrollo/livereload y Google Analytics #}
 {% if livereload_address %}

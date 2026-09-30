@@ -1,3 +1,4 @@
+import { getDocUrl } from '#/docsUrls'
 import './accessDenied.scss'
 
 import React from 'react'
@@ -57,7 +58,7 @@ const AccessDenied = (props: AccessDeniedProps) => {
     }
   }
 
-  const messageHtml = replaceBracketsWithLink(messageText, envStore.data.support_url)
+  const messageHtml = replaceBracketsWithLink(messageText, getDocUrl())
 
   return (
     <bem.AccessDenied>

@@ -1,3 +1,4 @@
+import { getDocUrl } from '#/docsUrls'
 import './table.scss'
 import { Stack } from '@mantine/core'
 import clonedeep from 'lodash.clonedeep'
@@ -1400,7 +1401,7 @@ export class DataTable extends React.Component<DataTableProps, DataTableState> {
     if (this.state.errorNumber === 500) {
       const supportMessage = t(
         'Please try again later, or [contact the support team](##SUPPORT_URL##) if this happens repeatedly.',
-      ).replace('##SUPPORT_URL##', envStore.data.support_url)
+      ).replace('##SUPPORT_URL##', getDocUrl())
       return (
         <bem.FormView m='ui-panel'>
           <CenteredMessage

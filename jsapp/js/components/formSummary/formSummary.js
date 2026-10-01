@@ -185,9 +185,9 @@ class FormSummary extends React.Component {
         <bem.FormView__cell m={['box', 'padding']}>
           {team.map((username, ind) => (
             <Avatar key={ind} username={username} size='s' isUsernameVisible />
-          ))
-        )}
-      </bem.FormView__cell>
+          ))}
+        </bem.FormView__cell>
+      </bem.FormView__row>
     )
   }
 

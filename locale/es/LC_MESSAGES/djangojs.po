@@ -6047,7 +6047,7 @@ msgstr "campos"
 
 #: jsapp/js/projects/projectViews/projectsFieldsSelector.tsx:88
 msgid "Select fields to display"
-msgstr ""
+msgstr "Seleccionar campos a mostrar"
 
 #: jsapp/js/projects/projectViews/projectsFilter.tsx:92
 msgid "filter"
@@ -6055,7 +6055,7 @@ msgstr "filtrar"
 
 #: jsapp/js/projects/projectViews/projectsFilter.tsx:108
 msgid "Table filter"
-msgstr ""
+msgstr "Filtrar tabla"
 
 #: jsapp/js/projects/projectViews/projectsFilter.tsx:133
 msgid "There are no filters, you can add one below"
@@ -6723,3 +6723,33 @@ msgstr "Advertencia: Si este formulario fue creado originalmente usando caracter
 
 
 
+
+msgid "DATAUMSA INSTITUTIONAL PLATFORM"
+msgstr "PLATAFORMA INSTITUCIONAL DATAUMSA"
+
+msgid "100% Offline"
+msgstr "100% Sin conexión"
+
+msgid "Rigor & Sovereignty"
+msgstr "Rigor y Soberanía"
+
+msgid "Live Monitoring"
+msgstr "Monitoreo en vivo"
+
+msgid "Getting Started Guides & Official Documentation"
+msgstr "Guías de Inicio y Documentación Oficial"
+
+msgid "Documentation & Guides"
+msgstr "Documentación y Guías"
+
+msgid "Quick Start Guide"
+msgstr "Guía de inicio rápido"
+
+msgid "Learn how to design forms and collect data with DataUMSA."
+msgstr "Aprende cómo diseñar formularios y recopilar datos con DataUMSA."
+
+msgid "Community & Support"
+msgstr "Comunidad y Soporte"
+
+msgid "Connect with the DataUMSA team, ask questions, and share ideas."
+msgstr "Conéctate con el equipo de DataUMSA, haz preguntas y comparte ideas."

@@ -2,77 +2,65 @@
 @use 'scss/_variables';
 @use 'scss/libs/_mdl';
 
-// ==========================================================================
-// Add new question
-// ==========================================================================
-
-// .expanding-spacer-between-rows BECOMES .survey__row__spacer
+// ==========================================================================\n// Add new question - Bento Standard
+// ==========================================================================\n
 .survey__row__spacer {
   position: relative;
 
   .line {
     height: 0;
+
+    &.expanded {
+      height: auto !important;
+      display: block !important;
+    }
   }
 }
 
 .row__questiontypes {
-  border: 1px solid colors.$kobo-blue;
-  padding: 0;
-  padding-top: 20px;
-  background: colors.$kobo-white;
-  margin: 4px 0;
+  border: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 16px;
+  padding: 20px 24px;
+  background: var(--color-text-inverse, #ffffff);
+  margin: 12px 0 16px;
+  box-shadow: 0 4px 0 var(--color-text-main, #0f172a);
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .row__questiontypes__list {
   margin-top: 20px;
-  border-top: 1px solid colors.$kobo-blue;
-  padding: 3px;
+  border-top: 2px solid var(--color-text-main, #0f172a);
+  padding: 16px 4px 8px;
   position: relative;
   line-height: 20px;
-
-  &::after,
- &::before {
-    bottom: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: ' ';
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-  }
-
-  &::after {
-    border-color: rgba(colors.$kobo-white, 0);
-    border-bottom-color: colors.$kobo-white;
-    border-width: 8px;
-    margin-left: -8px;
-  }
-
-  &::before {
-    border-color: rgba(colors.$kobo-blue, 0);
-    border-bottom-color: colors.$kobo-blue;
-    border-width: 11px;
-    margin-left: -11px;
-  }
 }
 
 .row__questiontypes__close {
   position: absolute;
-  top: -3px;
-  right: 1px;
-  color: colors.$kobo-gray-700;
+  top: 12px;
+  right: 14px;
+  color: var(--color-text-main, #0f172a);
   background: transparent;
-  border: 0 none;
-  font-family: mdl.$font;
-  font-weight: 600;
-  padding: 4px;
-  line-height: 1em;
-  font-size: 24px;
+  border: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
+  padding: 0;
+  line-height: 1;
+  font-size: 16px;
   cursor: pointer;
+  transition: all 0.15s ease;
 
   &:hover {
-    color: colors.$kobo-gray-800;
+    background-color: var(--color-primary-light, #e0f6ff);
+    transform: rotate(90deg);
   }
 }
 
@@ -81,74 +69,108 @@
 }
 
 input.row__questiontypes__new-question-name {
-  border: 0;
-  border-radius: 0;
-  font-weight: 600;
-  padding: 0 40px;
-  min-width: 99%;
+  border: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 8px;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--color-text-main, #0f172a);
+  padding: 10px 16px;
+  min-width: 95%;
+  background: #ffffff;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary-dark, #0688ba);
+    background: var(--color-primary-light, #e0f6ff);
+  }
 }
 
 .row__questiontypes--namer {
-  height: 68px;
-  padding: 15px 10px;
-  margin-bottom: 20px;
+  min-height: 60px;
+  padding: 16px 20px;
 
   form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding-right: 36px;
+    box-sizing: border-box;
+
     input {
-      width: 72%;
-      padding: 9px;
-      border: 1px solid colors.$kobo-blue;
+      flex: 1;
+      padding: 10px 16px;
+      border: 2px solid var(--color-text-main, #0f172a);
+      border-radius: 8px;
       font-size: 15px;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+      font-weight: 600;
+
+      &:focus {
+        border-color: var(--color-primary-dark, #0688ba);
+      }
     }
 
     button {
-      width: 25%;
-      margin-left: 2%;
-    }
+      padding: 10px 24px;
+      border-radius: 9999px;
+      border: 2px solid var(--color-text-main, #0f172a);
+      background-color: var(--color-primary, #29b9f2);
+      color: var(--color-text-main, #0f172a);
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
 
-    input,
- button {
-      float: left;
+      &:hover {
+        background-color: var(--color-primary-dark, #0688ba);
+        color: #ffffff;
+      }
     }
   }
 }
 
-// ==========================================================================
-// The question type selector icon menu
-// ==========================================================================
-
-// .menu-row BECOMES .questiontypelist__row
+// ==========================================================================\n// The question type selector icon menu\n// ==========================================================================\n
 .questiontypelist__row {
   width: 25%;
-  padding-right: 1px;
+  padding-right: 6px;
   float: left;
+  box-sizing: border-box;
 }
 
-// .menu-item BECOMES .questiontypelist__item
 .questiontypelist__item {
-  margin-bottom: 1px;
-  padding: 10px 5px;
-  font-size: 11px;
-  font-family: mdl.$font;
+  margin-bottom: 6px;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-weight: 600;
   cursor: pointer;
-  color: colors.$kobo-gray-800;
+  color: var(--color-text-main, #0f172a);
+  background: var(--color-bg-main, #f8fafc);
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  transition: all 0.15s ease;
 
   .k-icon {
-    margin-right: 6px;
+    margin-right: 8px;
     font-size: 20px;
-    vertical-align: top;
+    vertical-align: middle;
+    color: var(--color-primary-dark, #0688ba);
   }
 
   &:hover {
-    border-color: variables.$cardInSortBorderColor;
-    color: variables.$cardInSortBorderColor;
+    border-color: var(--color-text-main, #0f172a);
+    background-color: var(--color-primary-light, #e0f6ff);
+    color: var(--color-text-main, #0f172a);
+    transform: translateY(-1px);
   }
 }
 
-// Force hover through jQuery for arrow key navigation
 .questiontypelist__item-force-hover {
-  @include mdl.form-builder-focus;
-
-  color: variables.$cardInSortBorderColor;
+  border-color: var(--color-text-main, #0f172a);
+  background-color: var(--color-primary-light, #e0f6ff);
+  color: var(--color-text-main, #0f172a);
 }

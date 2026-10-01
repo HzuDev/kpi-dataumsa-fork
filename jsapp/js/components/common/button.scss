@@ -5,37 +5,39 @@
 @use 'sass:color';
 
 // "s" size
-$button-height-s: 28px;
-$button-font-s: 13px;
+$button-height-s: 30px;
+$button-font-s: 12.5px;
 $button-icon-s: icon.$s-icon-xs;
 $button-icon-alone-s: icon.$s-icon-m;
 
 // "m" size
-$button-height-m: 32px;
-$button-font-m: 14px;
+$button-height-m: 36px;
+$button-font-m: 13.5px;
 $button-icon-m: icon.$s-icon-s;
 $button-icon-alone-m: icon.$s-icon-l;
 
 // "l" size
-$button-height-l: 38px;
-$button-font-l: 16px;
+$button-height-l: 42px;
+$button-font-l: 15px;
 $button-icon-l: icon.$s-icon-m;
 $button-icon-alone-l: icon.$s-icon-l;
 
-// shared variables for all sizes
-$button-border-width: 1px;
-$button-border-radius: 6px;
+// shared variables for Bento standard buttons
+$button-border-width: 2px;
+$button-border-radius: 9999px;
 
 // Sets colors for button.
 @mixin button-colors(
   $textColor,
   $mainBgColor,
   $hoverBgColor,
+  $borderColor: var(--color-text-main, #0f172a),
 ) {
   color: $textColor;
   background-color: $mainBgColor;
+  border: $button-border-width solid $borderColor;
 
-  &:hover {
+  &:hover:not([disabled]) {
     background-color: $hoverBgColor;
   }
 
@@ -51,42 +53,28 @@ $button-border-radius: 6px;
 // Sets the different sizes for given size of a button.
 @mixin button-size($height, $font, $icon, $iconAlone) {
   min-height: $height;
-  min-width: $height; // Ensure we get at minimum a square.
+  min-width: $height;
   font-size: $font;
+  gap: 8px;
 
-  // Add some breathing space between the text and the icon.
-  gap: $height * 0.1;
-
-  // Note: paddings and margins are based on the `$height` (the "size") variable
-  // to scale with button sizes.
-
-  // We don't want to add left & right paddings if there is only icon inside, as
-  // it means we are aiming at a square button.
   &.k-button--has-label {
-    padding-left: $height * 0.4;
-    padding-right: $height * 0.4;
+    padding-left: 20px;
+    padding-right: 20px;
 
     .k-button__label {
-      // For long labels, to avoid squashed button when the text wraps into
-      // multiple lines
-      margin-top: $height * 0.2;
-      margin-bottom: $height * 0.2;
+      margin-top: 2px;
+      margin-bottom: 2px;
     }
   }
 
   &.k-button--has-start-icon.k-button--has-label {
-    // For button with icon and text, we don't need as much padding near
-    // the icon as near the text.
-    padding-left: $height * 0.3;
+    padding-left: 16px;
   }
 
   &.k-button--has-end-icon.k-button--has-label {
-    // For button with icon and text, we don't need as much padding near
-    // the icon as near the text.
-    padding-right: $height * 0.3;
+    padding-right: 16px;
   }
 
-  // Position the spinner icon in the center.
   &.k-button--pending.k-button--has-label .k-icon.k-icon-spinner {
     top: calc(50% - #{$icon * 0.5});
     left: calc(50% - #{$icon * 0.5});
@@ -97,42 +85,48 @@ $button-border-radius: 6px;
     left: calc(50% - #{$iconAlone * 0.5});
   }
 
-  // We need bigger specificity here to override paddings for has-label
   &.k-button--type-text.k-button--type-text {
-    // We need the text button to align better with other UI elements, so we
-    // want to avoid the transparent space on both sides.
     padding-left: 0;
     padding-right: 0;
+    border: none;
+    min-height: auto;
+    min-width: auto;
   }
 }
 
 .k-button {
   cursor: pointer;
-  color: inherit;
+  color: var(--color-text-main, #0f172a);
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   align-content: center;
-  justify-content: flex-start;
-  position: relative; // Needed for tooltips, pending state etc.
-  font-weight: 500;
+  justify-content: center;
+  position: relative;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
   text-decoration: none;
-  text-align: initial;
+  text-align: center;
   padding: 0;
   margin: 0;
-  border-width: 0;
   border-radius: $button-border-radius;
   background-color: transparent;
-  transition: background-color 0.2s, opacity 0.2s, color 0.2s;
+  box-shadow: none !important;
+  transition: all 0.15s ease;
+
+  &:hover:not([disabled]) {
+    transform: translateY(-1px);
+    box-shadow: none !important;
+  }
+
+  &:active:not([disabled]) {
+    transform: translateY(1px);
+    box-shadow: none !important;
+  }
 }
 
 .long-button-padding {
   padding: 0 10.5% !important;
-}
-
-.k-button:active {
-  // Make it appear pressed down.
-  transform: translateY(1px);
 }
 
 .k-button__label {
@@ -143,26 +137,18 @@ $button-border-radius: 6px;
 .k-button.k-button--has-start-icon:not(.k-button--has-label),
 .k-button.k-button--has-end-icon:not(.k-button--has-label) {
   justify-content: center;
+  border-radius: 50%;
+  padding: 0 !important;
 }
 
 .k-button[disabled] {
   pointer-events: none;
-
-  // When button is pending, we don't want to make it "grayed out"
-  &:not(.k-button--pending) {
-    opacity: 0.5;
-  }
+  opacity: 0.45;
+  box-shadow: none !important;
 }
 
-// Note: this assumes a `spinner` icon is present inside the button (already
-// handled by `button.tsx` code).
-// Note 2: when button is in pending state, it is also `disabled` by the
-// attribute
 .k-button.k-button--pending {
-  // Hide button text.
   color: transparent !important;
-
-  // Disable any interactions (and hover effects).
   pointer-events: none;
 
   .k-icon.k-icon-spinner {
@@ -179,60 +165,65 @@ $button-border-radius: 6px;
 
 .k-button.k-button--upper-case {
   text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
-// button types ↓
-
+// button types - Bento Specification
 .k-button.k-button--type-primary {
   @include button-colors(
-    $textColor: colors.$kobo-white,
-    $mainBgColor: colors.$kobo-blue,
-    $hoverBgColor: colors.$kobo-hover-blue,
+    $textColor: var(--color-text-main, #0f172a),
+    $mainBgColor: var(--color-primary, #29b9f2),
+    $hoverBgColor: var(--color-primary-dark, #0688ba),
   );
+
+  &:hover:not([disabled]) {
+    color: #ffffff;
+  }
 }
 
 .k-button.k-button--type-secondary {
   @include button-colors(
-    $textColor: colors.$kobo-dark-blue,
-    $mainBgColor: colors.$kobo-bg-blue,
-    $hoverBgColor: colors.$kobo-light-blue,
+    $textColor: var(--color-text-main, #0f172a),
+    $mainBgColor: var(--color-text-inverse, #ffffff),
+    $hoverBgColor: var(--color-primary-light, #e0f6ff),
   );
 }
 
 .k-button.k-button--type-danger {
   @include button-colors(
-    $textColor: colors.$kobo-white,
-    $mainBgColor: colors.$kobo-red,
-    $hoverBgColor: colors.$kobo-dark-red,
+    $textColor: #ffffff,
+    $mainBgColor: var(--color-danger, #ef4444),
+    $hoverBgColor: #dc2626,
   );
 }
 
 .k-button.k-button--type-secondary-danger {
   @include button-colors(
-    $textColor: colors.$kobo-dark-red,
-    $mainBgColor: colors.$kobo-light-red,
-    $hoverBgColor: colors.$kobo-hover-red,
+    $textColor: #991b1b,
+    $mainBgColor: #fee2e2,
+    $hoverBgColor: #fecaca,
   );
 }
 
-// We don't use `button-colors` mixin here, as they are too many differences
 .k-button.k-button--type-text {
-  // $textColor
-  color: colors.$kobo-dark-blue;
+  color: var(--color-text-main, #0f172a);
+  border: none !important;
+  background-color: transparent !important;
 
   &:hover {
-    color: colors.$kobo-hover-blue;
+    color: var(--color-primary-dark, #0688ba);
+    text-decoration: underline;
+    transform: none;
   }
 
   &.k-button--pending {
     .k-icon.k-icon-spinner {
-      color: colors.$kobo-dark-blue;
+      color: var(--color-text-main, #0f172a);
     }
   }
 }
 
-// button sizes ↓
-
+// button sizes
 .k-button.k-button--size-s {
   @include button-size($button-height-s, $button-font-s, $button-icon-s, $button-icon-alone-s);
 }

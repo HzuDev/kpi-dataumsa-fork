@@ -1,23 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Montserrat:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
 :root {
-  --color-primary: #29b9f2;       
-  --color-primary-dark: #0688ba;  
-  --color-primary-light: #e0f6ff; 
-  --color-surface: #ffffff;       
-  --color-text-main: #0f172a;     
-  --color-text-muted: #64748b;    
-  --color-border: #cbd5e1;        
-  
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Colors
+     ========================================================================== */
+  --color-primary: #29b9f2;
+  --color-primary-dark: #0688ba;
+  --color-primary-light: #e0f6ff;
+  --color-bg-main: #f8fafc;
+  --color-bg-surface: rgba(255, 255, 255, 0.7);
+  --color-text-main: #0f172a;
+  --color-text-muted: #475569;
+  --color-text-dark-muted: #94a3b8;
+  --color-text-inverse: #ffffff;
+  --color-bg-dark: #090f1e;
+  --color-bg-dark-surface: #131b2e;
+  --color-accent: #8b5cf6;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* Aliases for legacy compatibility */
+  --color-surface: var(--color-text-inverse);
+  --color-border: #cbd5e1;
+
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Typography Families
+     ========================================================================== */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Montserrat', var(--font-sans);
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Typography Scale
+     ========================================================================== */
+  --font-size-xs: 0.875rem;     /* 14px */
+  --font-size-sm: 0.9375rem;    /* 15px */
+  --font-size-base: 1.0625rem;  /* 17px */
+  --font-size-lg: 1.25rem;      /* 20px */
+  --font-size-xl: 1.4375rem;    /* 23px */
+  --font-size-2xl: 1.75rem;     /* 28px */
+  --font-size-3xl: 2.125rem;    /* 34px */
+  --font-size-4xl: 2.75rem;     /* 44px */
+  --font-size-5xl: 3.5rem;      /* 56px */
+
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Spacing Scale
+     ========================================================================== */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-128: 128px;
+
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Radii
+     ========================================================================== */
+  --radius-sm: 8px;
   --radius-md: 12px;
-  --transition-fast: 0.2s ease;
-  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-lg: 20px;
+  --radius-card: 32px;
+  --radius-pill: 9999px;
+  --radius-blob: 1000px;
+
+  /* ==========================================================================
+     DESIGN2: Bento Style Tokens — Layout & Borders
+     ========================================================================== */
+  --page-max-width: 1200px;
+  --section-gap: 72px;
+  --card-padding: 24px;
+
+  --border-thick: 2px solid var(--color-text-main);
+  --border-bold: 2.5px solid var(--color-text-main);
+  --border-subtle: 1px solid var(--color-border);
+
+  --transition-fast: 0.15s ease;
+  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .main-container {
   display: flex;
   min-height: 100vh;
   width: 100vw;
-  background-color: var(--color-surface);
+  background-color: var(--color-bg-main);
   color: var(--color-text-main);
+  font-family: var(--font-sans);
   overflow-x: hidden;
   box-sizing: border-box;
 
@@ -25,9 +99,9 @@
     box-sizing: border-box;
   }
 
-  // Animaciones Keyframes
+  /* Animaciones Keyframes */
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
@@ -36,87 +110,67 @@
     to { opacity: 1; }
   }
 
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0px); }
-  }
-
-  @keyframes floatPhone {
-    0%, 100% { transform: translateY(0px) rotate(-2deg); }
-    50% { transform: translateY(-10px) rotate(2deg); }
-  }
-
-  @keyframes floatLock {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-6px) scale(1.05); }
-  }
-
-  @keyframes floatCard {
-    0%, 100% { transform: translateY(0px) rotate(2deg); }
-    50% { transform: translateY(-12px) rotate(-1deg); }
-  }
-
-  @keyframes floatBadge {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-5px) scale(1.08); }
-  }
-
-  @keyframes dataFlow {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 50px 50px; }
-  }
-
-  /* Panel Izquierdo: Formulario Integrado */
+  /* ==========================================================================
+     Panel Izquierdo: Bento Card Container (Canvas Base)
+     ========================================================================== */
   .login-panel {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--color-surface);
-    padding: 4rem 2rem;
+    background-color: var(--color-bg-main);
+    padding: var(--spacing-32) var(--spacing-24);
     position: relative;
     z-index: 10;
   }
 
+  /* Tarjeta Bento Principal */
   .login-wrapper {
     width: 100%;
-    max-width: 460px; 
-    animation: fadeUp 0.8s var(--transition-smooth);
+    max-width: 460px;
+    background-color: var(--color-text-inverse);
+    border: var(--border-bold);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-40) var(--spacing-32);
+    box-shadow: none;
+    animation: fadeUp 0.6s var(--transition-smooth);
   }
 
-  /* Badge de Estado */
+  /* Badge de Estado - Formato Sticker */
   .status-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(41, 185, 242, 0.1);
-    color: var(--color-primary-dark);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(41, 185, 242, 0.2);
-    transition: var(--transition-fast);
+    gap: var(--spacing-8);
+    background-color: var(--color-primary-light);
+    color: var(--color-text-main);
+    padding: var(--spacing-4) var(--spacing-16);
+    border-radius: var(--radius-pill);
+    border: var(--border-thick);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: var(--spacing-24);
+    transition: transform var(--transition-fast), background-color var(--transition-fast);
+
+    &:hover {
+      background-color: #cbeeff;
+      transform: translateY(-1px);
+    }
   }
 
-  .status-badge:hover {
-    background: rgba(41, 185, 242, 0.15);
-  }
-
-  /* Cabecera y Logo */
+  /* Cabecera y Títulos */
   .brand-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: var(--spacing-24);
   }
 
   .logo-text {
-    font-size: clamp(2.2rem, 4vw, 2.8rem);
+    font-family: var(--font-display);
+    font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-3xl));
     font-weight: 800;
-    letter-spacing: -1px;
+    letter-spacing: -0.03em;
     color: var(--color-text-main);
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-8);
     line-height: 1.1;
 
     span {
@@ -125,533 +179,190 @@
   }
 
   .title-text {
-    font-size: clamp(2rem, 3.5vw, 2.4rem);
+    font-family: var(--font-display);
+    font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
     font-weight: 800;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.03em;
     color: var(--color-text-main);
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-8);
     line-height: 1.2;
   }
 
   .subtitle {
-    font-size: 1.05rem;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
     color: var(--color-text-muted);
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
-  /* Contenedor de Inputs con Floating Labels */
+  /* ==========================================================================
+     Inputs y Form Controls (Bento Style)
+     ========================================================================== */
   .input-group {
     position: relative;
-    margin-bottom: 1.8rem;
+    margin-bottom: var(--spacing-20);
 
     input {
       width: 100%;
-      height: auto; // Override legacy 38px height from _registration.scss
-      padding: 1.1rem 1.2rem;
-      font-size: 1.05rem;
+      height: auto;
+      padding: var(--spacing-12) var(--spacing-16);
+      font-family: var(--font-sans);
+      font-size: var(--font-size-base);
       color: var(--color-text-main);
-      background-color: transparent;
-      border: 2px solid var(--color-border);
-      border-radius: var(--radius-md);
-      transition: var(--transition-fast);
+      background-color: var(--color-text-inverse);
+      border: var(--border-thick);
+      border-radius: var(--radius-sm);
+      transition: outline-color var(--transition-fast), border-color var(--transition-fast);
       outline: none;
+      box-shadow: none;
 
-      &:focus,
-      &:not(:placeholder-shown) {
-        border-color: var(--color-primary);
-        box-shadow: 0 0 0 4px var(--color-primary-light);
+      &:focus {
+        border-color: var(--color-text-main);
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
       }
 
       &:focus ~ label,
       &:not(:placeholder-shown) ~ label {
-        top: -0.6rem;
-        left: 0.8rem;
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: var(--color-primary-dark);
+        top: -0.65rem;
+        left: 0.75rem;
+        font-size: var(--font-size-xs);
+        font-weight: 700;
+        color: var(--color-text-main);
       }
     }
 
     label {
       position: absolute;
-      left: 1rem;
-      top: 1.15rem;
+      left: var(--spacing-16);
+      top: var(--spacing-12);
+      font-family: var(--font-sans);
       color: var(--color-text-muted);
-      font-size: 1.05rem;
+      font-size: var(--font-size-base);
       transition: var(--transition-fast);
       pointer-events: none;
-      background-color: var(--color-surface);
-      padding: 0 0.5rem;
+      background-color: var(--color-text-inverse);
+      padding: 0 var(--spacing-4);
+      line-height: 1.2;
+    }
+
+    select {
+      width: 100%;
+      height: auto;
+      padding: var(--spacing-12) var(--spacing-40) var(--spacing-12) var(--spacing-16);
+      font-family: var(--font-sans);
+      font-size: var(--font-size-base);
+      color: var(--color-text-main);
+      background-color: var(--color-text-inverse);
+      border: var(--border-thick);
+      border-radius: var(--radius-sm);
+      transition: outline-color var(--transition-fast);
+      outline: none;
+      appearance: none;
+      box-shadow: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230f172a' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--spacing-16) center;
+      background-size: 1.15rem;
+
+      &:focus {
+        border-color: var(--color-text-main);
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+    }
+
+    &.has-select label {
+      top: -0.65rem;
+      left: 0.75rem;
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      color: var(--color-text-main);
     }
   }
 
-  /* Override legacy padding and border-top on password1 from _registration.scss */
   .input-group.password1 {
     margin-top: 0 !important;
     padding-top: 0 !important;
     border-top: none !important;
   }
 
-  /* Botón Principal */
+  /* ==========================================================================
+     Boton Primario Cyan (Bento Sticker Button)
+     ========================================================================== */
   .login-button {
     width: 100%;
-    padding: 1.2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--color-surface);
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    border: none;
-    border-radius: var(--radius-md);
+    padding: var(--spacing-16) var(--spacing-28, 28px);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    color: var(--color-text-main);
+    background-color: var(--color-primary);
+    border: var(--border-thick);
+    border-radius: var(--radius-pill);
     cursor: pointer;
-    transition: var(--transition-smooth);
-    margin-top: 1rem;
+    transition: transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast);
+    margin-top: var(--spacing-16);
+    box-shadow: none;
+    text-align: center;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(41, 185, 242, 0.2);
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%; width: 50%; height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
-      transform: skewX(-25deg);
-      transition: var(--transition-smooth);
-    }
 
     &:hover {
+      background-color: var(--color-primary-dark);
+      color: var(--color-text-inverse);
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(6, 136, 186, 0.35);
-
-      &::after {
-        left: 150%;
-        transition: 0.7s ease-in-out;
-      }
     }
 
     &:active {
-      transform: translateY(0);
+      transform: translateY(2px);
     }
   }
 
-  /* Links de Acción */
+  /* Links de Accion */
   .action-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: var(--spacing-16);
     justify-content: space-between;
-    margin-top: 2rem;
-    font-size: 0.95rem;
+    margin-top: var(--spacing-24);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
 
     a {
       text-decoration: none;
       color: var(--color-text-muted);
-      font-weight: 500;
-      transition: var(--transition-fast);
+      font-weight: 600;
+      transition: color var(--transition-fast);
 
       &:hover {
         color: var(--color-primary-dark);
+        text-decoration: underline;
       }
-    }
-  }
 
-  /* Panel Derecho: Branding y Datos */
-  .brand-panel {
-    flex: 1.2;
-    background-color: var(--color-text-main);
-    color: var(--color-surface);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
-    position: relative;
-    text-align: center;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%; width: 200%; height: 200%;
-      background-image: 
-          linear-gradient(rgba(41, 185, 242, 0.08) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(41, 185, 242, 0.08) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: dataFlow 20s linear infinite;
-      z-index: 1;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      width: clamp(400px, 60vw, 800px);
-      height: clamp(400px, 60vw, 800px);
-      background: radial-gradient(circle, rgba(41,185,242,0.12) 0%, rgba(15,23,42,0) 70%);
-      border-radius: 50%;
-      z-index: 1;
-      animation: float 8s ease-in-out infinite;
-    }
-  }
-
-  .brand-content {
-    position: relative;
-    z-index: 2;
-    max-width: 500px;
-    animation: fadeIn 1.2s var(--transition-smooth) 0.3s both;
-
-    h2 {
-      font-size: clamp(2rem, 3vw, 2.6rem);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-      color: var(--color-surface);
-    }
-
-    p {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: #94a3b8;
-      margin-bottom: 2.5rem;
-    }
-  }
-
-  /* Ilustración: Celular + Candado */
-  .privacy-illustration {
-    position: relative;
-    width: 140px;
-    height: 180px;
-    margin: 0 auto 3.5rem auto;
-  }
-
-  /* El Celular */
-  .phone {
-    width: 95px;
-    height: 170px;
-    background: #1e293b;
-    border: 4px solid #475569;
-    border-radius: 16px;
-    padding: 8px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    animation: floatPhone 6s ease-in-out infinite;
-    z-index: 1;
-  }
-
-  .phone-screen {
-    background: #f1f5f9;
-    width: 100%;
-    height: 100%;
-    border-radius: 6px;
-    padding: 12px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .form-line {
-    height: 6px;
-    background: #cbd5e1;
-    border-radius: 3px;
-
-    &.title { width: 70%; height: 8px; background: #94a3b8; margin-bottom: 6px; }
-    &.short { width: 50%; }
-    &.long { width: 100%; }
-  }
-
-  .form-btn { height: 18px; background: var(--color-primary); border-radius: 4px; margin-top: auto; }
-
-  /* El Candado */
-  .padlock {
-    position: absolute;
-    bottom: 5px;
-    right: -15px;
-    z-index: 2;
-    animation: floatLock 5s ease-in-out infinite;
-  }
-
-  .lock-shackle {
-    width: 32px;
-    height: 40px;
-    border: 6px solid #94a3b8;
-    border-bottom: none;
-    border-radius: 16px 16px 0 0;
-    margin: 0 auto;
-    position: relative;
-    top: 8px;
-  }
-
-  .lock-body {
-    width: 70px;
-    height: 50px;
-    background: var(--color-primary);
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .lock-keyhole {
-    width: 10px;
-    height: 14px;
-    background: #0f172a;
-    border-radius: 5px;
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 14px;
-      height: 14px;
-      background: #0f172a;
-      border-radius: 50%;
-    }
-  }
-
-  .stats-badge {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background: rgba(41, 185, 242, 0.1);
-    border: 1px solid rgba(41, 185, 242, 0.3);
-    border-radius: 30px;
-    font-size: 0.95rem;
-    color: var(--color-primary-light);
-    backdrop-filter: blur(5px);
-  }
-
-  /* Logo styling override for django block */
-  .registration--logo {
-    margin-bottom: 1.5rem;
-    text-align: left;
-    
-    img {
-      max-width: 170px;
-      height: auto;
-    }
-  }
-
-  /* Error rendering specific to django inputs */
-  .error-message {
-    color: #ef4444;
-    font-size: 0.85rem;
-    margin-top: 0.4rem;
-    font-weight: 500;
-  }
-
-  .non-field-errors {
-    background-color: #fef2f2;
-    border: 1px solid #fecaca;
-    color: #991b1b;
-    padding: 0.8rem 1.2rem;
-    border-radius: var(--radius-md);
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
-    list-style: none;
-  }
-
-  /* Language switcher inside panel */
-  .language-switcher-container {
-    position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    z-index: 20;
-
-    select {
-      appearance: none;
-      background-color: transparent;
-      border: 1px solid var(--color-border);
-      padding: 0.4rem 1.8rem 0.4rem 0.8rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      color: var(--color-text-muted);
-      cursor: pointer;
-      outline: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0.5rem center;
-      background-size: 1rem;
-      transition: var(--transition-fast);
-
-      &:hover {
-        border-color: var(--color-primary);
+      span {
         color: var(--color-primary-dark);
+        font-weight: 700;
+        text-decoration: underline;
       }
     }
   }
 
-  /* SSO Section */
-  .registration__sso--login {
-    margin-top: 2rem;
-    text-align: center;
-
-    hr {
-      border: 0;
-      border-top: 1px solid var(--color-border);
-      margin-bottom: 1.5rem;
-    }
-
-    h2 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: var(--color-text-main);
-    }
-
-    p {
-      font-size: 0.8rem;
-      color: var(--color-text-muted);
-      margin-bottom: 1rem;
-      line-height: 1.4;
-    }
-
-    .socialaccount_providers {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        margin-bottom: 0.5rem;
-      }
-    }
-  }
-
-  .kobo-button--sso {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 0.9rem;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
-    color: var(--color-text-main);
-    font-size: 0.95rem;
-    font-weight: 500;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: var(--transition-fast);
-    text-decoration: none;
-
-    &:hover {
-      background-color: var(--color-primary-light);
-      border-color: var(--color-primary);
-      color: var(--color-primary-dark);
-    }
-  }
-
-  /* Legal Links */
-  .registration__legal {
-    margin-top: 2rem;
-    border-top: 1px solid var(--color-border);
-    padding-top: 1rem;
-    text-align: center;
-
-    .links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-
-      a {
-        text-decoration: none;
-        font-size: 0.85rem;
-        color: var(--color-text-muted);
-        transition: var(--transition-fast);
-
-        &:hover {
-          color: var(--color-primary-dark);
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-}
-
-/* Responsiveness overrides */
-@media (max-width: 1024px) {
-  .main-container {
-    .login-panel {
-      padding: 3rem 2rem;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-
-    .brand-panel {
-      display: none;
-    }
-
-    .login-panel {
-      padding: 2rem 1.5rem;
-      align-items: flex-start;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    .login-wrapper {
-      max-width: 100%;
-      margin-top: 5vh;
-    }
-  }
-}
-
-.main-container {
-  /* Dropdowns, Radio lists, Checkboxes styles in registration */
-  .input-group {
-    select {
-      width: 100%;
-      height: auto; // Override legacy 38px height from _registration.scss
-      padding: 1.2rem;
-      font-size: 1.05rem;
-      color: var(--color-text-main);
-      background-color: transparent;
-      border: 2px solid var(--color-border);
-      border-radius: var(--radius-md);
-      transition: var(--transition-fast);
-      outline: none;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1.2rem center;
-      background-size: 1.25rem;
-
-      &:focus {
-        border-color: var(--color-primary);
-        box-shadow: 0 0 0 4px var(--color-primary-light);
-      }
-    }
-  }
-
-  /* Force label to top for selects */
-  .input-group.has-select {
-    label {
-      top: -0.6rem;
-      left: 0.8rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--color-primary-dark);
-    }
-  }
-
-  /* Checkbox styling */
+  /* Checkbox Bento */
   .checkbox-group {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+    gap: var(--spacing-12);
+    margin-bottom: var(--spacing-20);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
     line-height: 1.5;
 
     input[type="checkbox"] {
-      margin-top: 4px;
+      margin-top: 3px;
       width: 18px;
       height: 18px;
-      border: 2px solid var(--color-border);
+      border: var(--border-thick);
       border-radius: 4px;
       cursor: pointer;
       accent-color: var(--color-primary);
@@ -663,44 +374,44 @@
 
       a {
         color: var(--color-primary-dark);
-        text-decoration: none;
-        font-weight: 600;
+        text-decoration: underline;
+        font-weight: 700;
 
         &:hover {
           color: var(--color-primary);
-          text-decoration: underline;
         }
       }
     }
 
     .required {
-      color: #ef4444;
+      color: var(--color-danger);
       font-weight: 700;
-      margin-left: 4px;
+      margin-left: var(--spacing-4);
     }
   }
 
-  /* Radio/Gender styling */
+  /* Radio / Gender Bento */
   .radio-group {
-    margin-bottom: 1.8rem;
+    margin-bottom: var(--spacing-20);
 
     .group-label {
       display: block;
-      font-size: 1rem;
-      font-weight: 600;
+      font-family: var(--font-sans);
+      font-size: var(--font-size-sm);
+      font-weight: 700;
       color: var(--color-text-main);
-      margin-bottom: 0.8rem;
+      margin-bottom: var(--spacing-8);
 
       .required {
-        color: #ef4444;
+        color: var(--color-danger);
         font-weight: 700;
-        margin-left: 4px;
+        margin-left: var(--spacing-4);
       }
     }
 
     .radio-options {
       display: flex;
-      gap: 20px;
+      gap: var(--spacing-20);
       flex-wrap: wrap;
 
       ul {
@@ -708,23 +419,25 @@
         padding: 0;
         margin: 0;
         display: flex;
-        gap: 20px;
+        gap: var(--spacing-20);
         flex-wrap: wrap;
 
         li {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: var(--spacing-8);
         }
       }
 
       label {
-        font-size: 1rem;
+        font-family: var(--font-sans);
+        font-size: var(--font-size-sm);
         color: var(--color-text-main);
         cursor: pointer;
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: var(--spacing-8);
+        font-weight: 500;
       }
 
       input[type="radio"] {
@@ -736,104 +449,630 @@
     }
   }
 
-  /* Help text styling */
+  /* Textos de Ayuda */
   p.help {
-    font-size: 0.85rem;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-xs);
     color: var(--color-text-muted);
-    margin-top: 0.4rem;
+    margin-top: var(--spacing-4);
     line-height: 1.4;
   }
 
   /* Password strength app widget container */
   #registration-password-app {
-    margin-bottom: 1.5rem;
-  }
+    margin-top: -0.5rem;
+    margin-bottom: var(--spacing-20);
 
-  /* NUEVA ILUSTRACIÓN: Tarjeta de Perfil */
-  .account-illustration {
-    position: relative;
-    width: 160px;
-    height: 160px;
-    margin: 0 auto 3rem auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Tarjeta de Usuario */
-  .profile-card {
-    width: 120px;
-    height: 150px;
-    background: #1e293b;
-    border: 3px solid #475569;
-    border-radius: 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    animation: floatCard 7s ease-in-out infinite;
-    position: relative;
-    z-index: 1;
-
-    .ui-line {
-      height: 6px;
-      background: #cbd5e1;
-      border-radius: 3px;
+    div[class*="root"] {
       width: 100%;
-      margin-bottom: 8px;
+      font-family: var(--font-sans);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+    }
 
-      &.short {
-        width: 60%;
-        background: #94a3b8;
+    div[class*="title"] {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      color: var(--color-text-main);
+      margin-bottom: var(--spacing-8);
+    }
+
+    div[class*="bar"] {
+      width: 100%;
+      height: 8px;
+      background-color: var(--color-primary-light);
+      border: var(--border-thick);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      position: relative;
+      box-shadow: none;
+      margin-bottom: var(--spacing-12);
+
+      div[class*="indicator"] {
+        height: 100%;
+        border-radius: var(--radius-pill);
+        transition: width var(--transition-fast), background-color var(--transition-fast);
+      }
+
+      &[data-password-score="0"] div[class*="indicator"] { background-color: var(--color-danger); }
+      &[data-password-score="1"] div[class*="indicator"] { background-color: var(--color-warning); }
+      &[data-password-score="2"] div[class*="indicator"] { background-color: var(--color-warning); }
+      &[data-password-score="3"] div[class*="indicator"] { background-color: var(--color-success); }
+      &[data-password-score="4"] div[class*="indicator"] { background-color: var(--color-primary); }
+    }
+
+    ul[class*="messages"] {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+      height: auto !important;
+
+      li[class*="message"] {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-8);
+
+        &::before {
+          content: "●";
+          color: var(--color-primary);
+          font-size: 0.65rem;
+        }
+
+        &[class*="messageWarning"] {
+          color: var(--color-danger);
+          font-weight: 600;
+
+          &::before {
+            color: var(--color-danger);
+          }
+        }
       }
     }
   }
 
-  .avatar-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--color-primary);
-    margin-bottom: 16px;
+  /* ==========================================================================
+     Panel Derecho: Contenedor con la Tarjeta ShowCase Estilo Referencia
+     ========================================================================== */
+  .brand-panel {
+    flex: 1.15;
+    background-color: var(--color-bg-dark); /* #090f1e de DESIGN2.md */
+    border-left: var(--border-bold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-24);
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
 
+    /* Sutil textura ambiental */
     &::before {
-      content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
-      width: 36px; height: 36px; background: rgba(255,255,255,0.3); border-radius: 50%;
-    }
-    &::after {
-      content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-      width: 18px; height: 18px; background: rgba(255,255,255,0.4); border-radius: 50%;
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
     }
   }
 
-  /* Badge de Verificación / Creación */
-  .success-badge {
-    position: absolute;
-    bottom: -10px;
-    right: -20px;
-    width: 48px;
-    height: 48px;
-    background: var(--color-primary-dark);
-    border-radius: 50%;
-    border: 4px solid var(--color-text-main);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .brand-content {
+    position: relative;
     z-index: 2;
-    animation: floatBadge 5s ease-in-out infinite;
-    box-shadow: 0 10px 20px rgba(6, 136, 186, 0.4);
+    width: 100%;
+    max-width: 530px;
+    height: calc(100vh - 48px);
+    max-height: 750px;
+    min-height: 600px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    animation: fadeIn 0.8s var(--transition-smooth) 0.1s both;
+  }
 
-    &::after {
-      content: '';
-      width: 12px;
-      height: 22px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      transform: rotate(45deg);
-      margin-bottom: 4px;
+  /* ==========================================================================
+     Bento ShowCase Card (Réplica exacta de la referencia)
+     ========================================================================== */
+  .bento-showcase-card {
+    position: relative;
+    background-color: var(--color-success); /* #10b981 Success Emerald de DESIGN2.md */
+    border: 3px solid #0f172a;
+    border-radius: 40px;
+    padding: 36px 32px 28px 32px;
+    color: #ffffff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: none;
+
+    /* Muesca escalón en la esquina superior derecha */
+    .card-notch-corner {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 72px;
+      height: 48px;
+      background-color: var(--color-bg-dark);
+      border-bottom: 3px solid #0f172a;
+      border-left: 3px solid #0f172a;
+      border-bottom-left-radius: 28px;
+      z-index: 3;
+      pointer-events: none;
     }
+
+    .bento-showcase__upper {
+      position: relative;
+      z-index: 2;
+      text-align: left;
+    }
+
+    .bento-showcase__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.95);
+      background-color: rgba(15, 23, 42, 0.22);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 16px;
+    }
+
+    .bento-showcase__title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 2.7vw, 2.45rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      color: #ffffff;
+      margin: 0 0 20px 0;
+      max-width: 420px;
+      text-align: left;
+    }
+
+    .bento-pillar-container {
+      min-height: 135px;
+      position: relative;
+      text-align: left;
+    }
+
+    .bento-pillar-slide {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      &.is-active {
+        display: block;
+        opacity: 1;
+        animation: fadeIn 0.35s ease;
+      }
+    }
+
+    .bento-pillar__headline {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bento-pillar__desc {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.94);
+      margin: 0;
+      font-weight: 400;
+      max-width: 440px;
+    }
+
+    /* Starburst Line-Art en el Fondo */
+    .bento-starburst {
+      position: absolute;
+      right: -25px;
+      top: 90px;
+      width: 240px;
+      height: 240px;
+      color: rgba(255, 255, 255, 0.22);
+      pointer-events: none;
+      z-index: 1;
+      transform: rotate(12deg);
+    }
+
+    /* Controles de Navegación */
+    .bento-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 2;
+
+      .bento-nav-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-md);
+        border: 2px solid #0f172a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform var(--transition-fast), background-color var(--transition-fast);
+
+        &:active {
+          transform: translateY(1px);
+        }
+
+        &--prev {
+          background-color: #d1fae5;
+          color: #0f172a;
+
+          &:hover {
+            background-color: #ffffff;
+            transform: translateY(-2px);
+          }
+        }
+
+        &--next {
+          background-color: #0f172a;
+          color: #ffffff;
+
+          &:hover {
+            background-color: #1e293b;
+            transform: translateY(-2px);
+          }
+        }
+      }
+
+      .bento-slide-indicator {
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        margin-left: 8px;
+      }
+    }
+
+    /* ==========================================================================
+       Placa Inferior Blanca (Bento Plate)
+       ========================================================================== */
+    .bento-showcase__plate {
+      background-color: #ffffff;
+      border: 3px solid #0f172a;
+      border-radius: 24px;
+      padding: 24px 28px;
+      position: relative;
+      color: var(--color-text-main);
+      z-index: 2;
+      text-align: left;
+      margin-top: auto;
+
+      /* Insignia Circular Flotante con Estrella */
+      .bento-floating-star {
+        position: absolute;
+        top: -26px;
+        right: 24px;
+        width: 56px;
+        height: 56px;
+        background-color: #ffffff;
+        border: 2.5px solid #0f172a;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0f172a;
+        box-shadow: none;
+        z-index: 4;
+        transition: transform var(--transition-fast);
+
+        &:hover {
+          transform: rotate(45deg);
+        }
+      }
+
+      .plate-title {
+        font-family: var(--font-display);
+        font-size: 1.18rem;
+        font-weight: 800;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+        color: var(--color-text-main);
+        margin: 0 0 8px 0;
+        padding-right: 50px;
+      }
+
+      .plate-desc {
+        font-family: var(--font-sans);
+        font-size: 0.88rem;
+        line-height: 1.45;
+        color: var(--color-text-muted);
+        margin: 0 0 16px 0;
+      }
+
+      .plate-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+
+        .plate-badge {
+          font-family: var(--font-sans);
+          font-size: 0.72rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          background-color: var(--color-primary-light);
+          color: var(--color-text-main);
+          padding: 4px 10px;
+          border-radius: var(--radius-pill);
+          border: 1.5px solid #0f172a;
+        }
+
+        .plate-avatars {
+          display: flex;
+          align-items: center;
+
+          .avatar-tag {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-left: -8px;
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+            &--cs { background-color: #0284c7; }
+            &--tec { background-color: #8b5cf6; }
+            &--med { background-color: #ef4444; }
+            &--hum { background-color: #059669; }
+            &--more { background-color: #0f172a; font-size: 8px; }
+          }
+        }
+      }
+    }
+  }
+
+  /* Logo */
+  .registration--logo {
+    margin-bottom: var(--spacing-20);
+    text-align: left;
+
+    img {
+      max-width: 170px;
+      height: auto;
+    }
+  }
+
+  /* Mensajes de Error */
+  .error-message {
+    color: var(--color-danger);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-xs);
+    margin-top: var(--spacing-4);
+    font-weight: 600;
+  }
+
+  .non-field-errors {
+    background-color: #fef2f2;
+    border: 2px solid var(--color-danger);
+    color: var(--color-danger);
+    padding: var(--spacing-12) var(--spacing-16);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-20);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    list-style: none;
+  }
+
+  /* Selector de Idioma (Pill Sticker) */
+  .language-switcher-container {
+    position: absolute;
+    top: var(--spacing-20);
+    right: var(--spacing-20);
+    z-index: 20;
+
+    select {
+      appearance: none;
+      background-color: var(--color-text-inverse);
+      border: var(--border-thick);
+      padding: var(--spacing-8) var(--spacing-32) var(--spacing-8) var(--spacing-16);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-sans);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      color: var(--color-text-main);
+      cursor: pointer;
+      outline: none;
+      box-shadow: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230f172a' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--spacing-12) center;
+      background-size: 0.9rem;
+      transition: background-color var(--transition-fast), transform var(--transition-fast);
+
+      &:hover {
+        background-color: var(--color-primary-light);
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  /* ==========================================================================
+     SSO (Single Sign On) — Bento Ghost Pill Button
+     ========================================================================== */
+  .registration__sso--login,
+  .registration__sso--signup {
+    margin-top: var(--spacing-24);
+    text-align: center;
+
+    hr {
+      border: 0;
+      border-top: 1.5px solid var(--color-border);
+      margin-bottom: var(--spacing-20);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: var(--font-size-base);
+      font-weight: 700;
+      margin-bottom: var(--spacing-4);
+      color: var(--color-text-main);
+    }
+
+    p {
+      font-family: var(--font-sans);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-16);
+      line-height: 1.4;
+    }
+
+    .socialaccount_providers {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-bottom: var(--spacing-8);
+      }
+    }
+  }
+
+  .kobo-button--sso {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: var(--spacing-12) var(--spacing-24);
+    border: var(--border-thick);
+    background-color: var(--color-text-inverse);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    text-decoration: none;
+    box-shadow: none;
+
+    &:hover {
+      background-color: var(--color-primary-light);
+      border-color: var(--color-text-main);
+      color: var(--color-text-main);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+
+  /* Legal Links */
+  .registration__legal {
+    margin-top: var(--spacing-24);
+    border-top: 1.5px solid var(--color-border);
+    padding-top: var(--spacing-16);
+    text-align: center;
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-20);
+
+      a {
+        text-decoration: none;
+        font-family: var(--font-sans);
+        font-size: var(--font-size-xs);
+        color: var(--color-text-muted);
+        transition: color var(--transition-fast);
+
+        &:hover {
+          color: var(--color-primary-dark);
+        }
+      }
+    }
+  }
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .main-container {
+    .login-panel {
+      padding: var(--spacing-24) var(--spacing-16);
+    }
+    .brand-panel {
+      padding: var(--spacing-16);
+    }
+    .bento-showcase-card {
+      padding: 28px 24px 24px 24px;
+    }
+  }
+}
+
+@media (max-width: 860px) {
+  .main-container {
+    flex-direction: column;
+
+    .brand-panel {
+      display: none;
+    }
+
+    .login-panel {
+      padding: var(--spacing-24) var(--spacing-16);
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .login-wrapper {
+      max-width: 100%;
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-24) var(--spacing-16);
+      margin-top: 3vh;
+    }
+  }
+}
+
+/* ==========================================================================
+   Accessibility: Support prefers-reduced-motion (WCAG 2.1 AA)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .main-container .login-wrapper,
+  .main-container .bento-showcase-card,
+  .main-container .bento-pillar-slide {
+    animation: none !important;
+    transition: none !important;
   }
 }

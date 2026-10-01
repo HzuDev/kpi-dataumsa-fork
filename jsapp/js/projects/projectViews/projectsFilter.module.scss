@@ -7,80 +7,141 @@
   vertical-align: top;
 
   :global(.k-button) {
-    border: 1px solid rgba(15, 23, 42, 0.12) !important;
-    border-radius: 30px !important;
-    padding: 6px 16px !important;
-    height: 34px !important;
-    background-color: colors.$kobo-white !important;
-    color: var(--color-text-main, colors.$kobo-gray-800) !important;
-    font-weight: 600 !important;
-    transition: all 0.2s ease !important;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    border: 2px solid var(--color-text-main, #0f172a) !important;
+    border-radius: 9999px !important;
+    padding: 6px 18px !important;
+    height: 36px !important;
+    background-color: #ffffff !important;
+    color: var(--color-text-main, #0f172a) !important;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    text-transform: capitalize !important;
+    transition: all 0.15s ease !important;
+    box-shadow: none !important;
 
     :global(.k-icon) {
-      color: var(--color-text-muted, colors.$kobo-gray-600) !important;
-      transition: color 0.2s ease !important;
+      color: var(--color-text-main, #0f172a) !important;
+      transition: color 0.15s ease !important;
     }
 
     &:hover {
-      border-color: var(--color-primary, colors.$kobo-blue) !important;
-      background-color: rgba(41, 185, 242, 0.05) !important;
-      color: var(--color-primary-dark, colors.$kobo-dark-blue) !important;
+      background-color: var(--color-primary-light, #e0f6ff) !important;
+      color: var(--color-text-main, #0f172a) !important;
+      transform: translateY(-1.5px) !important;
 
       :global(.k-icon) {
-        color: var(--color-primary, colors.$kobo-blue) !important;
+        color: var(--color-text-main, #0f172a) !important;
       }
     }
 
     &:active {
-      transform: scale(0.97) !important;
+      transform: translateY(1px) !important;
     }
   }
 }
 
 .content {
-  padding: koboModal.$kobo-modal-padding koboModal.$kobo-modal-padding 0;
+  padding: 24px;
 
-  // We want the field and condition selectors to not be confined to
-  // the modal content area, but with multiple rows, it becomes impossible
-  // to not have scrollable content, thus:
   &.hasManyFilters {
+    max-height: 420px;
     overflow-y: auto;
-
-    // We need a tiny bit space on bottom to avoid scrollbar appearing
-    // unnecessarily, when delete button of last filter row is being pressed.
-    padding-bottom: 1px;
+    padding-bottom: 8px;
   }
 }
 
 .footer {
   @include mixins.centerRowFlex;
-
   justify-content: space-between;
-  gap: 8px;
-  padding: koboModal.$kobo-modal-padding;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 0 0 18px 18px;
+  background-color: var(--color-bg-main, #f8fafc);
 
-  // To display the first button on the left and the rest on the right.
   > *:first-child {
     margin-right: auto;
   }
+
+  :global(.k-button) {
+    border: 2px solid var(--color-text-main, #0f172a) !important;
+    border-radius: 9999px !important;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+    font-weight: 700 !important;
+    font-size: 13.5px !important;
+    padding: 8px 20px !important;
+    height: 40px !important;
+    box-shadow: none !important;
+    transition: all 0.15s ease !important;
+
+    &:hover {
+      transform: translateY(-1px) !important;
+    }
+
+    &:active {
+      transform: translateY(1px) !important;
+    }
+  }
+
+  :global(.k-button--type-secondary) {
+    background-color: #ffffff !important;
+    color: var(--color-text-main, #0f172a) !important;
+
+    &:hover {
+      background-color: #f1f5f9 !important;
+    }
+  }
+
+  :global(.k-button--type-secondary-danger) {
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+
+    &:hover {
+      background-color: #fecaca !important;
+      color: #991b1b !important;
+    }
+  }
+
+  :global(.k-button--type-primary) {
+    background-color: var(--color-primary, #29b9f2) !important;
+    color: var(--color-text-main, #0f172a) !important;
+
+    &:hover {
+      background-color: var(--color-primary-dark, #0688ba) !important;
+      color: #ffffff !important;
+    }
+  }
 }
 
-// We want the button to look distinct if there are any filters enabled, so that
-// user is not confused why some of their projects might not appear on the list.
-:global(.k-button).buttonHasFilters {
-  background-color: rgba(41, 185, 242, 0.1) !important;
-  border-color: var(--color-primary, colors.$kobo-blue) !important;
-  color: var(--color-primary-dark, colors.$kobo-dark-blue) !important;
+:global(.k-button).buttonHasFilters,
+.buttonHasFilters {
+  background-color: var(--color-primary-light, #e0f6ff) !important;
+  border-color: var(--color-text-main, #0f172a) !important;
+  color: var(--color-text-main, #0f172a) !important;
   padding-left: 16px !important;
   padding-right: 16px !important;
 
   :global(.k-icon) {
-    color: var(--color-primary-dark, colors.$kobo-dark-blue) !important;
+    color: var(--color-text-main, #0f172a) !important;
+  }
+
+  strong {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary, #29b9f2);
+    color: var(--color-text-main, #0f172a);
+    border: 1.5px solid var(--color-text-main, #0f172a);
+    border-radius: 9999px;
+    padding: 0 6px;
+    height: 18px;
+    font-size: 11px;
+    font-weight: 800;
+    margin-left: 4px;
   }
 
   &:hover {
-    background-color: rgba(41, 185, 242, 0.15) !important;
+    background-color: var(--color-primary, #29b9f2) !important;
   }
 }
-

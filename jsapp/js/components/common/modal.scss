@@ -9,7 +9,7 @@ $z-enketo-iframe-icon: 1100;
 $z-modal-x: 10;
 
 // -----------------------------------------------------------------------------
-// common modal parts
+// common modal parts - Bento style redesign
 // -----------------------------------------------------------------------------
 
 .modal__backdrop {
@@ -19,8 +19,8 @@ $z-modal-x: 10;
   z-index: $z-modal-backdrop;
   top: 0;
   left: 0;
-  background-color: rgba(15, 23, 42, 0.45) !important;
-  backdrop-filter: blur(5px);
+  background-color: rgba(9, 15, 30, 0.7) !important;
+  backdrop-filter: blur(4px);
 }
 
 .modal {
@@ -34,10 +34,11 @@ $z-modal-x: 10;
   max-height: 95%;
   overflow-x: auto;
   visibility: hidden;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.15), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+  border: 2.5px solid var(--color-text-main, #0f172a) !important;
+  background-color: #ffffff !important;
 
   &.modal--open {
     visibility: visible;
@@ -85,8 +86,8 @@ $z-modal-x: 10;
 
 .modal__body {
   // we use margin for bottom to make it stack with modal__footer
-  padding: 30px 30px 0;
-  margin-bottom: 30px;
+  padding: 24px 28px 0 !important;
+  margin-bottom: 28px !important;
 
   // in some cases adding custom footer requires it to be inside modal__body and
   // then padding is not needed (it is partially needed when in .modal--large)
@@ -97,122 +98,135 @@ $z-modal-x: 10;
 
 .modal__content {
   overflow: auto;
-  background-color: colors.$kobo-white;
+  background-color: #ffffff !important;
   width: 100%;
-  border-radius: 16px;
+  border-radius: 25px !important;
 }
 
 .modal__tabs {
-  background: var(--color-text-main, colors.$kobo-gray-900);
+  background: var(--color-bg-dark, #090f1e);
   color: colors.$kobo-white;
 }
 
+// Bento Header for Modals
 .modal__header {
   min-height: 64px;
-  background: var(--color-text-main, colors.$kobo-gray-900);
-  color: colors.$kobo-white;
+  background: var(--color-bg-dark, #090f1e) !important;
+  color: #ffffff !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 2.5px solid var(--color-text-main, #0f172a) !important;
+  padding: 0 24px !important;
 }
 
 .modal__title {
   margin: 0;
-  padding: 18px 24px;
-  font-size: 18px;
-  line-height: 22px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
+  padding: 18px 0 !important;
+  font-family: var(--font-display, 'Montserrat', sans-serif) !important;
+  font-size: 19px !important;
+  line-height: 24px;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: #ffffff !important;
 }
 
+// Bento sticker circular close button
 .modal__x {
   z-index: $z-modal-x;
-  color: rgba(255, 255, 255, 0.7);
-  background-color: transparent;
-  padding: 8px;
-  margin: 0 16px 0 0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: #ffffff !important;
+  background-color: transparent !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 9999px !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease !important;
 
   i {
     display: block;
-    font-size: 20px;
-    transition: transform 0.25s ease;
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.2s ease;
   }
 
   &:hover {
-    color: colors.$kobo-white;
-    background-color: rgba(255, 255, 255, 0.1);
-    opacity: 1;
-    
+    color: var(--color-text-main, #0f172a) !important;
+    background-color: var(--color-primary, #29b9f2) !important;
+    border-color: var(--color-primary, #29b9f2) !important;
+    transform: translateY(-1px);
+
     i {
       transform: rotate(90deg);
     }
   }
 
-  // Some modals have light background for the header, so we need some other
-  // color than white
+  &:active {
+    transform: translateY(1px);
+  }
+
   .modal-submission &,
   .modal--media-preview &,
   .modal--mfa-setup & {
-    color: colors.$kobo-gray-600;
-    
+    color: var(--color-text-main, #0f172a) !important;
+    border-color: var(--color-text-main, #0f172a) !important;
+
     &:hover {
-      background-color: rgba(15, 23, 42, 0.06);
-      color: var(--color-text-main, colors.$kobo-gray-900);
+      background-color: var(--color-primary-light, #e0f6ff) !important;
+      color: var(--color-primary-dark, #0688ba) !important;
     }
   }
 }
 
-// NOTE: Subheader element is weirdly positioned because it is inside a padded
-// containter but has to appear as if it was outside of it.
-// Unfortunately we can't rely on `overflow: hidden` being there, so negative
-// margins hack isn't good enough. Other hacks are no good too.
 .modal__subheader {
-  background: colors.$kobo-gray-200;
-  padding: 20px 30px;
-  margin: -30px -30px 20px;
-  color: colors.$kobo-gray-700;
+  background: var(--color-bg-main, #f8fafc);
+  padding: 18px 28px;
+  margin: -24px -28px 24px -28px;
+  color: var(--color-text-muted, #475569);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 13.5px;
+  line-height: 1.5;
+  border-bottom: 2px solid var(--color-text-main, #0f172a);
 
   i {
-    margin: 5px 10px 10px 3px;
-    font-size: 24px;
+    margin: 4px 10px 4px 0;
+    font-size: 20px;
     float: left;
+    color: var(--color-primary, #29b9f2);
   }
 }
 
 .modal__footer {
-  padding: 0 30px 30px;
+  padding: 0 28px 28px;
   margin-top: 20px;
   text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
 
   &::before,
   &::after {
-    content: '';
-    display: table;
-    clear: both;
+    display: none;
   }
 
   &:first-child {
     margin-top: 0;
     margin-bottom: 20px;
   }
-
-  button:not(:first-of-type) {
-    margin-left: 10px;
-  }
 }
 
 .modal__hr {
-  margin: 20px -30px;
+  margin: 20px -28px;
   border: 0;
-  background-color: colors.$kobo-gray-300;
-  height: 1px;
+  background-color: var(--color-border, #e2e8f0);
+  height: 1.5px;
 }
 
 // -----------------------------------------------------------------------------
@@ -221,11 +235,8 @@ $z-modal-x: 10;
 
 $modal-custom-header-height: 60px;
 
-// TODO: Make a better generic modal component
-// Refactor common CSS for modals with custom headers
-// See: https://github.com/kobotoolbox/kpi/issues/3643
 .modal.modal--custom-header {
-  border-radius: 6px;
+  border-radius: 28px !important;
 
   .modal__content {
     display: flex;
@@ -233,12 +244,12 @@ $modal-custom-header-height: 60px;
   }
 
   .modal__header {
-    color: colors.$kobo-gray-800;
+    color: #ffffff;
     height: $modal-custom-header-height;
 
     .modal__x {
       padding: 0;
-      margin: 2px 0 0;
+      margin: 0;
     }
   }
 
@@ -251,21 +262,18 @@ $modal-custom-header-height: 60px;
 }
 
 .modal.modal--mfa-setup {
-  // FIXME: Fixed size for standardization
   width: 570px;
   height: 700px;
-  // Overwrite regular modal % based sizes
   min-width: 0;
   min-height: 0;
 
   .modal__header {
-    background-color: colors.$kobo-gray-100;
-    font-size: 24px;
-    padding: 32px 32px 48px;
+    background-color: var(--color-bg-dark, #090f1e);
+    font-size: 22px;
+    padding: 24px 28px;
 
     .modal__x {
-      font-size: 12px;
-      color: rgba(colors.$kobo-gray-800, 0.4);
+      font-size: 14px;
     }
   }
 

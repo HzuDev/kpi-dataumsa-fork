@@ -11,76 +11,63 @@
 }
 
 .tabs {
-  background: colors.$kobo-white;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: var(--color-text-inverse, #ffffff);
+  border-bottom: 2.5px solid var(--color-text-main, #0f172a);
   text-align: center;
-  height: 48px;
+  height: 52px;
   position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  box-shadow: none !important;
+  gap: 8px;
 }
 
 .tab {
   background: transparent;
   border: none;
-  border-bottom: 3px solid transparent;
+  border-bottom: 4px solid transparent;
   text-transform: uppercase;
   line-height: 48px;
   cursor: pointer;
   position: relative;
-  color: var(--color-text-muted, #64748b);
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  transition: all 0.2s ease;
+  color: var(--color-text-muted, #475569);
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: -0.01em;
+  padding: 0 24px;
+  transition: all 0.15s ease;
   user-select: none;
 
   &:hover {
-    color: var(--color-primary, #29b9f2);
+    color: var(--color-text-main, #0f172a);
+    background-color: var(--color-primary-light, #e0f6ff);
   }
 
   &.active {
-    font-weight: 700;
-    color: var(--color-primary-dark, #0688ba);
-    border-bottom-color: var(--color-primary, #29b9f2);
+    font-weight: 800;
+    color: var(--color-text-main, #0f172a);
+    border-bottom: 4px solid var(--color-primary, #29b9f2);
   }
 
   &.disabled {
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.35;
   }
 }
 
 @include breakpoints.breakpoint(veryNarrow) {
   .tabs {
-    padding-left: 10px;
-    padding-right: 10px;
-    gap: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+    gap: 4px;
   }
 
   .tab {
-    @include mixins.textEllipsis;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 12px;
   }
 }
-
-@include breakpoints.breakpoint(narrow) {
-  .tabs {
-    gap: 30px;
-  }
-}
-
-@include breakpoints.breakpoint(narrowAndUp) {
-  .tab {
-    font-size: 14px;
-  }
-}
-
-@include breakpoints.breakpoint(mediumAndUp) {
-  .tabs {
-    gap: 60px;
-  }
-}
-

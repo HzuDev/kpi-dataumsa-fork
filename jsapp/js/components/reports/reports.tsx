@@ -63,7 +63,8 @@ export interface ReportsState {
 }
 
 export default function Reports(props: ReportsProps) {
-  const [state, setState] = useState<ReportsState>({\n    graphWidth: '700',
+  const [state, setState] = useState<ReportsState>({
+    graphWidth: '700',
     graphHeight: '250',
     activeModalTab: 0,
     isFullscreen: false,
@@ -399,7 +400,8 @@ export default function Reports(props: ReportsProps) {
     })
 
     return (
-      <bem.FormView__reportButtons>\n        <div className='form-view__report-buttons-left'>
+      <bem.FormView__reportButtons>
+        <div className='form-view__report-buttons-left'>
           <KoboSelect
             className='custom-reports-selector'
             name='custom-reports'

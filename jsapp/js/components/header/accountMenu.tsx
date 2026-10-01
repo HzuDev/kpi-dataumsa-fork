@@ -11,7 +11,7 @@ import { dataInterface } from '#/dataInterface'
 import envStore from '#/envStore'
 import { isAnyRouteBlockerActive } from '#/router/routerUtils'
 import sessionStore from '#/stores/session'
-import { currentLang } from '#/utils'
+import { cookies, currentLang, LANGUAGE_COOKIE_NAME } from '#/utils'
 import ButtonNew from '../common/ButtonNew'
 import OrganizationBadge from './organizationBadge.component'
 
@@ -43,6 +43,7 @@ export default function AccountMenu() {
 
   const onLanguageChange = (langCode: string) => {
     if (langCode) {
+      cookies.set(LANGUAGE_COOKIE_NAME, langCode, { path: '/', maxAge: 31536000 })
       // use .always (instead of .done) here since Django 1.8 redirects the request
       dataInterface.setLanguage({ language: langCode }).always(() => {
         if ('reload' in window.location) {

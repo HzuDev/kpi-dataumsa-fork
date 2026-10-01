@@ -5,22 +5,7 @@
 @use 'scss/mixins';
 @use 'sass:color';
 
-// TODO: This file is too big and it lost it's original purpose.
-// It was supposed to be a general form view layout (AKA "the content"), but
-// over time it accumulated many small unique modifiers.
-// See: https://github.com/kobotoolbox/kpi/issues/3926
-//
-// Best things to do here:
-// 1. For sure don't add anything new, unless it really makes sense to be part
-//    of the Form View. It is really tempting to add new modifier when writing
-//    JSX `<FormView__cell m='new-modifier'>`, but try not to do this.
-// 2. Try to split out logical parts of it that are unique to only single place
-//    in app. You can easily leave them as form-view__… for now.
-// 3. Add comments describing what you're adding.
-// 4. We should migrate form-view layout to flex box to avoid all those calc()
-//    and to make it context independent.
-
-$side-tabs-width: 180px;
+$side-tabs-width: 190px;
 $side-tabs-width-mobile: 70px;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,12 +16,10 @@ $side-tabs-width-mobile: 70px;
 .page-wrapper__content--form-landing {
   .form-view,
   .loadingSpinner {
-    height: calc(100% - 48px);
+    height: calc(100% - 52px);
   }
 
   .loadingSpinner {
-    // Without this, it sometimes gets pushed down (outside the layout), when
-    // some sibling nodes are present
     width: auto;
     margin-left: auto;
     margin-right: auto;
@@ -47,11 +30,9 @@ $side-tabs-width-mobile: 70px;
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  background: #f8fafc;
+  background: var(--color-bg-main, #f8fafc);
 
   &.form-view--fullscreen {
-    // We force the position to avoid problems with stronger specificity
-    // breaking the fullscreen functionality.
     position: fixed !important;
     z-index: z-indexes.$z-fullscreen;
     top: 0;
@@ -60,7 +41,6 @@ $side-tabs-width-mobile: 70px;
     right: 0;
     width: 100%;
     height: 100%;
-    // min/max sizes to override any custom @media or other .form-view styles
     min-width: 100%;
     max-width: 100%;
     min-height: 100%;
@@ -73,31 +53,31 @@ $side-tabs-width-mobile: 70px;
   .form-view__sidetabs + .report-view,
   .form-view__sidetabs + .loading,
   .form-view__sidetabs + .access-denied {
-    width: calc(100% - $side-tabs-width);
-    height: calc(100% - 48px);
+    width: calc(100% - #{$side-tabs-width});
+    height: calc(100% - 52px);
     overflow: auto;
     overflow-x: hidden;
   }
 }
 
-// The additional side menu tabs on the left
+// The additional side menu tabs on the left (Data & Settings subtabs)
 .form-view__sidetabs {
   width: $side-tabs-width;
   height: 100%;
-  max-height: calc(100% - 48px);
+  max-height: calc(100% - 52px);
   overflow-x: hidden;
   overflow-y: auto;
   float: left;
-  background: colors.$kobo-white;
-  border-right: 1px solid rgba(15, 23, 42, 0.08);
-  padding-top: 20px;
+  background: var(--color-text-inverse, #ffffff);
+  border-right: 2.5px solid var(--color-text-main, #0f172a);
+  padding: 24px 0;
 
   & + .form-view,
   & + .report-view,
   & + .loading,
   & + .access-denied {
     width: calc(100% - #{$side-tabs-width});
-    height: calc(100% - 48px);
+    height: calc(100% - 52px);
     overflow: auto;
     overflow-x: hidden;
   }
@@ -115,38 +95,42 @@ $side-tabs-width-mobile: 70px;
 
   a.form-view__tab {
     background: transparent;
-    border: none;
-    padding: 10px 14px;
-    margin: 4px 12px;
-    border-radius: 8px;
-    font-size: 14px;
+    border: 2px solid transparent;
+    padding: 10px 16px;
+    margin: 6px 14px;
+    border-radius: 9999px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13.5px;
     cursor: pointer;
     position: relative;
-    color: var(--color-text-muted, colors.$kobo-gray-700);
+    color: var(--color-text-muted, #475569);
     font-weight: 600;
     letter-spacing: -0.01em;
     display: flex;
     align-items: center;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
 
     &:hover {
-      color: var(--color-primary-dark, colors.$kobo-dark-blue);
-      background-color: var(--color-primary-light, rgba(41, 185, 242, 0.06));
+      color: var(--color-primary-dark, #0688ba);
+      background-color: var(--color-primary-light, #e0f6ff);
+      transform: translateX(2px);
     }
 
     &.active {
       font-weight: 700;
-      color: var(--color-primary-dark, colors.$kobo-dark-blue);
-      background-color: var(--color-primary-light, rgba(41, 185, 242, 0.08)) !important;
+      color: var(--color-text-main, #0f172a) !important;
+      background-color: var(--color-primary-light, #e0f6ff) !important;
+      border: 2px solid var(--color-text-main, #0f172a) !important;
+      transform: none !important;
     }
 
     &.form-view__tab--disabled {
       pointer-events: none;
-      opacity: 0.4;
+      opacity: 0.35;
     }
 
     .k-icon {
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1;
       margin: 0 10px 0 0;
       color: inherit;
@@ -161,7 +145,7 @@ $side-tabs-width-mobile: 70px;
 }
 
 .form-view__row {
-  margin: 40px;
+  margin: 36px 40px;
 
   + .form-view__row {
     margin-top: 0;
@@ -193,31 +177,36 @@ $side-tabs-width-mobile: 70px;
 
 .form-view__cell-label {
   font-size: 12px;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .form-view__cell {
   &.form-view__cell--box {
-    background-color: colors.$kobo-white;
-    border-radius: 12px;
-    border: 1px solid rgba(15, 23, 42, 0.07);
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02), 0 1px 2px rgba(15, 23, 42, 0.02);
+    background-color: var(--color-text-inverse, #ffffff);
+    border-radius: 24px;
+    border: 2.5px solid var(--color-text-main, #0f172a);
+    box-shadow: none !important;
     overflow: hidden;
   }
 
   &.form-view__cell--bordered {
-    border: 1px solid rgba(15, 23, 42, 0.08);
+    border: 2px solid var(--color-text-main, #0f172a);
   }
 
   &.form-view__cell--page-title {
-    font-size: 24px;
-    font-weight: 700;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--color-text-main, #0f172a);
     margin: 30px 0 15px;
   }
 
   &.form-view__cell--page-subtitle {
-    font-size: 18px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 16px;
     font-weight: 500;
+    color: var(--color-text-muted, #475569);
     margin: 30px 0 15px;
   }
 
@@ -251,7 +240,7 @@ $side-tabs-width-mobile: 70px;
     width: 30px;
     margin-inline-end: 10px;
     text-align: center;
-    color: colors.$kobo-gray-700;
+    color: var(--color-text-muted, #475569);
 
     .k-icon {
       font-size: 24px;
@@ -264,7 +253,7 @@ $side-tabs-width-mobile: 70px;
   }
 
   &.form-view__cell--bordertop {
-    border-top: 1px solid rgba(15, 23, 42, 0.07);
+    border-top: 1.5px solid rgba(15, 23, 42, 0.08);
   }
 
   &.form-view__cell--padding {
@@ -275,18 +264,21 @@ $side-tabs-width-mobile: 70px;
     width: 100%;
   }
 
-  // preferably with or inside .form-view__cell--first
+  // Section titles
   &.form-view__cell--label {
-    font-size: 16px;
-    color: var(--color-text-main, colors.$kobo-gray-900);
-    font-weight: 700;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-size: 20px;
+    color: var(--color-text-main, #0f172a);
+    font-weight: 800;
+    letter-spacing: -0.02em;
 
     span {
       display: block;
-      color: var(--color-text-muted, colors.$kobo-gray-700);
-      font-size: 12px;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+      color: var(--color-text-muted, #475569);
+      font-size: 12.5px;
       font-weight: 500;
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     &::first-letter {
@@ -295,7 +287,7 @@ $side-tabs-width-mobile: 70px;
   }
 
   &.form-view__cell--first {
-    padding-bottom: 24px;
+    padding-bottom: 18px;
     position: relative;
 
     .form-view__group {
@@ -311,42 +303,47 @@ $side-tabs-width-mobile: 70px;
     text-align: right;
 
     :global(.k-button) {
-      border-radius: 30px !important;
-      padding: 8px 24px !important;
+      border-radius: 9999px !important;
+      padding: 10px 24px !important;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
       font-weight: 700 !important;
       font-size: 14px !important;
-      transition: all 0.2s ease !important;
-      box-shadow: 0 4px 10px rgba(41, 185, 242, 0.2) !important;
-      background: linear-gradient(135deg, var(--color-primary, colors.$kobo-blue) 0%, var(--color-primary-dark, colors.$kobo-dark-blue) 100%) !important;
-      border: none !important;
-      color: colors.$kobo-white !important;
+      transition: all 0.15s ease !important;
+      box-shadow: none !important;
+      background: var(--color-primary, #29b9f2) !important;
+      border: 2.5px solid var(--color-text-main, #0f172a) !important;
+      color: var(--color-text-main, #0f172a) !important;
 
       &:hover:not([disabled]) {
-        transform: translateY(-1.5px) !important;
-        box-shadow: 0 6px 16px rgba(6, 136, 186, 0.3) !important;
+        background: var(--color-primary-dark, #0688ba) !important;
+        color: #ffffff !important;
+        transform: translateY(-1px) !important;
       }
 
       &:active:not([disabled]) {
-        transform: translateY(0) !important;
+        transform: translateY(1px) !important;
       }
     }
   }
 
   &.form-view__cell--version {
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--color-text-main, colors.$kobo-gray-900);
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--color-text-main, #0f172a);
     display: inline-block;
     vertical-align: middle;
   }
 
   &.form-view__cell--undeployed {
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
     font-size: 11px;
-    font-weight: 600;
-    color: colors.$kobo-dark-red;
-    background-color: colors.$kobo-light-red;
-    padding: 2px 8px;
-    border-radius: 12px;
+    font-weight: 700;
+    color: #991b1b;
+    background-color: #fee2e2;
+    border: 1.5px solid var(--color-text-main, #0f172a);
+    padding: 2px 10px;
+    border-radius: 9999px;
     margin-left: 8px;
     display: inline-block;
     vertical-align: middle;
@@ -373,44 +370,43 @@ $side-tabs-width-mobile: 70px;
       font-size: 24px;
       margin: 0 3px;
       vertical-align: top;
-      color: colors.$kobo-teal;
+      color: var(--color-primary, #29b9f2);
     }
   }
 
-  // visually take same amount of white space as without buttons
   &.form-view__cell--label + &.form-view__cell--action-buttons {
     margin: -8px 0;
   }
 
   &.form-view__cell--action-buttons {
     @include mixins.centerRowFlex;
-    gap: 8px;
+    gap: 10px;
 
     :global(.k-button) {
-      border: 1px solid rgba(15, 23, 42, 0.1) !important;
-      background-color: colors.$kobo-white !important;
-      border-radius: 50% !important; // Circle buttons matching quick actions
-      width: 36px !important;
-      height: 36px !important;
+      border: 2px solid var(--color-text-main, #0f172a) !important;
+      background-color: var(--color-text-inverse, #ffffff) !important;
+      border-radius: 50% !important;
+      width: 38px !important;
+      height: 38px !important;
       padding: 0 !important;
       justify-content: center !important;
       align-items: center !important;
-      transition: all 0.2s ease !important;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+      transition: all 0.15s ease !important;
+      box-shadow: none !important;
 
       :global(.k-icon) {
         margin: 0 !important;
-        color: var(--color-text-muted, colors.$kobo-gray-700) !important;
+        color: var(--color-text-main, #0f172a) !important;
+        font-size: 18px !important;
       }
 
       &:hover:not([disabled]) {
-        border-color: var(--color-primary, colors.$kobo-blue) !important;
-        background-color: rgba(41, 185, 242, 0.06) !important;
-        transform: scale(1.05) translateY(-1px) !important;
-        box-shadow: 0 3px 8px rgba(41, 185, 242, 0.15) !important;
+        border-color: var(--color-text-main, #0f172a) !important;
+        background-color: var(--color-primary-light, #e0f6ff) !important;
+        transform: scale(1.08) translateY(-1px) !important;
 
         :global(.k-icon) {
-          color: var(--color-primary-dark, colors.$kobo-dark-blue) !important;
+          color: var(--color-primary-dark, #0688ba) !important;
         }
       }
 
@@ -419,55 +415,50 @@ $side-tabs-width-mobile: 70px;
       }
 
       &[disabled] {
-        opacity: 0.45 !important;
-        background-color: rgba(15, 23, 42, 0.02) !important;
-        border-color: rgba(15, 23, 42, 0.06) !important;
+        opacity: 0.35 !important;
+        background-color: #f1f5f9 !important;
+        border-color: rgba(15, 23, 42, 0.2) !important;
         box-shadow: none !important;
-
-        :global(.k-icon) {
-          color: colors.$kobo-gray-500 !important;
-        }
       }
     }
-    
+
     // Style for the Mantine ButtonNew dropdown target button
     :global(button.mantine-UnstyledButton-root) {
-      border: 1px solid rgba(15, 23, 42, 0.1) !important;
-      background-color: colors.$kobo-white !important;
+      border: 2px solid var(--color-text-main, #0f172a) !important;
+      background-color: var(--color-text-inverse, #ffffff) !important;
       border-radius: 50% !important;
-      width: 36px !important;
-      height: 36px !important;
+      width: 38px !important;
+      height: 38px !important;
       padding: 0 !important;
       display: inline-flex !important;
       justify-content: center !important;
       align-items: center !important;
-      transition: all 0.2s ease !important;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
-      color: var(--color-text-muted, colors.$kobo-gray-700) !important;
+      transition: all 0.15s ease !important;
+      box-shadow: none !important;
+      color: var(--color-text-main, #0f172a) !important;
 
       i, svg, .k-icon {
         margin: 0 !important;
-        font-size: 20px !important;
-        color: var(--color-text-muted, colors.$kobo-gray-700) !important;
+        font-size: 18px !important;
+        color: var(--color-text-main, #0f172a) !important;
       }
 
       &:hover {
-        border-color: var(--color-primary, colors.$kobo-blue) !important;
-        background-color: rgba(41, 185, 242, 0.06) !important;
-        transform: scale(1.05) translateY(-1px) !important;
-        box-shadow: 0 3px 8px rgba(41, 185, 242, 0.15) !important;
-        color: var(--color-primary-dark, colors.$kobo-dark-blue) !important;
+        border-color: var(--color-text-main, #0f172a) !important;
+        background-color: var(--color-primary-light, #e0f6ff) !important;
+        transform: scale(1.08) translateY(-1px) !important;
 
         i, svg, .k-icon {
-          color: var(--color-primary-dark, colors.$kobo-dark-blue) !important;
+          color: var(--color-primary-dark, #0688ba) !important;
         }
       }
     }
   }
 
   &.form-view__cell--date {
-    font-weight: normal;
-    color: var(--color-text-muted, colors.$kobo-gray-700);
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-weight: 500;
+    color: var(--color-text-muted, #475569);
     display: inline-block;
     vertical-align: middle;
     font-size: 14px;
@@ -477,11 +468,12 @@ $side-tabs-width-mobile: 70px;
     }
 
     .question-count {
-      font-weight: 600;
-      color: var(--color-text-main, colors.$kobo-gray-800);
-      background-color: rgba(15, 23, 42, 0.05);
-      padding: 2px 8px;
-      border-radius: 12px;
+      font-weight: 700;
+      color: var(--color-text-main, #0f172a);
+      background-color: var(--color-primary-light, #e0f6ff);
+      border: 1.5px solid var(--color-text-main, #0f172a);
+      padding: 2px 10px;
+      border-radius: 9999px;
       margin-left: 6px;
       font-size: 12px;
       display: inline-block;
@@ -492,10 +484,10 @@ $side-tabs-width-mobile: 70px;
     display: inline-block;
     vertical-align: middle;
     font-size: 14px;
-    color: var(--color-text-muted, colors.$kobo-gray-700);
+    color: var(--color-text-muted, #475569);
 
     strong {
-      color: var(--color-text-main, colors.$kobo-gray-900);
+      color: var(--color-text-main, #0f172a);
       font-weight: 700;
     }
 
@@ -511,12 +503,13 @@ $side-tabs-width-mobile: 70px;
 
       li {
         display: inline-block;
-        background-color: rgba(15, 23, 42, 0.05);
-        padding: 2px 10px;
-        border-radius: 12px;
+        background-color: var(--color-bg-main, #f8fafc);
+        border: 1.5px solid var(--color-text-main, #0f172a);
+        padding: 3px 12px;
+        border-radius: 9999px;
         font-size: 12px;
-        font-weight: 600;
-        color: var(--color-text-main, colors.$kobo-gray-800);
+        font-weight: 700;
+        color: var(--color-text-main, #0f172a);
         margin: 0;
       }
     }
@@ -525,34 +518,35 @@ $side-tabs-width-mobile: 70px;
   // Manage languages button
   &.form-view__cell--translation-list + & {
     :global(button.mantine-Button-root) {
-      border: 1px solid rgba(15, 23, 42, 0.12) !important;
-      background-color: colors.$kobo-white !important;
-      color: var(--color-text-main, colors.$kobo-gray-800) !important;
-      border-radius: 30px !important;
-      padding: 6px 16px !important;
-      height: 34px !important;
-      font-weight: 600 !important;
-      transition: all 0.2s ease !important;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+      border: 2px solid var(--color-text-main, #0f172a) !important;
+      background-color: var(--color-text-inverse, #ffffff) !important;
+      color: var(--color-text-main, #0f172a) !important;
+      border-radius: 9999px !important;
+      padding: 6px 18px !important;
+      height: 36px !important;
+      font-weight: 700 !important;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+      transition: all 0.15s ease !important;
+      box-shadow: none !important;
 
       &:hover {
-        border-color: var(--color-primary, colors.$kobo-blue) !important;
-        background-color: rgba(41, 185, 242, 0.05) !important;
-        color: var(--color-primary-dark, colors.$kobo-dark-blue) !important;
+        background-color: var(--color-primary-light, #e0f6ff) !important;
+        color: var(--color-primary-dark, #0688ba) !important;
+        transform: translateY(-1px) !important;
       }
 
       &:active {
-        transform: scale(0.97) !important;
+        transform: translateY(1px) !important;
       }
     }
   }
 
   &.form-view__cell--thin-label {
-    color: colors.$kobo-gray-700;
-    opacity: 0.6;
+    color: var(--color-text-muted, #475569);
     font-size: 12px;
     line-height: 18px;
     margin-bottom: 10px;
+    font-weight: 600;
   }
 
   &.form-view__cell--centered {
@@ -564,20 +558,6 @@ $side-tabs-width-mobile: 70px;
   }
 }
 
-@keyframes recent {
-  0% {
-    background-color: colors.$kobo-white;
-  }
-
-  10% {
-    background-color: color.adjust(colors.$kobo-blue, $lightness: 20%);
-  }
-
-  100% {
-    background-color: color.adjust(colors.$kobo-blue, $lightness: 40%);
-  }
-}
-
 .form-view__group {
   .dropzone {
     display: inline;
@@ -585,7 +565,7 @@ $side-tabs-width-mobile: 70px;
 
   &.form-view__group--items {
     padding: 0;
-    border-top: 1px solid colors.$kobo-gray-300;
+    border-top: 1.5px solid rgba(15, 23, 42, 0.08);
     display: flex;
     align-items: center;
 
@@ -593,10 +573,29 @@ $side-tabs-width-mobile: 70px;
       border-top: none;
     }
 
+    > .form-view__cell {
+      .form-view__label {
+        font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--color-text-muted, #475569);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 4px;
+      }
+
+      div, span {
+        font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+        font-size: 14.5px;
+        color: var(--color-text-main, #0f172a);
+        font-weight: 600;
+      }
+    }
+
     > .form-view__label {
       text-align: right;
       width: 30%;
-      padding: 10px;
+      padding: 12px;
       vertical-align: middle;
 
       &--version {
@@ -611,21 +610,16 @@ $side-tabs-width-mobile: 70px;
     .form-view__label--date {
       text-align: left;
     }
-
-    &.recent {
-      background-color: color.adjust(colors.$kobo-blue, $lightness: 40%);
-      animation: recent 5s 1;
-    }
   }
 
   .form-view__group--deployments {
     .form-view__group--items:hover {
-      background: colors.$kobo-gray-200;
+      background: var(--color-primary-light, #e0f6ff);
     }
   }
 
   .form-view__group--headings {
-    font-weight: 600;
+    font-weight: 700;
     border-top: none;
 
     &:hover {
@@ -635,11 +629,11 @@ $side-tabs-width-mobile: 70px;
 }
 
 .form-view--form-settings {
-  background: #f8fafc;
+  background: var(--color-bg-main, #f8fafc);
 }
 
 .form-view--settings-sharing {
-  background: #f8fafc;
+  background: var(--color-bg-main, #f8fafc);
   padding: 40px;
 }
 
@@ -651,13 +645,13 @@ $side-tabs-width-mobile: 70px;
 }
 
 .form-view.form-view--form-settings-sharing {
-  background: #f8fafc;
+  background: var(--color-bg-main, #f8fafc);
 
   .form-modal {
-    background-color: colors.$kobo-white;
-    border-radius: 12px;
-    border: 1px solid rgba(15, 23, 42, 0.07);
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02), 0 1px 2px rgba(15, 23, 42, 0.02);
+    background-color: var(--color-text-inverse, #ffffff);
+    border-radius: 24px;
+    border: 2.5px solid var(--color-text-main, #0f172a);
+    box-shadow: none !important;
     margin: 40px;
     padding: 32px;
     overflow: auto;
@@ -710,9 +704,10 @@ $side-tabs-width-mobile: 70px;
 
 .form-view__cell--collect-header {
   .collect-link-missing {
-    color: colors.$kobo-dark-amber;
+    color: var(--color-warning, #f59e0b);
     display: block;
     line-height: 24px;
+    font-weight: 600;
 
     .k-icon {
       vertical-align: top;
@@ -723,20 +718,36 @@ $side-tabs-width-mobile: 70px;
 
 .collect-header-actions {
   @include mixins.centerRowFlex;
-  gap: 10px;
+  gap: 12px;
+
+  :global(.k-button) {
+    border-radius: 9999px !important;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+    font-weight: 700 !important;
+    border: 2px solid var(--color-text-main, #0f172a) !important;
+    box-shadow: none !important;
+  }
 }
 
 .collect-meta-description {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  color: var(--color-text-muted, #475569);
+  font-size: 14px;
+  line-height: 1.6;
+
   pre,
   code {
-    border: 1px solid colors.$kobo-gray-300;
-    background: colors.$kobo-gray-200;
+    border: 2px solid var(--color-text-main, #0f172a);
+    background: var(--color-bg-main, #f8fafc);
+    border-radius: 8px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: var(--color-text-main, #0f172a);
   }
 
   pre {
     display: block;
-    margin: 0;
-    padding: 10px;
+    margin: 12px 0;
+    padding: 14px 18px;
     font-size: 13px;
     white-space: normal;
   }
@@ -744,12 +755,18 @@ $side-tabs-width-mobile: 70px;
   ol {
     margin: 0;
     padding: 0;
-    margin-left: 15px;
+    margin-left: 20px;
     margin-bottom: 0;
 
     li {
-      margin-bottom: 5px;
-      padding: 5px;
+      margin-bottom: 8px;
+      padding: 2px 0;
+
+      a {
+        color: var(--color-primary-dark, #0688ba);
+        font-weight: 700;
+        text-decoration: underline;
+      }
     }
 
     .k-icon.k-icon-more-vertical {
@@ -760,9 +777,9 @@ $side-tabs-width-mobile: 70px;
   }
 
   code {
-    padding: 4px;
-    margin-left: 5px;
-    margin-right: 5px;
+    padding: 3px 8px;
+    margin-left: 4px;
+    margin-right: 4px;
   }
 }
 
@@ -777,7 +794,6 @@ $side-tabs-width-mobile: 70px;
   }
 }
 
-// TODO: rework all these media queries to mobile first
 @media screen and (width < breakpoints.$b768) {
   .form-view__sidetabs {
     width: $side-tabs-width-mobile;
@@ -843,23 +859,23 @@ $side-tabs-width-mobile: 70px;
 }
 
 .form-modal__form.form-modal__form--bulk-edit-submissions {
-  // text links
   .form-modal__item--wrapper > a:hover {
     text-decoration: underline;
   }
 
   h2 {
+    font-family: var(--font-display, 'Montserrat', sans-serif);
     font-size: inherit;
-    font-weight: 600;
+    font-weight: 700;
     margin: 0 auto 10px;
   }
 
   i.blue-response-dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     display: inline-block;
     vertical-align: middle;
-    background: colors.$kobo-blue;
+    background: var(--color-primary, #29b9f2);
     border-radius: 100%;
     margin-right: 6px;
   }
@@ -883,10 +899,9 @@ $side-tabs-width-mobile: 70px;
 }
 
 .form-view--library-asset {
-  background: colors.$kobo-white;
+  background: var(--color-text-inverse, #ffffff);
 }
 
-// Temporary legacy code replacement. We needed this to remove bem.uiPanel
 .form-view--ui-panel {
   padding: 10px;
 }

@@ -23,51 +23,6 @@
   </p>
 {% endblock %}
 
-{% block brand_content %}
-  <!-- Ilustración animada: Celular y Candado -->
-  <div class="privacy-illustration">
-    <div class="phone">
-      <div class="phone-screen">
-        <div class="form-line title"></div>
-        <div class="form-line short"></div>
-        <div class="form-line long"></div>
-        <div class="form-line long"></div>
-        <div class="form-line short"></div>
-        <div class="form-btn"></div>
-      </div>
-    </div>
-    <div class="padlock">
-      <div class="lock-shackle"></div>
-      <div class="lock-body">
-        <div class="lock-keyhole"></div>
-      </div>
-    </div>
-  </div>
-
-  <h2>
-    {% if LANGUAGE_CODE == 'es' %}
-      Rigurosidad científica y protección absoluta de datos.
-    {% else %}
-      Scientific rigor and absolute data protection.
-    {% endif %}
-  </h2>
-  <p>
-    {% if LANGUAGE_CODE == 'es' %}
-      Un entorno formal desarrollado para la investigación avanzada. Gestione encuestas avanzadas y proyectos especializados con la certeza de que su información permanece bajo estricta reserva, libre del uso comercial de plataformas comunes y optimizada para el análisis de múltiples disciplinas.
-    {% else %}
-      A formal environment developed for advanced research. Manage advanced surveys and specialized projects with the certainty that your information remains strictly confidential, free from the commercial use of common platforms, and optimized for the analysis of multiple disciplines.
-    {% endif %}
-  </p>
-  
-  <div class="stats-badge">
-    {% if LANGUAGE_CODE == 'es' %}
-      Precisión • Rigor • Academia
-    {% else %}
-      Precision • Rigor • Academia
-    {% endif %}
-  </div>
-{% endblock %}
-
 {% block content %}
   {# Errores generales del formulario (Non-field errors) #}
   {% if form.non_field_errors %}
@@ -119,88 +74,55 @@
       {% endif %}
     </div>
 
-    {# Botón de Ingreso #}
-    {% if config.TURNSTILE_ENABLED and config.TURNSTILE_SITE_KEY %}
-      <div class="cf-turnstile-container" style="margin-bottom: 1.5rem; display: flex; justify-content: center;">
-        <div class="cf-turnstile" data-sitekey="{{ config.TURNSTILE_SITE_KEY }}" data-theme="light"></div>
-      </div>
-    {% endif %}
-
+    {# Botón Principal de Envío #}
     <button type="submit" name="Login" class="login-button">
-      {% if LANGUAGE_CODE == 'es' %}
-        Iniciar sesión
-      {% else %}
-        Login
-      {% endif %}
+      {% trans "Log in" %}
     </button>
 
-    {# Enlaces de Acción #}
+    {# Enlaces de Acción: Recuperar contraseña y Crear cuenta #}
     <div class="action-links">
       <a href="{% url 'account_reset_password' %}">
+        {% trans "Forgot password?" %}
+      </a>
+      <a href="{{ signup_url }}">
         {% if LANGUAGE_CODE == 'es' %}
-          ¿Olvidaste tu contraseña?
+          ¿No tienes cuenta? <span>Regístrate</span>
         {% else %}
-          Forgot password?
+          Don't have an account? <span>Sign up</span>
         {% endif %}
       </a>
-      {% if config.REGISTRATION_OPEN %}
-        <a href="{{ signup_url }}">
-          {% if LANGUAGE_CODE == 'es' %}
-            Crear una cuenta
-          {% else %}
-            Create an account
-          {% endif %}
-        </a>
-      {% endif %}
     </div>
 
-    {# Sección de Inicio de Sesión Único (SSO) #}
+    {# Sección SSO (Single Sign-On) #}
     {% get_social_apps as social_apps %}
     {% if social_apps %}
       <div class="registration__sso registration__sso--login">
         <hr>
         <h2>
-          {% if LANGUAGE_CODE == 'es' %}
-            Inicia sesión con SSO
-          {% else %}
-            Log in using SSO
-          {% endif %}
+          {% trans "Sign in using SSO" %}
         </h2>
         <p>
-          {% if LANGUAGE_CODE == 'es' %}
-            Si configuraste el inicio de sesión único en la configuración de la cuenta, solo podrás iniciar sesión mediante este método.
-          {% else %}
-            If you set up Single Sign On in your account settings, you will only be able to log in through this method.
-          {% endif %}
+          {% trans "If you set up Single Sign On in your account settings, you will only be able to log in through this method." %}
         </p>
         <div class="registration__sso-buttons">
           <ul class="socialaccount_providers">
             {% for social_app in social_apps %}
               <li>
                 <a title="{{ social_app.name }}"
-                   class="socialaccount_provider {{ social_app.provider_id }} kobo-button--sso"
-                   href="{% provider_login_url social_app.provider_id process='login' scope=scope auth_params=auth_params %}"
-                >
+                  class="socialaccount_provider {{ social_app.provider_id }} kobo-button--sso"
+                  href="{% provider_login_url social_app.provider_id process='login' scope=scope auth_params=auth_params %}">
                   {{ social_app.name }}
                 </a>
               </li>
             {% endfor %}
           </ul>
-          {# para estabilidad con upstream #}
           {% include "socialaccount/snippets/login_extra.html" %}
         </div>
       </div>
       <script src="{% static 'js/sso_buttons.js' %}"></script>
     {% endif %}
 
-    {# Términos y condiciones legales #}
+    {# Enlaces legales y de privacidad #}
     {% include "../legal/registration_legal.html" with config=config %}
   </form>
-{% endblock %}
-
-{% block extra_javascript %}
-  {{ block.super }}
-  {% if config.TURNSTILE_ENABLED and config.TURNSTILE_SITE_KEY %}
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-  {% endif %}
 {% endblock %}

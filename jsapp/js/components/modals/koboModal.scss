@@ -9,31 +9,30 @@
 $kobo-modal-elements-height-min: 60px;
 $kobo-modal-width-min: 280px;
 $kobo-modal-width-large: 940px;
-$kobo-modal-width-medium: 570px;
-$kobo-modal-padding: 30px;
-$kobo-modal-header-icon-margin: 10px;
+$kobo-modal-width-medium: 580px;
+$kobo-modal-padding: 24px;
+$kobo-modal-header-icon-margin: 12px;
 
 .kobo-modal {
   position: fixed;
-  border-radius: 6px;
+  border-radius: 20px;
+  border: 2px solid var(--color-text-main, #0f172a);
   max-width: 90vw;
   max-height: 90vh;
   min-width: $kobo-modal-width-min;
   left: 50%;
   top: 50%;
-  background-color: colors.$kobo-white;
-  box-shadow: 0 0 12px 0 color.change(colors.$kobo-gray-800, $alpha: 0.25);
+  background-color: #ffffff;
+  box-shadow: 0 10px 0 var(--color-text-main, #0f172a) !important;
   display: flex;
   flex-direction: column;
 
-  // It's set on purpose here to make sure no one will make it hidden, as we
-  // need some content to be overflowing (e.g. dropdowns).
+  // Keep visible so dropdown menus can extend naturally
   overflow: visible;
 
   @media all and (max-height: breakpoints.$b480) {
     transform: translate(-50%, -50%);
 
-    // This ensures that modal layout is better adapting to very short screens.
     .kobo-modal__header,
     .kobo-modal__content,
     .kobo-modal__footer {
@@ -62,35 +61,65 @@ $kobo-modal-header-icon-margin: 10px;
   @include mixins.centerRowFlex;
 
   justify-content: space-between;
-  padding: $kobo-modal-padding;
-  border-radius: 6px 6px 0 0;
+  padding: 18px 24px;
+  border-radius: 18px 18px 0 0;
+  border-bottom: 2px solid var(--color-text-main, #0f172a);
+  background-color: #ffffff;
 
   &.kobo-modal__header--red {
-    background-color: color.change(colors.$kobo-mid-red, $alpha: 0.1);
+    background-color: #fef2f2;
   }
 
   &.kobo-modal__header--grey {
-    background-color: colors.$kobo-gray-100;
+    background-color: var(--color-bg-main, #f8fafc);
   }
 
   &.kobo-modal__header--white {
-    background-color: colors.$kobo-white;
+    background-color: #ffffff;
   }
 
   h1 {
     @include mixins.centerRowFlex;
 
     flex: 1;
-    color: colors.$kobo-gray-800;
+    color: var(--color-text-main, #0f172a);
+    font-family: var(--font-display, 'Montserrat', sans-serif);
     font-size: 18px;
     font-weight: 700;
     margin: 0;
-    line-height: 1;
+    line-height: 1.2;
     margin-inline-end: 10px;
 
     // If there is close button, we need to limit the width (for a long content)
     &:not(:only-child) {
-      max-width: calc(100% - button.$button-height-s);
+      max-width: calc(100% - 36px);
+    }
+  }
+
+  .k-button {
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
+    padding: 0 !important;
+    border: 2px solid var(--color-text-main, #0f172a) !important;
+    border-radius: 50% !important;
+    background-color: var(--color-bg-main, #f8fafc) !important;
+    color: var(--color-text-main, #0f172a) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: none !important;
+    transition: all 0.15s ease !important;
+
+    .k-icon {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-text-main, #0f172a) !important;
+    }
+
+    &:hover {
+      background-color: var(--color-primary-light, #e0f6ff) !important;
+      transform: rotate(90deg) !important;
     }
   }
 }
@@ -98,23 +127,29 @@ $kobo-modal-header-icon-margin: 10px;
 .kobo-modal__header-icon {
   display: block;
   margin-right: $kobo-modal-header-icon-margin;
+  color: var(--color-primary-dark, #0688ba) !important;
+
+  .k-icon {
+    font-size: 20px;
+    color: var(--color-primary-dark, #0688ba) !important;
+  }
 
   &.kobo-modal__header-icon--blue {
-    color: colors.$kobo-blue;
+    color: var(--color-primary-dark, #0688ba) !important;
   }
 
   &.kobo-modal__header-icon--red {
-    color: colors.$kobo-red;
+    color: #ef4444 !important;
   }
 
   &.kobo-modal__header-icon--storm {
-    color: colors.$kobo-storm;
+    color: var(--color-primary-dark, #0688ba) !important;
   }
 }
 
 .kobo-modal__content {
   overflow-x: auto;
-  padding: $kobo-modal-padding;
+  padding: 24px;
 
   > ul,
   > ol,
@@ -129,8 +164,11 @@ $kobo-modal-header-icon-margin: 10px;
 
 .kobo-modal__footer {
   @include mixins.centerRowFlex;
-  gap: 8px;
-  padding: $kobo-modal-padding;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 0 0 18px 18px;
+  background-color: var(--color-bg-main, #f8fafc);
 
   &.kobo-modal__footer--center {
     justify-content: center;
@@ -139,17 +177,67 @@ $kobo-modal-header-icon-margin: 10px;
   &.kobo-modal__footer--end {
     justify-content: flex-end;
   }
+
+  .k-button {
+    border: 2px solid var(--color-text-main, #0f172a) !important;
+    border-radius: 9999px !important;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+    font-weight: 700 !important;
+    font-size: 13.5px !important;
+    padding: 8px 22px !important;
+    height: 40px !important;
+    box-shadow: none !important;
+    transition: all 0.15s ease !important;
+
+    &:hover {
+      transform: translateY(-1px) !important;
+    }
+
+    &:active {
+      transform: translateY(1px) !important;
+    }
+
+    &.k-button--type-secondary-danger {
+      background-color: #fee2e2 !important;
+      color: #b91c1c !important;
+
+      &:hover {
+        background-color: #fecaca !important;
+        color: #991b1b !important;
+      }
+    }
+
+    &.k-button--type-primary {
+      background-color: var(--color-primary, #29b9f2) !important;
+      color: var(--color-text-main, #0f172a) !important;
+
+      &:hover {
+        background-color: var(--color-primary-dark, #0688ba) !important;
+        color: #ffffff !important;
+      }
+    }
+
+    &.k-button--type-secondary {
+      background-color: #ffffff !important;
+      color: var(--color-text-main, #0f172a) !important;
+
+      &:hover {
+        background-color: #f1f5f9 !important;
+      }
+    }
+  }
 }
 
 // If the KoboModalContent component is used together with the KoboModalFooter
 // component, we want the paddings not to multiply.
 .kobo-modal__content + .kobo-modal__footer {
-  padding-top: 0;
+  padding-top: 16px;
 }
 
 .kobo-modal-overlay {
   position: fixed;
   z-index: z-indexes.$z-modal;
   inset: 0;
-  background-color: color.change(colors.$kobo-storm, $alpha: 0.6);
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
 }

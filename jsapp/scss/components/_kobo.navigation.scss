@@ -12,23 +12,21 @@
 .header-stretch-bg {
   position: absolute;
   width: 100%;
-  background-color: var(--color-text-main);
+  background-color: var(--color-bg-dark, #090f1e);
   min-height: mdl.$layout-desktop-header-height;
   z-index: 0;
-  border-bottom: 1px solid rgba(colors.$kobo-white, 0.08);
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.25), 0 2px 6px -1px rgba(15, 23, 42, 0.15);
+  border-bottom: 2.5px solid var(--color-text-main, #0f172a);
+  box-shadow: none !important;
 }
 
 .mdl-layout__header {
-  background-color: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--color-bg-dark, #090f1e);
   min-height: mdl.$layout-desktop-header-height;
   margin-left: 0;
   width: 100%;
   z-index: auto;
-  border-bottom: 1px solid rgba(colors.$kobo-white, 0.08);
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.25), 0 2px 6px -1px rgba(15, 23, 42, 0.15);
+  border-bottom: 2.5px solid var(--color-text-main, #0f172a);
+  box-shadow: none !important;
 
   .mdl-layout__header-row {
     height: mdl.$layout-desktop-header-height;
@@ -53,11 +51,11 @@
     // Needed for non-horizontal images
     background-size: contain;
     display: block;
-    transition: transform var(--transition-fast), filter var(--transition-fast);
+    transition: transform 0.15s ease, filter 0.15s ease;
 
     &:hover {
-      transform: scale(1.02);
-      filter: brightness(1.05);
+      transform: scale(1.04);
+      filter: brightness(1.1);
     }
   }
 
@@ -85,7 +83,7 @@
     max-width: 100%;
   }
 
-  // New Menu component button styles
+  // Bento Avatar Menu trigger
   .account-menu-trigger {
     background: none;
     border: none;
@@ -93,16 +91,28 @@
     padding: 2px;
     display: block;
     border-radius: 50%;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition: transform 0.15s ease;
+
+    :global(.avatar .initials),
+    .initials {
+      border: 2px solid rgba(255, 255, 255, 0.4) !important;
+      transition: all 0.15s ease !important;
+    }
 
     &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 0 2px var(--color-primary);
+      transform: scale(1.08);
+
+      :global(.avatar .initials),
+      .initials {
+        border-color: var(--color-primary, #29b9f2) !important;
+        outline: 2px solid var(--color-primary, #29b9f2);
+        outline-offset: 2px;
+      }
     }
 
     &:focus-visible {
-      outline: none;
-      box-shadow: 0 0 0 2px var(--color-primary);
+      outline: 2px solid var(--color-primary, #29b9f2);
+      outline-offset: 2px;
     }
   }
 
@@ -121,6 +131,7 @@
     }
   }
 
+  // Bento Header Search Box
   .search {
     vertical-align: middle;
     margin: 0 16px;
@@ -128,44 +139,47 @@
     width: 100%;
     max-width: 480px;
     position: relative;
-    transition: var(--transition-smooth);
+    transition: all 0.2s ease;
 
     ::placeholder {
-      color: var(--color-text-muted);
-      opacity: 0.8;
-      font-weight: 400;
+      color: var(--color-text-dark-muted, #94a3b8);
+      opacity: 1;
+      font-weight: 500;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
     }
 
     .search-input {
-      color: colors.$kobo-white;
-      border: 1px solid rgba(colors.$kobo-white, 0.12);
-      border-radius: var(--radius-md);
-      padding: 10px 16px;
-      padding-left: 42px;
-      padding-right: 40px;
-      background-color: rgba(colors.$kobo-white, 0.06);
+      color: #ffffff;
+      border: 2px solid #23314f !important;
+      border-radius: 9999px !important;
+      padding: 9px 40px 9px 42px;
+      background-color: var(--color-bg-dark-surface, #131b2e) !important;
       font-size: 14px;
-      font-family: inherit;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+      font-weight: 500;
       position: relative;
       width: 100%;
-      outline: none;
-      transition: all var(--transition-fast);
+      height: 38px;
+      outline: none !important;
+      box-shadow: none !important;
+      transition: all 0.15s ease;
 
       &:hover {
-        background-color: rgba(colors.$kobo-white, 0.09);
-        border-color: rgba(colors.$kobo-white, 0.2);
+        background-color: #17223b !important;
+        border-color: var(--color-primary, #29b9f2) !important;
       }
 
       &:focus {
-        background-color: rgba(colors.$kobo-white, 0.12);
-        border-color: var(--color-primary);
-        box-shadow: 0 0 0 3px rgba(41, 185, 242, 0.2);
+        background-color: var(--color-bg-dark-surface, #131b2e) !important;
+        border-color: var(--color-primary, #29b9f2) !important;
+        outline: 2px solid var(--color-primary, #29b9f2) !important;
+        outline-offset: 1px !important;
+        box-shadow: none !important;
       }
 
       &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
-        background-color: rgba(colors.$kobo-white, 0.02);
       }
     }
 
@@ -174,65 +188,103 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--color-text-muted);
+      color: var(--color-text-dark-muted, #94a3b8);
       font-size: 18px;
-      transition: color var(--transition-fast), transform var(--transition-fast);
+      transition: color 0.15s ease, transform 0.15s ease;
     }
 
     .search__icon {
-      left: 16px;
+      left: 14px;
       pointer-events: none;
     }
 
     .search__cancel {
       cursor: pointer;
-      right: 16px;
+      right: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
 
       &:hover {
-        color: colors.$kobo-white;
+        color: #ffffff;
         transform: translateY(-50%) scale(1.1);
       }
     }
   }
 }
 
+// Bento User Profile Popup Menu
 .account-box__menu {
-  min-width: 280px;
+  min-width: 300px;
   max-height: 80vh;
   overflow-y: auto;
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
-  padding: 16px;
+  background-color: #ffffff !important;
+  border: 2.5px solid var(--color-text-main, #0f172a) !important;
+  border-radius: 24px !important;
+  box-shadow: none !important;
+  padding: 22px 20px 18px 20px !important;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
 
   .account-box__menu-item--avatar {
     margin-bottom: 8px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+
+    :global(.avatar .initials),
+    .initials {
+      border: 2px solid var(--color-text-main, #0f172a) !important;
+      font-family: var(--font-display, 'Montserrat', sans-serif) !important;
+      font-weight: 800 !important;
+    }
+
+    :global(.avatar .username),
+    .username {
+      font-family: var(--font-display, 'Montserrat', sans-serif) !important;
+      font-size: 16px !important;
+      font-weight: 800 !important;
+      color: var(--color-text-main, #0f172a) !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    :global(.avatar .email),
+    .email {
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+      font-size: 13px !important;
+      color: var(--color-text-muted, #475569) !important;
+      margin-top: 2px !important;
+    }
   }
 
+  // Bento dominant CTA button "Configuración de la cuenta"
   .account-box__menu-item--settings {
-    margin-top: 12px;
+    margin-top: 14px;
+    margin-bottom: 2px;
 
     button {
-      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%) !important;
-      border: none !important;
-      border-radius: var(--radius-md) !important;
-      font-weight: 600 !important;
+      background: var(--color-primary, #29b9f2) !important;
+      border: 2.5px solid var(--color-text-main, #0f172a) !important;
+      border-radius: 9999px !important;
+      color: var(--color-text-main, #0f172a) !important;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+      font-weight: 700 !important;
       font-size: 14px !important;
-      box-shadow: 0 4px 12px rgba(41, 185, 242, 0.2) !important;
-      transition: var(--transition-smooth) !important;
+      height: 42px !important;
+      padding: 0 20px !important;
+      box-shadow: none !important;
+      transition: all 0.15s ease !important;
 
-      &:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(6, 136, 186, 0.3) !important;
+      &:hover:not(:disabled) {
+        background: var(--color-primary-dark, #0688ba) !important;
+        color: #ffffff !important;
+        transform: translateY(-1.5px) !important;
+        box-shadow: none !important;
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(1px) !important;
       }
     }
   }
@@ -243,19 +295,19 @@
     list-style: none;
 
     a {
-      color: var(--color-text-muted);
+      color: var(--color-text-muted, #475569);
       cursor: pointer;
-      font-weight: 500;
-      font-size: 14px;
+      font-weight: 600;
+      font-size: 13.5px;
       display: block;
-      padding: 10px 14px;
+      padding: 8px 12px;
       border-radius: 8px;
-      transition: all var(--transition-fast);
+      transition: all 0.15s ease;
 
       i {
-        font-size: 24px;
+        font-size: 22px;
         margin: 3px;
-        vertical-align: -6px;
+        vertical-align: -5px;
       }
 
       span {
@@ -263,65 +315,74 @@
       }
 
       &:hover {
-        color: var(--color-primary-dark);
-        background-color: var(--color-primary-light);
+        color: var(--color-primary-dark, #0688ba);
+        background-color: var(--color-primary-light, #e0f6ff);
       }
     }
 
     &.environment-links {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      padding-top: 8px;
-      border-top: 1px solid var(--color-border);
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1.5px solid var(--color-border, #e2e8f0);
       margin-top: 8px;
 
       a {
         display: inline-block;
-        font-size: 12px;
+        font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+        font-size: 12.5px;
+        font-weight: 600;
         text-align: center;
-        padding: 6px 10px;
-        border-radius: 6px;
-        color: var(--color-text-muted);
+        padding: 6px 12px;
+        border-radius: 8px;
+        color: var(--color-text-muted, #475569);
         text-wrap: balance;
-        background-color: rgba(15, 23, 42, 0.02);
+        background-color: transparent;
+        transition: all 0.15s ease;
 
         &:hover {
-          background-color: rgba(15, 23, 42, 0.05);
-          color: var(--color-text-main);
+          background-color: var(--color-primary-light, #e0f6ff);
+          color: var(--color-primary-dark, #0688ba);
+          transform: translateY(-1px);
         }
       }
     }
   }
 
+  // Bento Language selector in account menu
   .account-box__menu-li--lang {
     position: relative;
-    border-top: 1px solid var(--color-border);
-    padding-top: 12px;
-    margin-top: 8px;
+    border-top: 1.5px solid var(--color-border, #e2e8f0);
+    padding-top: 10px;
+    margin-top: 4px;
 
     button {
       width: 100%;
       justify-content: flex-start;
-      color: var(--color-text-main) !important;
-      font-weight: 600 !important;
+      color: var(--color-text-main, #0f172a) !important;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+      font-weight: 700 !important;
+      font-size: 13.5px !important;
       border-radius: 8px;
       padding: 8px 12px;
+      transition: all 0.15s ease;
 
       &:hover {
-        background-color: var(--color-primary-light) !important;
-        color: var(--color-primary-dark) !important;
+        background-color: var(--color-primary-light, #e0f6ff) !important;
+        color: var(--color-primary-dark, #0688ba) !important;
       }
     }
 
     ul {
       margin-top: 8px;
-      background-color: var(--color-surface);
-      color: var(--color-text-main);
+      background-color: #ffffff;
+      color: var(--color-text-main, #0f172a);
       min-width: 100%;
-      padding: 4px;
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
+      padding: 6px;
+      border: 2px solid var(--color-text-main, #0f172a);
+      border-radius: 12px;
+      box-shadow: none;
       list-style: none;
 
       li {
@@ -329,45 +390,52 @@
         padding: 0;
 
         &:not(:last-child) {
-          border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+          border-bottom: 1px solid rgba(15, 23, 42, 0.06);
         }
 
         a {
-          padding: 8px 16px;
+          padding: 8px 14px;
           border-radius: 6px;
           font-size: 13px;
-          font-weight: 400;
-          color: var(--color-text-muted);
+          font-weight: 500;
+          color: var(--color-text-muted, #475569);
+          transition: all 0.15s ease;
 
           strong {
-            font-weight: 600;
-            color: var(--color-primary-dark);
+            font-weight: 700;
+            color: var(--color-primary-dark, #0688ba);
           }
 
           &:hover {
-            background-color: var(--color-primary-light);
-            color: var(--color-primary-dark);
+            background-color: var(--color-primary-light, #e0f6ff);
+            color: var(--color-primary-dark, #0688ba);
           }
         }
       }
     }
   }
 
+  // Bento Logout in account menu
   .account-box__menu-li--logout {
-    border-top: 1px solid var(--color-border);
-    padding-top: 12px;
-    margin-top: 8px;
+    border-top: 1.5px solid var(--color-border, #e2e8f0);
+    padding-top: 10px;
+    margin-top: 4px;
 
     button {
       width: 100%;
       justify-content: flex-start;
-      color: #ef4444 !important;
-      font-weight: 600 !important;
+      color: var(--color-danger, #ef4444) !important;
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+      font-weight: 700 !important;
+      font-size: 13.5px !important;
       border-radius: 8px;
       padding: 8px 12px;
+      transition: all 0.15s ease;
 
       &:hover {
         background-color: #fef2f2 !important;
+        color: #dc2626 !important;
+        transform: translateY(-1px);
       }
     }
   }
@@ -460,15 +528,14 @@
   }
 }
 
-
-
 // temporary fix for language menu on touch devices
 @media screen and (pointer: coarse) {
   .account-box__menu .account-box__menu-li--lang {
     ul {
       opacity: 1;
       position: static;
-      border: 1px solid colors.$kobo-gray-300;
+      border: 2px solid var(--color-text-main, #0f172a);
+      border-radius: 12px;
       margin-left: 12px;
       padding: 0;
       max-height: 1000px;

@@ -2,14 +2,12 @@
 @use 'scss/_variables';
 @use 'scss/mixins';
 
-// Note: we can't change this into a CSS Module, because some Data Table and
-// `utils.ts` code relies on `.checkbox__input` being available.
-
 .checkbox {
   .checkbox__wrapper {
-    padding: 0;
+    padding: 2px 0;
     cursor: pointer;
-    display: block;
+    display: flex;
+    align-items: center;
   }
 
   // Disabled state
@@ -22,13 +20,13 @@
 
     .checkbox__input,
     .checkbox__label {
-      opacity: 0.5;
+      opacity: 0.55;
     }
 
     .checkbox__input:checked {
-      color: colors.$kobo-white;
-      border-color: colors.$kobo-gray-700;
-      background-color: colors.$kobo-gray-700;
+      color: var(--color-text-main, #0f172a);
+      border-color: var(--color-text-main, #0f172a);
+      background-color: #cbd5e1;
     }
   }
 
@@ -36,78 +34,92 @@
   .checkbox__wrapper:hover {
     // Unchecked
     .checkbox__input:not(:checked) {
-      border-color: colors.$kobo-gray-700;
-      background-color: colors.$kobo-bg-blue;
+      border-color: var(--color-text-main, #0f172a);
+      background-color: var(--color-primary-light, #e0f6ff);
     }
 
     // Checked
     .checkbox__input:checked {
-      color: colors.$kobo-white;
-      border-color: colors.$kobo-mid-blue;
-      background-color: colors.$kobo-mid-blue;
+      color: var(--color-text-main, #0f172a);
+      border-color: var(--color-text-main, #0f172a);
+      background-color: var(--color-primary-dark, #0688ba);
+
+      &::after {
+        border-color: #ffffff;
+      }
     }
   }
 
   .checkbox__input,
   .checkbox__label {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
   }
 
   .checkbox__label {
     max-width: calc(100% - 32px);
-    color: colors.$kobo-gray-800;
-    font-size: variables.$base-font-size;
+    color: var(--color-text-main, #0f172a);
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-weight: 600;
+    font-size: 13.5px;
+    line-height: 1.4;
   }
 
   .checkbox__input + .checkbox__label {
-    margin-inline-start: 6px;
+    margin-inline-start: 8px;
   }
 
   .checkbox__input {
-    border-radius: 4px;
+    border-radius: 6px;
     appearance: none;
     position: relative;
     margin: 0;
-    color: colors.$kobo-gray-500;
-    border: 1px solid colors.$kobo-gray-500;
-    background-color: colors.$kobo-white;
+    color: var(--color-text-main, #0f172a);
+    border: 2px solid var(--color-text-main, #0f172a);
+    background-color: #ffffff;
     width: 20px;
     height: 20px;
+    min-width: 20px;
     outline: 0;
     cursor: pointer;
-    overflow: hidden; // HACK FIX to not cause scrollbar when near the edge
+    overflow: hidden;
+    transition: all 0.12s ease;
 
-    // This is the CSS checkbox :)
+    // This is the CSS checkbox
     &::after {
       display: block;
       position: absolute;
       opacity: 0;
       content: '';
       top: calc(50% - 5px);
-      left: calc(50% - 6px);
+      left: calc(50% - 5px);
       transform: rotate(-45deg);
-      border: 3px solid currentcolor;
+      border: 2.5px solid var(--color-text-main, #0f172a);
       border-top: none;
       border-right: none;
       width: 10px;
-      height: 4px;
+      height: 5px;
       background-color: transparent;
       border-radius: 1px;
       box-sizing: content-box;
+      transition: opacity 0.1s ease;
     }
 
     &:checked {
-      color: colors.$kobo-white;
-      border-color: colors.$kobo-blue;
-      background-color: colors.$kobo-blue;
+      color: var(--color-text-main, #0f172a);
+      border-color: var(--color-text-main, #0f172a);
+      background-color: var(--color-primary, #29b9f2);
 
-      &::after {opacity: 1;}
+      &::after {
+        opacity: 1;
+        border-color: var(--color-text-main, #0f172a);
+      }
     }
 
     // Keyboard focus styles
     &:focus-visible {
-      @include mixins.default-ui-focus;
+      outline: 2px solid var(--color-primary-dark, #0688ba);
+      outline-offset: 2px;
     }
   }
 }

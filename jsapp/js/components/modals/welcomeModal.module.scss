@@ -1,0 +1,258 @@
+.modalRoot {
+  :global {
+    .mantine-Modal-content {
+      border: 2.5px solid var(--color-text-main, #0f172a) !important;
+      border-radius: 28px !important;
+      box-shadow: none !important;
+      background: #ffffff !important;
+      padding: 6px 10px 16px 10px !important;
+      overflow: hidden !important;
+    }
+
+    .mantine-Modal-header {
+      background: transparent !important;
+      padding: 16px 20px 6px 20px !important;
+      align-items: flex-start !important;
+    }
+
+    .mantine-Modal-body {
+      padding: 6px 20px 16px 20px !important;
+    }
+
+    .mantine-Modal-close {
+      border: 2px solid var(--color-text-main, #0f172a) !important;
+      border-radius: 9999px !important;
+      width: 34px !important;
+      height: 34px !important;
+      color: var(--color-text-main, #0f172a) !important;
+      background: #ffffff !important;
+      transition: all 0.15s ease !important;
+
+      &:hover {
+        background-color: var(--color-primary-light, #e0f6ff) !important;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-primary-light, #e0f6ff);
+  color: var(--color-primary-dark, #0688ba);
+  border: 1.5px solid var(--color-text-main, #0f172a);
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.badgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: #10b981;
+  display: inline-block;
+}
+
+.title {
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--color-text-main, #0f172a);
+  margin: 0;
+}
+
+.leadText {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-text-muted, #475569);
+  margin: 0;
+}
+
+.docsCard {
+  background-color: var(--color-primary-light, #e0f6ff);
+  border: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 20px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.docsCardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.docsIconCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  border: 1.5px solid var(--color-text-main, #0f172a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-main, #0f172a);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.docsCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.docsCardTitle {
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--color-text-main, #0f172a);
+  margin: 0;
+}
+
+.docsCardDesc {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--color-text-muted, #475569);
+  margin: 0;
+}
+
+.docsBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background-color: #ffffff;
+  color: var(--color-text-main, #0f172a);
+  border: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 9999px;
+  padding: 9px 18px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background-color: var(--color-primary, #29b9f2);
+    color: var(--color-text-main, #0f172a);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.featuresGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.featurePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ffffff;
+  border: 1.5px solid var(--color-text-main, #0f172a);
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-main, #0f172a);
+}
+
+.footerGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1.5px dashed rgba(15, 23, 42, 0.16);
+}
+
+.bentoCheckbox {
+  :global {
+    .mantine-Checkbox-root {
+      cursor: pointer;
+    }
+
+    .mantine-Checkbox-inner {
+      cursor: pointer;
+    }
+
+    .mantine-Checkbox-input {
+      border: 2px solid var(--color-text-main, #0f172a) !important;
+      border-radius: 6px !important;
+      background-color: #ffffff !important;
+      cursor: pointer;
+
+      &:checked {
+        background-color: var(--color-primary, #29b9f2) !important;
+        border-color: var(--color-text-main, #0f172a) !important;
+      }
+    }
+
+    .mantine-Checkbox-icon {
+      color: var(--color-text-main, #0f172a) !important;
+      stroke-width: 3.5px !important;
+    }
+
+    .mantine-Checkbox-label {
+      font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif) !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      color: var(--color-text-muted, #475569) !important;
+      cursor: pointer;
+      padding-left: 8px;
+    }
+  }
+}
+
+.primaryCta {
+  background-color: var(--color-primary, #29b9f2);
+  color: var(--color-text-main, #0f172a);
+  border: 2.5px solid var(--color-text-main, #0f172a);
+  border-radius: 9999px;
+  padding: 9px 24px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
+  font-size: 14.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: var(--color-primary-dark, #0688ba);
+    color: #ffffff;
+    transform: translateY(-1.5px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}

@@ -5,55 +5,63 @@
 @use 'scss/libs/_mdl';
 
 // ==========================================================================
-// Card (incl. Header and Expanded)
+// Card (incl. Header and Expanded) - Bento Standard
 // ==========================================================================
 
 .card {
-    border-radius: 0;
-    font-family: mdl.$font;
+    border-radius: 14px;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
     font-weight: 600;
-    font-size: 13px;
+    font-size: 13.5px;
     line-height: 18px;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
     position: relative;
+    background-color: var(--color-text-inverse, #ffffff);
 
     &.card--error {
         padding: 12px 20px;
-        background-color: rgba(colors.$kobo-mid-red, 0.5);
+        background-color: rgba(239, 68, 68, 0.1);
+        border: 2px solid var(--color-danger, #ef4444);
+        border-radius: 14px;
     }
 
     .card__header {
-        border: variables.$cardBorderStyle;
-        // right padding needs to make space for absolute positioned icons
-        padding: 20px #{15px + variables.$s-fb-row-locking-icons-width + variables.$s-fb-row-buttons-width} 20px 75px;
-        min-height: 82px; // to fit all icons in
-        display: block;
-        background: colors.$kobo-white;
+        border: 2px solid var(--color-text-main, #0f172a);
+        border-radius: 14px;
+        padding: 14px 48px 14px 62px;
+        min-height: 64px;
+        display: flex;
+        align-items: center;
+        background: var(--color-text-inverse, #ffffff);
         position: relative;
+        box-shadow: 0 2px 0 var(--color-text-main, #0f172a);
+        overflow: hidden;
+        transition: all 0.15s ease;
 
-        // don't show move cursor if not inside an enabled sortable instance
-        // HACK: `.ui-sortable-disabled` only applies to a group, so not to the
-        // root form sortable - we apply move cursor to all enabled
+        &:hover {
+            box-shadow: 0 4px 0 var(--color-text-main, #0f172a);
+        }
+
         .ui-sortable.js-sortable-enabled & {
           cursor: move;
         }
-        // … but then we remove it from all disabled ones :)
-        // This is because root form sortable is not created when locking is on
-        // but groups sortable is always created, but disabled later
+
         .ui-sortable.ui-sortable-disabled & {
           cursor: initial !important;
         }
     }
 
     .card__text {
-        margin: auto;
-        display: inline-block;
-        vertical-align: middle;
-        width: 99%;
+        margin: auto 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
         position: relative;
+        min-width: 0;
 
         &.activated {
-            color: colors.$kobo-gray-700;
+            color: var(--color-text-main, #0f172a);
         }
 
         .card__buttons__multioptions {
@@ -86,25 +94,42 @@
     }
 
     .card__header-title {
-        color: colors.$kobo-gray-700;
+        font-family: var(--font-display, 'Montserrat', sans-serif);
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: -0.01em;
+        color: var(--color-text-main, #0f172a);
+        border: none !important;
+        background: transparent !important;
+        outline: none !important;
+        padding: 0 !important;
+        width: 100%;
+        line-height: 20px;
 
         &:focus {
-            color: colors.$kobo-gray-800;
-          }
+            color: var(--color-text-main, #0f172a);
+        }
 
-        // we use placeholder as error message, as empty title is not welcomed
-         &::placeholder {
-            color: colors.$kobo-red;
-            background-color: rgba(colors.$kobo-mid-red, 0.075);
+        &::placeholder {
+            color: #94a3b8;
+            background-color: transparent;
         }
     }
 
     .card__header-hint {
-        color: inherit;
-        font-weight: 400;
+        font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+        color: var(--color-text-muted, #64748b);
+        font-weight: 500;
+        font-size: 13px;
+        margin-top: 3px;
+        border: none !important;
+        background: transparent !important;
+        outline: none !important;
+        padding: 0 !important;
+        width: 100%;
 
         &::placeholder {
-            color: colors.$kobo-gray-700;
+            color: #94a3b8;
             font-style: italic;
         }
     }
@@ -125,8 +150,9 @@
             position: absolute;
             top: -0.15em;
             left: -9px;
-            color: colors.$kobo-gray-700;
-            font-size: 11px;
+            color: var(--color-danger, #ef4444);
+            font-size: 14px;
+            font-weight: 800;
         }
 
         &.card--selectquestion {
@@ -152,25 +178,23 @@
 
 .sortable-active {
     .card__header {
-        border: variables.$cardInSortBorderStyle;
+        border: 2px solid var(--color-primary-dark, #0688ba);
 
         .card__header-title {
-            color: variables.$cardInSortBorderColor;
+            color: var(--color-primary-dark, #0688ba);
         }
     }
 }
 
 .card--error {
-    background-color: rgba(colors.$kobo-mid-red, 0.5);
+    background-color: rgba(239, 68, 68, 0.1);
 }
 
 // ==========================================================================
 // Card indicator
 // ==========================================================================
 
-$cardIndicatorWidth: 42px;
-$cardIndicatorIconHeight: 21px;
-$cardIndicatorIconWidth: 21px;
+$cardIndicatorWidth: 46px;
 
 .card__indicator {
     position: absolute;
@@ -178,26 +202,32 @@ $cardIndicatorIconWidth: 21px;
     top: 0;
     width: $cardIndicatorWidth;
     height: 100%;
-    border-right: variables.$cardBorderStyle;
+    border-right: 2px solid var(--color-text-main, #0f172a);
+    background-color: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card--insort {
     .card__indicator {
-        border-right: variables.$cardInSortThinBorderStyle;
+        border-right: 2px solid var(--color-primary-dark, #0688ba);
     }
 }
 
 .card__indicator__icon {
     position: absolute;
     top: 50%;
-    margin-top: -($cardIndicatorIconHeight*0.5);
-    left: 8px;
-    width: $cardIndicatorIconHeight;
-    height: $cardIndicatorIconHeight;
-    font-size: 20px;
-    line-height: 20px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    font-size: 14px;
+    line-height: 1;
     text-align: center;
-    color: colors.$kobo-gray-700;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-weight: 800;
+    color: var(--color-primary-dark, #0688ba);
 }
 
 // ==========================================================================
@@ -205,28 +235,29 @@ $cardIndicatorIconWidth: 21px;
 // ==========================================================================
 
 .card__buttons {
-    border: variables.$cardBorderStyle;
-    border-width: 0 0 0 1px;
+    border-left: 2px solid var(--color-text-main, #0f172a);
     position: absolute;
     top: 0;
-    right: 1px; // needed for settings icon to not cover the right border when active
-    width: variables.$s-fb-row-buttons-width;
+    right: 0;
+    width: 36px;
     height: 100%;
     z-index: z-indexes.$z-form-builder-card-buttons;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafc;
+    gap: 3px;
 }
 
 .card--shaded .card__buttons {
-    border-color: transparent;
+    border-color: var(--color-text-main, #0f172a);
 }
 
 // ==========================================================================
 // Card Shade (displays on hover above the card header)
 // ==========================================================================
 
-// Displayed when parent .card has .card--shaded
 .card__header--shade {
     position: absolute;
     width: 100%;
@@ -237,12 +268,14 @@ $cardIndicatorIconWidth: 21px;
     text-align: center;
     vertical-align: middle;
     display: none;
+    border-radius: 12px;
 
     span {
         position: relative;
         top: 35%;
-        font-weight: 600;
-        font-size: 23px;
+        font-family: var(--font-display, 'Montserrat', sans-serif);
+        font-weight: 800;
+        font-size: 20px;
     }
 }
 
@@ -255,69 +288,98 @@ $cardIndicatorIconWidth: 21px;
 }
 
 .card__header.settings .card__header--shade {
-    background: rgba(colors.$kobo-gray-700, 0.5);
+    background: rgba(15, 23, 42, 0.4);
+    color: #ffffff;
 }
 
 .card__header.delete .card__header--shade {
-    background: rgba(colors.$kobo-mid-red, 0.5);
+    background: rgba(239, 68, 68, 0.4);
+    color: #ffffff;
 }
 
 .card__header.duplicate .card__header--shade {
-    background: rgba(colors.$kobo-blue, 0.5);
+    background: rgba(41, 185, 242, 0.4);
+    color: var(--color-text-main, #0f172a);
 }
 
 .card__header.add-to-library .card__header--shade {
-    background: rgba(colors.$kobo-green, 0.5);
+    background: rgba(139, 92, 246, 0.4);
+    color: #ffffff;
 }
 
 .card--insort {
     .card__buttons {
-        border-left: variables.$cardInSortThinBorderStyle;
+        border-left: 2px solid var(--color-primary-dark, #0688ba);
     }
 }
 
 .card__buttons__button {
-    height: 20px;
-    line-height: 20px;
-    width: variables.$s-fb-row-buttons-width;
+    height: 22px;
+    line-height: 22px;
+    width: 26px;
     text-align: center;
     position: relative;
     cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
 
+    .k-icon {
+      font-size: 14.5px;
+    }
+
+    &.card__buttons__button--settings,
     &.card__buttons__button--gray {
-        color: colors.$kobo-gray-700;
+        color: #475569;
+
+        &:hover {
+            color: #0f172a;
+            background-color: rgba(15, 23, 42, 0.08);
+            transform: scale(1.1);
+        }
     }
 
+    &.card__buttons__button--delete,
     &.card__buttons__button--red {
-        color: colors.$kobo-red;
+        color: var(--color-danger, #ef4444);
+
+        &:hover {
+            color: #dc2626;
+            background-color: rgba(239, 68, 68, 0.12);
+            transform: scale(1.1);
+        }
     }
 
+    &.card__buttons__button--copy,
     &.card__buttons__button--blue {
-        color: colors.$kobo-blue;
+        color: var(--color-primary-dark, #0688ba);
+
+        &:hover {
+            color: #0369a1;
+            background-color: rgba(6, 136, 186, 0.12);
+            transform: scale(1.1);
+        }
     }
 
+    &.card__buttons__button--add,
     &.card__buttons__button--teal {
-        color: colors.$kobo-teal;
+        color: var(--color-accent, #8b5cf6);
+
+        &:hover {
+            color: #7c3aed;
+            background-color: rgba(139, 92, 246, 0.12);
+            transform: scale(1.1);
+        }
     }
 
     &.card__buttons__button--activated {
-        color: colors.$kobo-gray-700;
-        background-color: colors.$kobo-gray-300;
+        color: var(--color-text-main, #0f172a);
+        background-color: var(--color-primary-light, #e0f6ff);
         opacity: 1;
     }
-
-    &:hover,
-    &.card__buttons__button--activated:hover {
-        opacity: 0.5;
-    }
-
-    .k-icon {
-      font-size: 18px;
-    }
 }
-
-// overrides
-// ---------
 
 .card--shaded {
     .card__buttons {

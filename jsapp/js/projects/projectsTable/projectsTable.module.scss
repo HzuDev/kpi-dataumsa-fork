@@ -16,6 +16,7 @@ $projects-table-min-width: 820px;
   position: sticky;
   top: 0;
   z-index: z-indexes.$z-table-row-header;
+  background-color: #f8fafc;
 }
 
 .header,
@@ -27,7 +28,7 @@ $projects-table-min-width: 820px;
 .body {
   flex: 1;
   padding-top: 8px;
-  padding-bottom: 24px;
+  padding-bottom: 32px;
 
   :global {
     // The loading message of the ProjectsTable component

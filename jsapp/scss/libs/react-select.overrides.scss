@@ -4,49 +4,50 @@
 @use 'scss/_variables';
 @use 'scss/libs/_mdl';
 
-// Styles for WrappedSelect.
+// Styles for WrappedSelect - Bento style redesign
 .kobo-select__wrapper {
   &.kobo-select__wrapper--error {
     .kobo-select__error,
-    .kobo-select__label, {
-      color: colors.$kobo-red;
+    .kobo-select__label {
+      color: var(--color-danger, colors.$kobo-red);
     }
 
     .kobo-select .kobo-select__control {
-      border-color: colors.$kobo-mid-red;
+      border-color: var(--color-danger, colors.$kobo-mid-red);
     }
   }
 }
 
 .kobo-select__error {
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
+  color: var(--color-danger, #ef4444);
 }
 
 .kobo-select__label {
   display: block;
-  color: inherit;
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 400;
+  color: var(--color-text-main, #0f172a);
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
 
   & + .kobo-select {
-    margin-top: 5px;
+    margin-top: 4px;
   }
 }
 
 .kobo-select--limited-height {
   .kobo-select__menu-list {
-    // Restricts height of select dropdown by brute force disregarding the
-    // built-in autosizing due to the bug:
-    // https://github.com/JedWatson/react-select/issues/4108
-    max-height: 36px * 3.5 + 8px; // display 3.5 items
+    max-height: 36px * 3.5 + 8px;
   }
 }
 
 .kobo-select {
   font-size: 14px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
 
   &.kobo-select--is-disabled {
     pointer-events: none;
@@ -54,40 +55,37 @@
   }
 
   .kobo-select__control {
-    box-shadow: none;
-    border: 1px solid colors.$kobo-gray-300;
-    border-radius: 6px;
-    color: colors.$kobo-gray-700;
-    background-color: colors.$kobo-white;
-    min-height: button.$button-height-m;
+    box-shadow: none !important;
+    border: 2px solid var(--color-text-main, #0f172a);
+    border-radius: 8px;
+    color: var(--color-text-main, #0f172a);
+    background-color: #ffffff;
+    min-height: 40px;
     height: auto;
-    font-size: inherit;
-    padding: 0 8px;
+    font-size: 14px;
+    padding: 0 10px;
     box-sizing: border-box;
     cursor: pointer;
-    // it's a flexbox wrapper
     align-content: center;
+    transition: all 0.15s ease;
 
     &:hover {
-      border-color: colors.$kobo-gray-300;
+      border-color: var(--color-text-main, #0f172a);
     }
 
     &.kobo-select__control--is-focused {
-      // We don't use mixins.default-ui-focus because we need to use important
-      outline: var(--kobo-focus-ring) !important;
-      outline-offset: var(--kobo-focus-ring-offset) !important;
+      border-color: var(--color-text-main, #0f172a) !important;
+      outline: 2px solid var(--color-primary, #29b9f2) !important;
+      outline-offset: 2px !important;
     }
   }
 
   .kobo-select__input input {
-    // HACK: most of the global styles are removed by react-select itself, but
-    // some we need to remove ourself (until our global input[type="text"]
-    // styles are removed)
     transition: none !important;
   }
 
   .kobo-select__placeholder {
-    color: colors.$kobo-gray-500;
+    color: var(--color-text-muted, #475569);
   }
 
   .kobo-select__indicator-separator {
@@ -99,22 +97,29 @@
   }
 
   .kobo-select__single-value,
-  .kobo-select__multi-value, {
-    color: colors.$kobo-gray-800;
+  .kobo-select__multi-value {
+    color: var(--color-text-main, #0f172a);
+    font-weight: 500;
   }
 
   .kobo-select__multi-value {
     height: button.$button-height-m - 8px;
+    border-radius: 9999px;
+    border: 1px solid var(--color-text-main, #0f172a);
+    background-color: var(--color-primary-light, #e0f6ff);
   }
 
   .kobo-select__multi-value__label {
     line-height: button.$button-height-m - 8px;
     padding: 0 3px 0 6px;
+    color: var(--color-text-main, #0f172a);
+    font-weight: 600;
   }
 
   .kobo-select__multi-value__remove:hover {
-    color: colors.$kobo-red;
-    background-color: colors.$kobo-hover-red;
+    color: #ffffff;
+    background-color: var(--color-danger, #ef4444);
+    border-radius: 0 9999px 9999px 0;
   }
 
   .kobo-select__indicator {
@@ -124,38 +129,41 @@
     flex-direction: row;
     align-content: center;
     align-items: center;
+    color: var(--color-text-main, #0f172a);
   }
 
   .kobo-select__menu {
-    @include mdl.box-shadow;
-    border-radius: 4px;
-    // getting select menus to appear over checkboxes
-    z-index: 2;
-    margin-top: 0;
-    margin-bottom: 0;
+    border: 2px solid var(--color-text-main, #0f172a) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    background-color: #ffffff;
+    overflow: hidden;
+    z-index: 10;
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
 
   .kobo-select__menu-list {
-    // NOTE: we previously restricted height of select dropdown by brute force
-    // but it seems that our current version of react-select handles this very
-    // well. I will leave this commented out for now here.
-    // max-height: 36px * 3.5 + 8px; // display 3.5 items
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 
   .kobo-select__option {
     cursor: pointer;
+    font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+    font-size: 13.5px;
+    padding: 8px 12px;
+    transition: all 0.15s ease;
 
     &.kobo-select__option--is-selected {
-      background-color: colors.$kobo-white;
-      color: colors.$kobo-blue;
+      background-color: var(--color-primary-light, #e0f6ff);
+      color: var(--color-primary-dark, #0688ba);
       font-weight: 700;
     }
 
-    // is-focused needs to go after is-selected
     &.kobo-select__option--is-focused {
-      background-color: colors.$kobo-gray-200;
+      background-color: var(--color-primary-light, #e0f6ff);
+      color: var(--color-primary-dark, #0688ba);
     }
   }
 }

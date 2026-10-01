@@ -1,59 +1,65 @@
 @use 'scss/colors';
 @use 'sass:color';
 
-// ==========================================================================
-// Groups
-// ==========================================================================
-
-$formbuilder-group-bg: colors.$kobo-gray-200;
+// ==========================================================================\n// Groups - Bento Standard
+// ==========================================================================\n
+$formbuilder-group-bg: var(--color-bg-main, #f8fafc);
 
 .group {
-    padding: 4px 10px;
-    margin-bottom: 15px;
-    background-color: $formbuilder-group-bg;
-    border: 1px solid colors.$kobo-gray-500;
-    font-size: 13px;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+    background-color: var(--color-bg-main, #f8fafc);
+    border: 2.5px solid var(--color-text-main, #0f172a);
+    border-radius: 20px;
+    box-shadow: none !important;
+    font-size: 13.5px;
 
     // make space for the .btn--addrow on the left
     .card,
- .row__questiontypes {
+    .row__questiontypes {
         margin-left: 0;
     }
 }
 
 .group__name {
-    font-weight: 600;
+    font-family: var(--font-display, 'Montserrat', sans-serif);
+    font-weight: 700;
 }
 
 .group__header {
-    border-bottom: 1px solid colors.$kobo-gray-500;
+    border-bottom: 2px solid var(--color-text-main, #0f172a);
     position: relative;
-    margin: -4px -10px 0;
-    padding: 20px 12px;
+    margin: -8px -16px 0;
+    padding: 16px 16px;
 
     input {
         width: 94%;
         border: none;
         border-radius: 0;
         background: none;
+        font-family: var(--font-display, 'Montserrat', sans-serif);
         font-size: 16px;
-        line-height: 20px;
-        font-weight: 600;
+        line-height: 22px;
+        font-weight: 800;
+        color: var(--color-text-main, #0f172a);
         padding: 0;
         height: auto;
         vertical-align: middle;
+
+        &:focus {
+            outline: none;
+        }
     }
 }
 
 .group__rows {
-    margin-top: 6px;
+    margin-top: 10px;
 }
 
 // Overrides
 // --------------------------------------------------------------------------
 
 .group {
-    // .group is conflicting with .card in this one rule
     line-height: 1.4;
 
     // .group__settings displayed only in .group--expanded-settings
@@ -67,7 +73,7 @@ $formbuilder-group-bg: colors.$kobo-gray-200;
 
         > .card__settings {
             display: block;
-            background-color: colors.$kobo-white;
+            background-color: var(--color-text-inverse, #ffffff);
             border: none;
             margin-top: 1px;
 
@@ -95,7 +101,7 @@ $formbuilder-group-bg: colors.$kobo-gray-200;
 .group__header__icon,
 .group__header__icon .k-icon,
 .group__caret {
-  color: colors.$kobo-gray-700;
+  color: var(--color-text-main, #0f172a);
   display: inline-block;
   vertical-align: middle;
 }
@@ -111,12 +117,10 @@ $formbuilder-group-bg: colors.$kobo-gray-200;
   cursor: pointer;
 
   &:hover {
-    color: colors.$kobo-gray-800;
+    color: var(--color-primary-dark, #0688ba);
   }
 }
 
-// when inside .group--shrunk, .group__caret is displayed differently
-// when inside .group--shrunk, .group__rows is smaller, .survey__rows are hidden
 .group--shrunk {
     border-bottom: none;
     padding-bottom: 0;
@@ -131,17 +135,18 @@ $formbuilder-group-bg: colors.$kobo-gray-200;
 }
 
 .group__rows .group {
-    background: color.adjust($formbuilder-group-bg, $lightness: -3%);
+    background: #f1f5f9;
     margin-bottom: 12px;
+    border-radius: 16px;
 
     .group__rows .group {
-        background: color.adjust($formbuilder-group-bg, $lightness: -6%);
+        background: #e2e8f0;
 
         .group__rows .group {
-            background: color.adjust($formbuilder-group-bg, $lightness: -9%);
+            background: #cbd5e1;
 
             .group__rows .group {
-                background: color.adjust($formbuilder-group-bg, $lightness: -12%);
+                background: #94a3b8;
             }
         }
     }

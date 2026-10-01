@@ -1,3 +1,4 @@
+import { DOCS_PATHS, getDocUrl } from '#/docsUrls'
 import './helpBubble.scss'
 
 import React from 'react'
@@ -150,11 +151,11 @@ class HelpBubble extends React.Component<HelpBubbleProps, HelpBubbleState> {
         <bem.HelpBubble__popupContent>
           <bem.HelpBubble__row m='header'>{t('Help Resources')}</bem.HelpBubble__row>
 
-          {envStore.isReady && (envStore.data.support_url || true) && (
+          {envStore.isReady && (
             <bem.HelpBubble__rowAnchor
               m='link'
               target='_blank'
-              href={envStore.data.support_url || 'https://data.umsa.bo/docs/'}
+              href={getDocUrl(DOCS_PATHS.HOME)}
               onClick={this.close.bind(this)}
             >
               <i className='k-icon k-icon-help-articles' />
@@ -163,11 +164,11 @@ class HelpBubble extends React.Component<HelpBubbleProps, HelpBubbleState> {
             </bem.HelpBubble__rowAnchor>
           )}
 
-          {envStore.isReady && envStore.data.academy_url && (
+          {envStore.isReady && (
             <bem.HelpBubble__rowAnchor
               m='link'
               target='_blank'
-              href={envStore.data.academy_url}
+              href={getDocUrl(DOCS_PATHS.INICIO_RAPIDO)}
               onClick={this.close.bind(this)}
             >
               <i className='k-icon k-icon-help-academy' />
@@ -176,11 +177,11 @@ class HelpBubble extends React.Component<HelpBubbleProps, HelpBubbleState> {
             </bem.HelpBubble__rowAnchor>
           )}
 
-          {envStore.isReady && envStore.data.community_url && envStore.data.community_url !== envStore.data.support_url && (
+          {envStore.isReady && (
             <bem.HelpBubble__rowAnchor
               m='link'
               target='_blank'
-              href={envStore.data.community_url}
+              href='https://data.umsa.bo/'
               onClick={this.close.bind(this)}
             >
               <i className='k-icon k-icon-help-forum' />

@@ -12,11 +12,9 @@
 // Column Resizer handle styles are here, too.
 
 .columnRoot {
-  // For column width resizers
-  position: relative; // Be a positioned ancestor for resize handles
-  user-select: none;  // Prevent accidental text selection
+  position: relative;
+  user-select: none;
 
-  // Make the whole header cell clickable for the dropdown trigger.
   :global .kobo-dropdown,
   :global .kobo-dropdown__trigger {
     position: absolute;
@@ -37,18 +35,19 @@
 
   cursor: pointer;
   line-height: 40px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
   font-weight: 700;
-  color: var(--color-text-muted, colors.$kobo-gray-700);
-  font-size: 13px;
-  transition: color 0.2s ease;
+  color: var(--color-text-muted, #475569);
+  font-size: 11.5px;
+  transition: color 0.15s ease;
 
   :global {
     // Dropdown arrow
     .k-icon:first-child {
       margin-left: -14px;
       padding-right: 4px;
-      opacity: 0.6;
-      transition: color 0.2s ease, opacity 0.2s ease;
+      opacity: 0.7;
+      transition: color 0.15s ease, opacity 0.15s ease;
     }
 
     // Dropdown Label
@@ -56,42 +55,49 @@
       @include mixins.textEllipsis;
       cursor: pointer;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.05em;
     }
 
     // Sorting indicator
     .k-icon:not(:first-child) {
       margin-left: 6px;
-      color: var(--color-primary, colors.$kobo-blue) !important;
+      color: var(--color-primary-dark, #0688ba) !important;
     }
   }
 
   &:hover {
-    color: var(--color-text-main, colors.$kobo-gray-900);
+    color: var(--color-text-main, #0f172a);
     
     :global {
       .k-icon:first-child {
-        opacity: 0.9;
-        color: var(--color-primary, colors.$kobo-blue);
+        opacity: 1;
+        color: var(--color-text-main, #0f172a);
       }
     }
   }
 }
 
 .isMenuVisible .trigger {
-  color: var(--color-primary-dark, colors.$kobo-dark-blue);
+  color: var(--color-text-main, #0f172a);
 }
 
 
 .dropdownContent {
   @include mixins.floatingRoundedBox;
   padding: 10px;
-  min-width: 120px;
+  min-width: 130px;
+  background-color: #ffffff;
+  border: 2px solid var(--color-text-main, #0f172a);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0px var(--color-text-main, #0f172a);
 
   :global {
     .k-button {
       width: 100%;
       white-space: nowrap;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
 
       &:not(:first-child) {
         margin-top: 6px;
@@ -103,27 +109,24 @@
 // Resizers
 
 $line-width: 1px;
-// Resizer "pad" should be at least 10px wide for ease of use.
-// If $line-width is odd, $resizer-width should be odd, too.
 $resizer-width: 16px + $line-width;
 
 // Resizer "pad" - interactive area
 .resizer {
-  cursor: ew-resize; // col-resize <-|->   ew-resize <->
+  cursor: ew-resize;
   border-radius: 4px;
   position: absolute;
   top: 0;
   bottom: 0;
   right: math.div($resizer-width - $line-width, -2);
   width: $resizer-width;
-  z-index: 2; // Overlap adjacent column header and cell width indicator
-  background-color: colors.$kobo-bg-blue; // Resizer "pad" color
+  z-index: 2;
+  background-color: rgba(41, 185, 242, 0.1);
   opacity: 0;
 
   &:hover {
     opacity: 1;
   }
-  // performance hints
   contain: inline-size layout paint style;
 }
 
@@ -132,64 +135,10 @@ $resizer-width: 16px + $line-width;
   display: inline-block;
   content: '';
   position: absolute;
-  top: 4px; // $resizer-line-vertical-offset;
+  top: 4px;
   bottom: 4px;
   right: math.div($resizer-width - $line-width, 2);
   width: $line-width;
-  background-color: colors.$kobo-blue;
+  background-color: var(--color-primary-dark, #0688ba);
   opacity: 0;
-  z-index: 2; // Layer above gray lines and above adjacent column header
-}
-
-.resizer:hover::after {
-  opacity: 1;
-}
-
-// Thin gray vertical lines
-// Appear on either side of the header cell, indicating
-// the width of the cell you're going to resize.
-.columnRoot,
-.columnRoot:hover {
-  &::before,
-  &::after {
-    top: 6px;
-    bottom: 6px;
-    display: inline-block;
-    position: absolute;
-    background-color: colors.$kobo-gray-500;
-    // Give a little fade
-    border-top: 1px solid colors.$kobo-gray-300;
-    border-bottom: 1px solid colors.$kobo-gray-300;
-    box-shadow:
-      0 -1px 0 colors.$kobo-gray-200,
-      0  1px 0 colors.$kobo-gray-200;
-    width: $line-width;
-    content: '';
-    z-index: 1; // Layer below the resizer "pad" but above adjacent column headers
-    pointer-events: none;
-    transition: opacity 0.2s;
-  }
-
-  &::before {
-    left: (-$line-width);
-  }
-
-  &::after {
-    right: 0;
-  }
-}
-
-.columnRoot::before,
-.columnRoot::after {
-  opacity: 0;
-}
-
-.columnRoot:hover::before,
-.columnRoot:hover::after {
-  opacity: 1;
-}
-// Always hide leftmost width indicator
-// nth-child(2) because of checkbox column
-.columnRoot:nth-child(2)::before {
-  display: none;
 }

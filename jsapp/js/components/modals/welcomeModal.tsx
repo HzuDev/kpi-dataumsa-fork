@@ -12,10 +12,8 @@ const WelcomeModal = observer(() => {
   const [dontShowAgain, setDontShowAgain] = useState(false)
 
   const isEs = currentLang() === 'es'
-  const tr = (enText: string, esText: string) => {
-    const trans = t(enText)
-    if (trans && trans !== enText) return trans
-    return isEs ? esText : enText
+  const tr = (translated: string, esFallback: string) => {
+    return isEs ? esFallback : translated
   }
 
   useEffect(() => {
@@ -45,16 +43,18 @@ const WelcomeModal = observer(() => {
         <div>
           <div className={styles.badge}>
             <span className={styles.badgeDot}></span>
-            <span>{tr('DATAUMSA INSTITUTIONAL PLATFORM', 'PLATAFORMA INSTITUCIONAL DATAUMSA')}</span>
+            <span>{tr(t('DATAUMSA INSTITUTIONAL PLATFORM'), 'PLATAFORMA INSTITUCIONAL DATAUMSA')}</span>
           </div>
-          <h2 className={styles.title}>{tr('Welcome to DATAUMSA!', '¡Te damos la bienvenida a DATAUMSA!')}</h2>
+          <h2 className={styles.title}>{tr(t('Welcome to DATAUMSA!'), '¡Te damos la bienvenida a DATAUMSA!')}</h2>
         </div>
       }
     >
       <Stack gap='md'>
         <p className={styles.leadText}>
           {tr(
-            'Discover all the tools and features we have prepared to help you manage your forms and collect data efficiently.',
+            t(
+              'Discover all the tools and features we have prepared to help you manage your forms and collect data efficiently.'
+            ),
             'Descubre todas las herramientas y características que tenemos preparadas para ayudarte a gestionar tus formularios y recopilación de datos de manera eficiente.'
           )}
         </p>
@@ -62,15 +62,15 @@ const WelcomeModal = observer(() => {
         <div className={styles.featuresGrid}>
           <div className={styles.featurePill}>
             <IconCloudOff size={15} stroke={2.2} />
-            <span>{tr('100% Offline', '100% Sin conexión')}</span>
+            <span>{tr(t('100% Offline'), '100% Sin conexión')}</span>
           </div>
           <div className={styles.featurePill}>
             <IconShieldCheck size={15} stroke={2.2} />
-            <span>{tr('Rigor & Sovereignty', 'Rigor y Soberanía')}</span>
+            <span>{tr(t('Rigor & Sovereignty'), 'Rigor y Soberanía')}</span>
           </div>
           <div className={styles.featurePill}>
             <IconChartBar size={15} stroke={2.2} />
-            <span>{tr('Live Monitoring', 'Monitoreo en vivo')}</span>
+            <span>{tr(t('Live Monitoring'), 'Monitoreo en vivo')}</span>
           </div>
         </div>
 
@@ -81,11 +81,16 @@ const WelcomeModal = observer(() => {
             </div>
             <div className={styles.docsCardContent}>
               <div className={styles.docsCardTitle}>
-                {tr('Getting Started Guides & Official Documentation', 'Guías de Inicio y Documentación Oficial')}
+                {tr(
+                  t('Getting Started Guides & Official Documentation'),
+                  'Guías de Inicio y Documentación Oficial'
+                )}
               </div>
               <p className={styles.docsCardDesc}>
                 {tr(
-                  'To learn more about how the platform works and see step-by-step user guides, we recommend checking our official documentation:',
+                  t(
+                    'To learn more about how the platform works and see step-by-step user guides, we recommend checking our official documentation:'
+                  ),
                   'Para aprender más sobre el funcionamiento de la plataforma y ver guías de uso paso a paso, te recomendamos revisar nuestra documentación oficial:'
                 )}
               </p>
@@ -98,7 +103,7 @@ const WelcomeModal = observer(() => {
             rel='noopener noreferrer'
             className={styles.docsBtn}
           >
-            <span>{tr('View Official Documentation', 'Ver Documentación Oficial')}</span>
+            <span>{tr(t('View Official Documentation'), 'Ver Documentación Oficial')}</span>
             <IconExternalLink size={16} stroke={2.5} />
           </a>
         </div>
@@ -106,7 +111,7 @@ const WelcomeModal = observer(() => {
         <div className={styles.footerGroup}>
           <Checkbox
             className={styles.bentoCheckbox}
-            label={tr("Don't show this message again", 'No volver a mostrar este mensaje')}
+            label={tr(t("Don't show this message again"), 'No volver a mostrar este mensaje')}
             checked={dontShowAgain}
             onChange={(event) => setDontShowAgain(event.currentTarget.checked)}
           />
@@ -115,7 +120,7 @@ const WelcomeModal = observer(() => {
             className={styles.primaryCta}
             onClick={handleClose}
           >
-            {tr('Start', 'Empezar')}
+            {tr(t('Start'), 'Empezar')}
           </button>
         </div>
       </Stack>

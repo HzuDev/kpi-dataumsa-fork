@@ -6535,13 +6535,33 @@ msgstr "Habilitar botón de impresión en la boleta digital"
 msgid "Enable navigation menu in the digital form"
 msgstr "Habilitar menú de navegación en la boleta digital"
 
-#: jsapp/js/components/modals/welcomeModal.tsx:18
+#: jsapp/js/components/modals/welcomeModal.tsx:48
+msgid "DATAUMSA INSTITUTIONAL PLATFORM"
+msgstr "PLATAFORMA INSTITUCIONAL DATAUMSA"
+
+#: jsapp/js/components/modals/welcomeModal.tsx:50
 msgid "Welcome to DATAUMSA!"
 msgstr "¡Te damos la bienvenida a DATAUMSA!"
 
-#: jsapp/js/components/modals/welcomeModal.tsx:23
+#: jsapp/js/components/modals/welcomeModal.tsx:56
 msgid "Discover all the tools and features we have prepared to help you manage your forms and collect data efficiently."
 msgstr "Descubre todas las herramientas y características que tenemos preparadas para ayudarte a gestionar tus formularios y recopilación de datos de manera eficiente."
+
+#: jsapp/js/components/modals/welcomeModal.tsx:66
+msgid "100% Offline"
+msgstr "100% Sin conexión"
+
+#: jsapp/js/components/modals/welcomeModal.tsx:70
+msgid "Rigor & Sovereignty"
+msgstr "Rigor y Soberanía"
+
+#: jsapp/js/components/modals/welcomeModal.tsx:74
+msgid "Live Monitoring"
+msgstr "Monitoreo en vivo"
+
+#: jsapp/js/components/modals/welcomeModal.tsx:85
+msgid "Getting Started Guides & Official Documentation"
+msgstr "Guías de Inicio y Documentación Oficial"
 
 #: jsapp/js/components/modals/welcomeModal.tsx:27
 msgid "To learn more about how the platform works and see step-by-step user guides, we recommend checking our official documentation:"

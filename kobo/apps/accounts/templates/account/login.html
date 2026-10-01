@@ -74,6 +74,13 @@
       {% endif %}
     </div>
 
+    {# Widget Cloudflare Turnstile #}
+    {% if config.TURNSTILE_ENABLED and config.TURNSTILE_SITE_KEY %}
+      <div class="cf-turnstile-container" style="margin-bottom: var(--spacing-24); display: flex; justify-content: center;">
+        <div class="cf-turnstile" data-sitekey="{{ config.TURNSTILE_SITE_KEY }}" data-theme="light"></div>
+      </div>
+    {% endif %}
+
     {# Botón Principal de Envío #}
     <button type="submit" name="Login" class="login-button">
       {% trans "Log in" %}
@@ -125,4 +132,11 @@
     {# Enlaces legales y de privacidad #}
     {% include "../legal/registration_legal.html" with config=config %}
   </form>
+{% endblock %}
+
+{% block extra_javascript %}
+  {{ block.super }}
+  {% if config.TURNSTILE_ENABLED and config.TURNSTILE_SITE_KEY %}
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  {% endif %}
 {% endblock %}
